@@ -1,4 +1,5 @@
 import '@/app/globals.css'
+import { ProvidersSwitchDarkAndLight } from '@/components/ProviderSwitchDarkAndLight'
 
 export default function SignInLayout({
   children,
@@ -6,9 +7,9 @@ export default function SignInLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="min-h-dvh h-dvh antialiased bg-background-main transition-colors duration-500 flex items-center justify-center">
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-dvh h-dvh antialiased bg-background-main flex items-center justify-center">
+        <ProvidersSwitchDarkAndLight>{children}</ProvidersSwitchDarkAndLight>
       </body>
     </html>
   )

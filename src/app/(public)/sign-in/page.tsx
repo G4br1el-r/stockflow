@@ -8,7 +8,7 @@ export default function SignIn() {
       <section className="h-150 p-5 w-[90%] max-w-167.5 bg-background-modal-login relative flex items-center justify-center flex-col rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)] border">
         <div className="w-4/5 h-0.5 absolute top-0 left-1/2 -translate-x-1/2 bg-linear-to-r from-blue-neon/10 via-blue-neon to-blue-neon/10" />
 
-        <section className="flex flex-col gap-3 items-center justify-center mb-15">
+        <section className="flex flex-col gap-3 items-center justify-center mb-8">
           <div className="bg-blue-neon h-13 w-13 flex items-center justify-center rounded-sm shadow-[0_0_8px_rgb(13_89_242)]">
             <Zap className="text-white" size={28} />
           </div>
@@ -63,15 +63,15 @@ export default function SignIn() {
             </Text>
           </button>
         </form>
-        <div className="mt-5 space-y-5">
-          <div className="w-full h-px bg-border-main" />
+        <div className="mt-5 w-full space-y-5">
+          <div className="w-full h-px  bg-linear-to-r from-border-main/5 via-border-main to-border-main/5" />
           <div className="flex gap-1 items-center justify-center">
-            <Text as="span" className="text-base-primary">
+            <Text as="span" className="text-base-primary text-sm">
               Não tem uma conta?
             </Text>
             <button
               type="button"
-              className="text-blue-neon cursor-pointer font-semibold"
+              className="text-blue-neon cursor-pointer font-semibold text-sm"
             >
               Cadastre-se
             </button>

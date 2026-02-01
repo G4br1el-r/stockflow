@@ -11,9 +11,14 @@
   --color-background-main: var(--background-main);
   --color-background-sidebar-main: var(--background-sidebar-main);
   --color-background-modal-login: var(--background-modal-login);
-  --color-background-icon-activate: var(--background-icon-activate);
-  --color-background-icon-not-activate: var(--background-icon-not-activate);
+  --color-background-menu-activate: var(--background-menu-activate);
+  --color-background-menu-not-activate: var(--background-menu-not-activate);
+  --color-background-sidebar-user: var(--background-sidebar-user);
+  --color-background-tooltip: var(--background-tooltip);
+  --color-border-sidebar-user: var(--border-sidebar-user);
   --color-border-main: var(--border-main);
+  --color-background-hover-sidebar-menu: var(--background-hover-sidebar-menu);
+  --color-icon-hover-sidebar-menu: var(--icon-hover-sidebar-menu);
   --color-icon-activate: #0d59f2;
   --color-icon-not-activate: #6b7280;
   --color-blue-neon: #2563eb;
@@ -21,6 +26,8 @@
   /* TYPOGRAPHY */
   --color-base-primary: var(--base-primary);
   --color-base-secondary: var(--base-secondary);
+  --color-variant-primary: var(--variant-primary);
+  --color-variant-secondary: var(--variant-secondary);
 
   /* -- */
 
@@ -104,14 +111,21 @@
 :root {
   /* Custom */
 
-  --background-main: #f4f7f9;
-  --background-sidebar-main: #ffffff;
+  --background-main: #f4f6fc;
+  --background-sidebar-main: #fbfbfd;
   --background-modal-login: #ffffff;
-  --background-icon-activate: #e6eefe;
-  --background-icon-not-activate: #f8fafc;
+  --background-menu-activate: #e6eefe;
+  --background-menu-not-activate: #f8fafc;
+  --background-sidebar-user: #efedf1;
+  --background-tooltip: #090c13;
+  --background-hover-sidebar-menu: #edeef0;
+  --icon-hover-sidebar-menu: #0f172a;
+  --border-sidebar-user: #e1e0e3;
   --border-main: #d4d5d7;
   --base-primary: #738297;
   --base-secondary: #4b586a;
+  --variant-primary: #f4f7f9;
+  --variant-secondary: #0c111e;
 
   /* ---   */
 
@@ -185,12 +199,18 @@
   --background-main: #0c111e;
   --background-sidebar-main: #090c13;
   --background-modal-login: #0e131e;
-  --background-icon-activate: #09142a;
-  --background-icon-not-activate: #16181f;
+  --background-menu-activate: #09142a;
+  --background-menu-not-activate: #16181f;
+  --background-sidebar-user: #161a24;
+  --background-tooltip: #ffffff;
+  --background-hover-sidebar-menu: #161b26;
+  --icon-hover-sidebar-menu: #e2e8f0;
+  --border-sidebar-user: #282c35;
   --border-main: #1f2632;
   --base-primary: #8c9aaf;
   --base-secondary: #4b586a;
-
+  --variant-primary: #0c111e;
+  --variant-secondary: #f4f7f9;
   /* --- */
 
   --background: oklch(0.145 0 0);

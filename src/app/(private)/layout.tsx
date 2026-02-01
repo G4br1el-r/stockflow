@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import '@/app/globals.css'
 import { Sidebar } from '@/components/Sidebar'
+import { TooltipProvider } from '@radix-ui/react-tooltip'
+import { ProvidersSwitchDarkAndLight } from '@/components/ProviderSwitchDarkAndLight'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -24,11 +26,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background-main transition-colors duration-500`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-dvh h-dvh antialiased bg-background-main`}
       >
-        <Sidebar>{children}</Sidebar>
+        <ProvidersSwitchDarkAndLight>
+          <TooltipProvider>
+            <Sidebar>{children}</Sidebar>
+          </TooltipProvider>
+        </ProvidersSwitchDarkAndLight>
       </body>
     </html>
   )
