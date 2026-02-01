@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import {
   ChartNoAxesCombined,
   Package,
@@ -27,9 +27,8 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen">
-      {/* Desktop Sidebar */}
       <aside
-        className={`hidden md:flex flex-col bg-white  border-r fixed left-0 top-0 h-screen transition-[width] duration-300 ${
+        className={`hidden lg:flex flex-col bg-background-sidebar-main border-r fixed left-0 top-0 h-screen transition-[width] duration-300 ${
           hovered ? 'w-64' : 'w-20'
         }`}
         onMouseEnter={handleMouseEnter}
@@ -53,54 +52,54 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
         </nav>
       </aside>
 
-      {/* Mobile */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <button
           type="button"
           onClick={openMobile}
-          className="fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-lg"
+          className="fixed top-4 left-4 z-50 p-2 bg-background-sidebar-main rounded-lg shadow-lg"
           aria-label="Abrir menu"
         >
           <Menu className="w-6 h-6" />
         </button>
 
         {mobileOpen && (
-          <>
-            <button
-              type="button"
-              className="fixed inset-0 bg-black/50 z-40"
-              onClick={closeMobile}
-              aria-label="Fechar menu"
-            />
-
-            <aside className="fixed left-0 top-0 h-screen w-64 bg-white z-50 shadow-xl">
-              <div className="flex items-center justify-between p-6">
-                <button type="button" onClick={closeMobile} aria-label="Fechar">
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-
-              <nav className="px-3">
-                {MENU_ITEMS.map((item) => (
-                  <Link
-                    key={item.title}
-                    href={item.url}
-                    onClick={closeMobile}
-                    className="flex items-center gap-4 px-3 py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
-                  >
-                    <item.icon className="w-7 h-7" />
-                    <span>{item.title}</span>
-                  </Link>
-                ))}
-              </nav>
-            </aside>
-          </>
+          <button
+            type="button"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"
+            onClick={closeMobile}
+            aria-label="Fechar menu"
+          />
         )}
+
+        <aside
+          className={`fixed left-0 top-0 h-screen w-64 bg-background-sidebar-main z-50 shadow-xl transition-transform duration-300 ease-in-out ${
+            mobileOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <div className="flex items-center justify-between p-6">
+            <button type="button" onClick={closeMobile} aria-label="Fechar">
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          <nav className="px-3">
+            {MENU_ITEMS.map((item) => (
+              <Link
+                key={item.title}
+                href={item.url}
+                onClick={closeMobile}
+                className="flex items-center gap-4 px-3 py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
+              >
+                <item.icon className="w-7 h-7" />
+                <span>{item.title}</span>
+              </Link>
+            ))}
+          </nav>
+        </aside>
       </div>
 
-      {/* Main Content */}
       <main
-        className={`flex-1 transition-[margin] duration-300 ${hovered ? 'md:ml-64' : 'md:ml-20'}`}
+        className={`flex-1 transition-[margin] duration-300 ${hovered ? 'lg:ml-64' : 'lg:ml-20'}`}
       >
         {children}
       </main>

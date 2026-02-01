@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import './globals.css'
-import { Sidebar } from '@/components/AppSideBar'
+import '@/app/globals.css'
+import { Sidebar } from '@/components/Sidebar'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-app-bg bg-ambient transition-colors duration-500`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background-main transition-colors duration-500`}
       >
         <Sidebar>{children}</Sidebar>
       </body>
