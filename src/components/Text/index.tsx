@@ -12,8 +12,8 @@ const defaultStyles = {
   h4: 'text-xl font-medium',
   h5: 'text-lg font-medium',
   h6: 'text-base font-medium',
-  p: 'text-sm',
-  span: 'text-sm',
+  p: 'text-[1rem]',
+  span: 'text-[1rem]',
 }
 
 export function Text({

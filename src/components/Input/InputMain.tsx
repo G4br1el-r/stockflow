@@ -63,7 +63,7 @@ export default function InputMain({
         ref={inputRef}
         placeholder={placeHolder}
         className={cn(
-          'border-none outline-none bg-transparent flex-1 placeholder:text-base-secondary text-[0.8rem] text-base-secondary',
+          'border-none outline-none bg-transparent flex-1 placeholder:text-base-secondary text-[0.8rem] sm:text-[1rem] dark:text-base-primary',
           classNameInput,
         )}
       />
