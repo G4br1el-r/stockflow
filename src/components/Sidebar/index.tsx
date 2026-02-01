@@ -15,9 +15,9 @@ import {
 } from 'lucide-react'
 import { Text } from '../Text'
 import { Logo } from '../Icon'
-import { useLockBodyScroll } from '@/utils/useLockBodyScroll'
 import { UserSection } from '../UserSection'
-import { SwitchDarkMode } from '../SwitchDarkMode'
+import { useLockBodyScroll } from '@/hooks/useLockBodyScroll'
+import Image from 'next/image'
 
 const MENU_ITEMS = [
   { title: 'Dashboard', url: '/dashboard', icon: LayoutDashboard },
@@ -27,171 +27,162 @@ const MENU_ITEMS = [
   { title: 'Histórico de Venda', url: '/historico', icon: History },
 ]
 
-export function Sidebar({ children }: { children: React.ReactNode }) {
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [hovered, setHovered] = useState(false)
+// Componente do conteúdo da sidebar (reutilizável)
+function SidebarContent({
+  onClose,
+  showClose = false,
+  isCollapsed = false,
+}: {
+  onClose?: () => void
+  showClose?: boolean
+  isCollapsed?: boolean
+}) {
   const pathname = usePathname()
 
-  const handleMouseEnter = useCallback(() => setHovered(true), [])
-  const handleMouseLeave = useCallback(() => setHovered(false), [])
-  const closeMobile = useCallback(() => setMobileOpen(false), [])
-  const openMobile = useCallback(() => setMobileOpen(true), [])
+  return (
+    <div className="flex flex-col h-full">
+      {/* Header */}
+      <div className="flex items-center justify-between px-3 pt-6">
+        <div className="flex items-center gap-2">
+          <Logo className="h-11 w-11 shrink-0" />
+          {!isCollapsed && (
+            <div className="flex items-start justify-center flex-col">
+              <Text as="span" className="text-[1.3em] font-bold leading-7">
+                StockFlow
+              </Text>
+              <Text
+                as="span"
+                className="text-[0.7rem] text-base-primary leading-4"
+              >
+                ENTERPRISE
+              </Text>
+            </div>
+          )}
+        </div>
+        {showClose && (
+          <button type="button" onClick={onClose} aria-label="Fechar">
+            <X className="w-6 h-6" />
+          </button>
+        )}
+      </div>
+
+      <div className="w-full h-px bg-linear-to-r from-border-main/5 via-border-main to-border-main/5 mt-6" />
+
+      {/* Navigation */}
+      <nav className="flex-1 px-3 pt-4 overflow-hidden">
+        {MENU_ITEMS.map((item) => {
+          const isActive = pathname === item.url
+          return (
+            <Link
+              key={item.title}
+              href={item.url}
+              onClick={onClose}
+              className={cn(
+                'flex items-center h-11 group w-full relative gap-4 px-3 rounded-lg transition-colors mb-2',
+                isActive
+                  ? 'bg-background-menu-activate text-blue-neon border-blue-neon border'
+                  : 'hover:bg-background-hover-sidebar-menu',
+              )}
+            >
+              <item.icon
+                className={cn(
+                  'w-5 h-5 shrink-0',
+                  !isActive &&
+                    'text-icon-not-activate group-hover:text-icon-hover-sidebar-menu',
+                )}
+              />
+              {!isCollapsed && (
+                <Text
+                  as="span"
+                  className={cn(
+                    'text-sm font-semibold whitespace-nowrap',
+                    !isActive &&
+                      'text-icon-not-activate group-hover:text-icon-hover-sidebar-menu',
+                  )}
+                >
+                  {item.title}
+                </Text>
+              )}
+            </Link>
+          )
+        })}
+      </nav>
+
+      {/* User Section - Desktop */}
+      {!showClose && (
+        <div className="px-3 pb-6">
+          <UserSection />
+        </div>
+      )}
+
+      {/* User Section - Mobile */}
+      {showClose && (
+        <div className="px-3 pb-6">
+          <UserSection />
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Sidebar Desktop
+export function SidebarDesktop() {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <aside
+      className={cn(
+        'hidden lg:flex flex-col bg-background-sidebar-main border-r fixed left-0 top-0 h-screen transition-[width] duration-300 z-50',
+        hovered ? 'w-64' : 'w-17',
+      )}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <SidebarContent isCollapsed={!hovered} />
+    </aside>
+  )
+}
+
+// Botão e Menu Mobile
+export function SidebarMobile({ isVisible }: { isVisible?: boolean }) {
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useLockBodyScroll(mobileOpen)
 
   return (
-    <div className="flex min-h-dvh">
-      <aside
+    <>
+      {/* Botão hamburguer */}
+      <button
+        type="button"
+        onClick={() => setMobileOpen(true)}
         className={cn(
-          'hidden lg:flex flex-col bg-background-sidebar-main border-r fixed left-0 top-0 h-screen transition-[width] duration-300 z-50',
-          hovered ? 'w-64' : 'w-17',
+          'fixed top-4 left-4 z-50 p-2 bg-background-sidebar-main border border-border-main rounded-lg shadow-lg transition-transform duration-700 lg:hidden',
+          isVisible ? 'translate-y-0' : '-translate-y-20',
         )}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        aria-label="Abrir menu"
       >
-        <nav className="flex-1 py-6 px-3 flex flex-col justify-between gap-4 overflow-hidden">
-          <div className="flex gap-4 flex-col">
-            <div className="flex gap-4 h-11">
-              <Logo className="h-11 w-11 shrink-0" />
-              <div className="flex items-start justify-center flex-col">
-                <Text as="span" className="text-[1.3em] font-bold leading-7.5">
-                  StockFlow
-                </Text>
-                <Text as="span" className="text-[0.7rem] text-base-primary">
-                  ENTERPRISE
-                </Text>
-              </div>
-            </div>
+        <Menu className="w-6 h-6" />
+      </button>
 
-            <div className="w-full h-px  bg-linear-to-r from-border-main/5 via-border-main to-border-main/5" />
-
-            {MENU_ITEMS.map((item) => {
-              const isActive = pathname === item.url
-              return (
-                <Link
-                  key={item.title}
-                  href={item.url}
-                  className={cn(
-                    'flex items-center h-11 group w-full relative gap-4 px-3 rounded-lg transition-colors',
-                    isActive
-                      ? 'bg-background-menu-activate text-blue-neon border-blue-neon border'
-                      : 'hover:bg-background-hover-sidebar-menu',
-                  )}
-                >
-                  <item.icon
-                    className={cn(
-                      'w-5 h-5 shrink-0',
-                      !isActive &&
-                        'text-icon-not-activate group-hover:text-icon-hover-sidebar-menu',
-                    )}
-                  />
-                  <Text
-                    as="span"
-                    className={cn(
-                      'transition-opacity duration-300 whitespace-nowrap text-sm font-semibold',
-                      hovered ? 'opacity-100' : 'opacity-0 hidden',
-                      !isActive &&
-                        'text-icon-not-activate group-hover:text-icon-hover-sidebar-menu',
-                    )}
-                  >
-                    {item.title}
-                  </Text>
-                </Link>
-              )
-            })}
-          </div>
-          <UserSection />
-        </nav>
-      </aside>
-
-      {/* MOBILE */}
-      <div className="lg:hidden">
+      {/* Overlay */}
+      {mobileOpen && (
         <button
           type="button"
-          onClick={openMobile}
-          className="fixed top-4 left-4 z-50 p-2 bg-background-sidebar-main rounded-lg shadow-lg"
-          aria-label="Abrir menu"
-        >
-          <Menu className="w-6 h-6" />
-        </button>
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+          onClick={() => setMobileOpen(false)}
+          aria-label="Fechar menu"
+        />
+      )}
 
-        {mobileOpen && (
-          <button
-            type="button"
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"
-            onClick={closeMobile}
-            aria-label="Fechar menu"
-          />
+      {/* Menu lateral */}
+      <aside
+        className={cn(
+          'fixed left-0 top-0 h-dvh w-64 bg-background-sidebar-main z-50 shadow-xl transition-transform duration-300 ease-in-out border-r border-border-main',
+          mobileOpen ? 'translate-x-0' : '-translate-x-full',
         )}
-
-        <aside
-          className={cn(
-            'fixed left-0 top-0 h-dvh w-64 flex flex-col gap-5 px-3 py-6 bg-background-sidebar-main justify-between z-50 shadow-xl transition-transform duration-300 ease-in-out border-r border-border-main',
-            mobileOpen ? 'translate-x-0' : '-translate-x-full',
-          )}
-        >
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Logo className="h-11 w-11" />
-                <div className="flex items-start justify-center flex-col">
-                  <Text
-                    as="span"
-                    className="text-[1.3em] font-bold leading-relaxed"
-                  >
-                    StockFlow
-                  </Text>
-                  <Text as="span" className="text-[0.7rem] text-base-primary">
-                    ENTERPRISE
-                  </Text>
-                </div>
-              </div>
-              <button type="button" onClick={closeMobile} aria-label="Fechar">
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-
-            <div className="w-full h-px  bg-linear-to-r from-border-main/5 via-border-main to-border-main/5" />
-
-            <nav className="">
-              {MENU_ITEMS.map((item) => {
-                const isActive = pathname === item.url
-
-                return (
-                  <Link
-                    key={item.title}
-                    href={item.url}
-                    onClick={closeMobile}
-                    className={cn(
-                      'flex items-center relative gap-4 px-3 py-4 rounded-lg transition-colors',
-                      isActive &&
-                        'bg-background-menu-activate text-blue-neon border-blue-neon border',
-                    )}
-                  >
-                    <item.icon
-                      className={cn(
-                        'w-5 h-5',
-                        !isActive && 'text-icon-not-activate',
-                      )}
-                    />
-                    <Text
-                      as="span"
-                      className={cn(
-                        !isActive && 'text-icon-not-activate text-sm font-bold',
-                      )}
-                    >
-                      {item.title}
-                    </Text>
-                  </Link>
-                )
-              })}
-            </nav>
-          </div>
-          <UserSection />
-        </aside>
-      </div>
-
-      <div className="flex-1 lg:pl-21">{children}</div>
-    </div>
+      >
+        <SidebarContent onClose={() => setMobileOpen(false)} showClose />
+      </aside>
+    </>
   )
 }

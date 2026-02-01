@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import '@/app/globals.css'
-import { Sidebar } from '@/components/Sidebar'
+import { SidebarDesktop } from '@/components/Sidebar'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import { ProvidersSwitchDarkAndLight } from '@/components/ProviderSwitchDarkAndLight'
+import { Header } from '@/components/Header'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -32,7 +33,22 @@ export default function RootLayout({
       >
         <ProvidersSwitchDarkAndLight>
           <TooltipProvider>
-            <Sidebar>{children}</Sidebar>
+            <section className="grid w-full grid-cols-[auto_1fr] grid-rows-[auto_1fr] min-h-screen">
+              {/* DESKTOP - Sidebar na coluna 1 */}
+              <aside className="col-start-1 col-end-2 row-start-1 row-end-3 hidden lg:block">
+                <SidebarDesktop />
+              </aside>
+
+              {/* Header - coluna 2, linha 1 */}
+              <header className="col-start-2 col-end-3 row-start-1 row-end-2 lg:col-start-2">
+                <Header />
+              </header>
+
+              {/* Main Content - coluna 2, linha 2 */}
+              <main className="col-start-2 col-end-3 row-start-2 row-end-3 flex flex-col overflow-x-hidden lg:ml-0">
+                {children}
+              </main>
+            </section>
           </TooltipProvider>
         </ProvidersSwitchDarkAndLight>
       </body>

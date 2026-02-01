@@ -23,6 +23,8 @@
   --color-icon-not-activate: #6b7280;
   --color-blue-neon: #2563eb;
 
+  --shadow-header: var(--shadow-header);
+
   /* TYPOGRAPHY */
   --color-base-primary: var(--base-primary);
   --color-base-secondary: var(--base-secondary);
@@ -111,7 +113,7 @@
 :root {
   /* Custom */
 
-  --background-main: #f4f6fc;
+  --background-main: #edeff8;
   --background-sidebar-main: #fbfbfd;
   --background-modal-login: #ffffff;
   --background-menu-activate: #e6eefe;
@@ -127,6 +129,7 @@
   --variant-primary: #f4f7f9;
   --variant-secondary: #0c111e;
 
+  --shadow-header: 0 0 30px rgba(0, 0, 0, 0.1);
   /* ---   */
 
   --radius: 0.625rem;
@@ -211,6 +214,8 @@
   --base-secondary: #4b586a;
   --variant-primary: #0c111e;
   --variant-secondary: #f4f7f9;
+
+  --shadow-header: 0 0 30px rgba(0, 0, 0, 0.8);
   /* --- */
 
   --background: oklch(0.145 0 0);
