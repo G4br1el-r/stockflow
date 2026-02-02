@@ -4,6 +4,11 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* BREAKPOINT */
+
+  --breakpoint-xs: 375px;
+  --breakpoint-small: 425px;
+
   /* CUSTOM */
 
   --gradient-hero: linear-gradient(135deg, #0c131e 0%, #0a0715 100%);
@@ -113,14 +118,14 @@
 :root {
   /* Custom */
 
-  --background-main: #edeff8;
-  --background-sidebar-main: #fbfbfd;
+  --background-main: #fbfbfd;
+  --background-sidebar-main: #edeff8;
   --background-modal-login: #ffffff;
   --background-menu-activate: #e6eefe;
   --background-menu-not-activate: #f8fafc;
   --background-sidebar-user: #efedf1;
   --background-tooltip: #090c13;
-  --background-hover-sidebar-menu: #edeef0;
+  --background-hover-sidebar-menu: #f8fafc;
   --icon-hover-sidebar-menu: #0f172a;
   --border-sidebar-user: #e1e0e3;
   --border-main: #d4d5d7;
@@ -199,8 +204,8 @@
 
 .dark {
   /* CUSTON */
-  --background-main: #0c111e;
-  --background-sidebar-main: #090c13;
+  --background-main: #090c13;
+  --background-sidebar-main: #0d1220;
   --background-modal-login: #0e131e;
   --background-menu-activate: #09142a;
   --background-menu-not-activate: #16181f;
