@@ -1,12 +1,19 @@
 'use client'
 import { cn } from '@/lib/utils'
-import { Eye, EyeOff, LucideIcon, Mail, User, LockKeyhole } from 'lucide-react'
-import { useRef, useState } from 'react'
+import {
+  Eye,
+  EyeOff,
+  LucideIcon,
+  Mail,
+  User,
+  LockKeyhole,
+  Shirt,
+} from 'lucide-react'
+import { InputHTMLAttributes, useRef, useState } from 'react'
 
-interface InputMainProps {
+interface InputMainProps extends InputHTMLAttributes<HTMLInputElement> {
   IconMain?: keyof typeof iconMap
   classNameIconMain?: string
-  placeHolder: string
   classNameInput?: string
   isPassword?: boolean
 }
@@ -17,14 +24,15 @@ const iconMap = {
   eyeOff: EyeOff,
   user: User,
   lock: LockKeyhole,
+  shirt: Shirt,
 } as const
 
 export default function InputMain({
   IconMain,
   classNameIconMain,
-  placeHolder,
   classNameInput,
   isPassword = false,
+  ...props
 }: InputMainProps) {
   const [visiblePassword, setVisiblePassword] = useState(true)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -61,11 +69,11 @@ export default function InputMain({
       <input
         type={isPassword && visiblePassword ? 'password' : 'text'}
         ref={inputRef}
-        placeholder={placeHolder}
         className={cn(
           'border-none outline-none bg-transparent flex-1 placeholder:text-base-secondary text-[0.8rem] sm:text-[1rem] dark:text-base-primary',
           classNameInput,
         )}
+        {...props}
       />
       {isPassword && (
         <button

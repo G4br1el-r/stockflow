@@ -6,5 +6,9 @@ interface InputRootProps {
 }
 
 export default function InputRoot({ children, className }: InputRootProps) {
-  return <div className={cn('w-full space-y-1', className)}>{children}</div>
+  return (
+    <div className={cn('w-full flex flex-col gap-1', className)}>
+      {children}
+    </div>
+  )
 }

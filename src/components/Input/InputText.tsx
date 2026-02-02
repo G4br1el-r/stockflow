@@ -1,15 +1,22 @@
 import { cn } from '@/lib/utils'
-import { Text } from '../Text'
+import { LabelHTMLAttributes } from 'react'
 
-interface InputTitleProps {
+interface InputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   text: string
   className?: string
 }
 
-export default function InputTitle({ text, className }: InputTitleProps) {
+export default function InputLabel({
+  text,
+  className,
+  ...props
+}: InputLabelProps) {
   return (
-    <Text as="p" className={cn('text-base-secondary font-semibold', className)}>
+    <label
+      className={cn('text-base-secondary font-semibold', className)}
+      {...props}
+    >
       {text}
-    </Text>
+    </label>
   )
 }

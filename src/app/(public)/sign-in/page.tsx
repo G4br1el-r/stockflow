@@ -25,23 +25,29 @@ export default function SignIn() {
         </section>
         <form className="flex flex-col items-center w-full justify-center gap-5">
           <InputComponent.root>
-            <InputComponent.title text="E-mail" />
+            <InputComponent.label text="E-mail" htmlFor="email" />
             <InputComponent.wrapper>
               <InputComponent.main
                 IconMain={'mail'}
-                placeHolder="seu@email.com"
+                placeholder="seu@email.com"
+                id="email"
+                name="email"
+                type="email"
               />
             </InputComponent.wrapper>
           </InputComponent.root>
 
           <div className="space-y-2 w-full">
             <InputComponent.root>
-              <InputComponent.title text="Senha" />
+              <InputComponent.label text="Senha" htmlFor="password" />
               <InputComponent.wrapper>
                 <InputComponent.main
                   IconMain={'lock'}
-                  placeHolder="••••••••••"
+                  placeholder="••••••••••"
+                  id="password"
+                  name="password"
                   isPassword
+                  type="password"
                 />
               </InputComponent.wrapper>
             </InputComponent.root>
