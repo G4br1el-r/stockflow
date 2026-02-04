@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import '@/app/globals.css'
 import { SidebarDesktop } from '@/components/Sidebar'
-import { TooltipProvider } from '@radix-ui/react-tooltip'
 import { ProvidersSwitchDarkAndLight } from '@/providers/ProviderSwitchDarkAndLight'
 import { Header } from '@/components/Header'
 
@@ -32,21 +31,19 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-dvh h-dvh antialiased bg-background-sidebar-main`}
       >
         <ProvidersSwitchDarkAndLight>
-          <TooltipProvider>
-            <section className="grid w-full grid-cols-[auto_1fr] grid-rows-[auto_1fr] min-h-screen">
-              <aside className="col-start-1 col-end-2 row-start-1 row-end-3 hidden lg:block">
-                <SidebarDesktop />
-              </aside>
+          <section className="grid w-full grid-cols-[auto_1fr] grid-rows-[auto_1fr] min-h-screen">
+            <aside className="col-start-1 col-end-2 row-start-1 row-end-3 hidden lg:block">
+              <SidebarDesktop />
+            </aside>
 
-              <header className="col-start-2 col-end-3 lg:pr-3 lg:pt-3 row-start-1 row-end-2 lg:col-start-2">
-                <Header />
-              </header>
+            <header className="col-start-2 col-end-3 lg:pr-3 lg:pt-3 row-start-1 row-end-2 lg:col-start-2">
+              <Header />
+            </header>
 
-              <section className="col-start-2 lg:pr-3 lg:pb-3 col-end-3 row-start-2 row-end-3 flex flex-col overflow-x-hidden lg:ml-0">
-                {children}
-              </section>
+            <section className="col-start-2 lg:pr-3 lg:pb-3 col-end-3 row-start-2 row-end-3 flex flex-col overflow-x-hidden lg:ml-0">
+              {children}
             </section>
-          </TooltipProvider>
+          </section>
         </ProvidersSwitchDarkAndLight>
       </body>
     </html>

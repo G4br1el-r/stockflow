@@ -8,6 +8,9 @@ import {
   User,
   LockKeyhole,
   Shirt,
+  Store,
+  Palette,
+  Banknote,
 } from 'lucide-react'
 import { InputHTMLAttributes, useRef, useState } from 'react'
 
@@ -25,6 +28,9 @@ const iconMap = {
   user: User,
   lock: LockKeyhole,
   shirt: Shirt,
+  store: Store,
+  palette: Palette,
+  banknote: Banknote,
 } as const
 
 export default function InputMain({

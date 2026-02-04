@@ -85,7 +85,6 @@ function SidebarContent({
                   : 'hover:bg-background-hover-sidebar-menu',
               )}
             >
-              {/* ICON */}
               <item.icon
                 className={cn(
                   'w-5 h-5 shrink-0 z-10',
@@ -94,7 +93,6 @@ function SidebarContent({
                 )}
               />
 
-              {/* TEXT — fora do fluxo */}
               <span
                 className={cn(
                   'absolute left-12 whitespace-nowrap text-sm font-semibold transition-all duration-500 ease-in-out origin-left pointer-events-none',

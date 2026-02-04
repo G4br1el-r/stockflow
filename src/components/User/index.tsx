@@ -1,13 +1,9 @@
 'use client'
 
+import * as Tooltip from '@radix-ui/react-tooltip'
+import { DoorOpen } from 'lucide-react'
 import Image from 'next/image'
 import { Text } from '../Text'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@radix-ui/react-tooltip'
-import { DoorOpen } from 'lucide-react'
 
 export function User() {
   return (
@@ -30,20 +26,27 @@ export function User() {
           </Text>
         </div>
       </div>
-      <div className="overflow-hidden">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button type="button" className="cursor-pointer">
-              <DoorOpen className="w-5 h-5 text-icon-not-activate transition-colors duration-300 group-hover:text-red-300" />
+      <Tooltip.Provider delayDuration={500}>
+        <Tooltip.Root>
+          <Tooltip.Trigger asChild>
+            <button type="button" className="IconButton">
+              <DoorOpen className="w-5 h-5 text-icon-not-activate transition-colors duration-300 cursor-pointer hover:text-red-400" />
             </button>
-          </TooltipTrigger>
-          <TooltipContent className="bg-background-tooltip mb-1 z-10 text-sm p-1 px-3 rounded-md shadow-lg text-variant-primary">
-            <Text as="p" className="text-sm">
-              Sair
-            </Text>
-          </TooltipContent>
-        </Tooltip>
-      </div>
+          </Tooltip.Trigger>
+          <Tooltip.Portal>
+            <Tooltip.Content
+              className="TooltipContent bg-background-tooltip z-50 text-sm p-1 px-3 rounded-md shadow-lg text-variant-primary"
+              sideOffset={5}
+            >
+              <Text as="p" className="text-sm">
+                Sair
+              </Text>
+
+              <Tooltip.Arrow className="TooltipArrow fill-background-tooltip" />
+            </Tooltip.Content>
+          </Tooltip.Portal>
+        </Tooltip.Root>
+      </Tooltip.Provider>
     </div>
   )
 }
