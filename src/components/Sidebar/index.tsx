@@ -15,9 +15,10 @@ import {
 import { Text } from '../Text'
 import { Logo } from '../Icon'
 import { UserSection } from '../UserSection'
+import { useTheme } from 'next-themes'
+import { PrismLogo } from '../PrismLogo'
 
 interface SidebarMobileProps {
-  isVisible?: boolean
   mobileOpen: boolean
   setMobileOpen: (open: boolean) => void
 }
@@ -40,25 +41,27 @@ function SidebarContent({
   isCollapsed?: boolean
 }) {
   const pathname = usePathname()
+  const { theme } = useTheme()
+  const isDarkTheme = theme === 'dark'
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between px-3 py-6">
-        <div className="flex items-center gap-2">
-          <Logo className="h-11 w-11 shrink-0" />
-          {!isCollapsed && (
-            <div className="flex items-start justify-center flex-col">
-              <Text as="span" className="text-[1.3em] font-bold leading-7">
-                StockFlow
-              </Text>
-              <Text
-                as="span"
-                className="text-[0.7rem] text-base-primary leading-4"
-              >
-                ENTERPRISE
-              </Text>
-            </div>
-          )}
+    <div className="flex flex-col h-full overflow-hidden">
+      <div className="flex items-center h-17 justify-between px-3 py-4 gap-2">
+        <div className="relative flex items-center h-9">
+          <div className="relative w-11 h-full shrink-0 z-10">
+            <PrismLogo isDarkTheme={isDarkTheme} show="icon" />
+          </div>
+
+          <div
+            className={cn(
+              'absolute left-12 h-full w-30 transition-all duration-500 ease-in-out pointer-events-none',
+              isCollapsed
+                ? 'opacity-0 -translate-x-1.5'
+                : 'opacity-100 translate-x-0',
+            )}
+          >
+            <PrismLogo isDarkTheme={isDarkTheme} show="text" />
+          </div>
         </div>
         {showClose && (
           <button type="button" onClick={onClose} aria-label="Fechar">
@@ -76,31 +79,34 @@ function SidebarContent({
               href={item.url}
               onClick={onClose}
               className={cn(
-                'flex items-center h-11 group w-full relative gap-4 px-3 rounded-lg transition-colors mb-2',
+                'relative flex items-center h-11 group w-full px-3 rounded-lg transition-colors mb-2',
                 isActive
-                  ? 'bg-background-menu-activate text-blue-neon border-blue-neon border'
+                  ? 'bg-background-menu-activate text-blue-neon border border-blue-neon'
                   : 'hover:bg-background-hover-sidebar-menu',
               )}
             >
+              {/* ICON */}
               <item.icon
                 className={cn(
-                  'w-5 h-5 shrink-0',
+                  'w-5 h-5 shrink-0 z-10',
                   !isActive &&
                     'text-icon-not-activate group-hover:text-icon-hover-sidebar-menu',
                 )}
               />
-              {!isCollapsed && (
-                <Text
-                  as="span"
-                  className={cn(
-                    'text-sm font-semibold whitespace-nowrap',
-                    !isActive &&
-                      'text-icon-not-activate group-hover:text-icon-hover-sidebar-menu',
-                  )}
-                >
-                  {item.title}
-                </Text>
-              )}
+
+              {/* TEXT — fora do fluxo */}
+              <span
+                className={cn(
+                  'absolute left-12 whitespace-nowrap text-sm font-semibold transition-all duration-500 ease-in-out origin-left pointer-events-none',
+                  isCollapsed
+                    ? 'opacity-0 -translate-x-1.5 scale-x-95'
+                    : 'opacity-100 translate-x-0 scale-x-100',
+                  !isActive &&
+                    'text-icon-not-activate group-hover:text-icon-hover-sidebar-menu',
+                )}
+              >
+                {item.title}
+              </span>
             </Link>
           )
         })}
@@ -127,7 +133,7 @@ export function SidebarDesktop() {
   return (
     <aside
       className={cn(
-        'hidden lg:flex lg:sticky flex-col bg-background-sidebar-main left-0 top-0 h-screen transition-[width] duration-300',
+        'hidden lg:flex lg:sticky flex-col bg-background-sidebar-main left-0 top-0 h-screen transition-[width] duration-500',
         hovered ? 'w-64' : 'w-17',
       )}
       onMouseEnter={() => setHovered(true)}

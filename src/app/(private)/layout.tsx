@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import '@/app/globals.css'
 import { SidebarDesktop } from '@/components/Sidebar'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
-import { ProvidersSwitchDarkAndLight } from '@/components/ProviderSwitchDarkAndLight'
+import { ProvidersSwitchDarkAndLight } from '@/providers/ProviderSwitchDarkAndLight'
 import { Header } from '@/components/Header'
 
 const geistSans = Geist({
@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-dvh h-dvh antialiased bg-background-sidebar-main`}
       >

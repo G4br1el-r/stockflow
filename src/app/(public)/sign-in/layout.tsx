@@ -1,5 +1,5 @@
 import '@/app/globals.css'
-import { ProvidersSwitchDarkAndLight } from '@/components/ProviderSwitchDarkAndLight'
+import { ProvidersSwitchDarkAndLight } from '@/providers/ProviderSwitchDarkAndLight'
 
 export default function SignInLayout({
   children,
