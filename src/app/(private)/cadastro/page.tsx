@@ -35,7 +35,7 @@ export default function Register() {
               className="text-sm"
             />
             <InputComponent.wrapper>
-              <InputComponent.main
+              <InputComponent.inputBase
                 id="product"
                 name="product"
                 placeholder="Camiseta Oversized"
@@ -51,7 +51,7 @@ export default function Register() {
               className="text-sm"
             />
             <InputComponent.wrapper>
-              <InputComponent.main
+              <InputComponent.inputBase
                 id="store"
                 name="store"
                 placeholder="Selecione a unidade"
@@ -67,7 +67,7 @@ export default function Register() {
               text="Subcategoria"
             />
             <InputComponent.wrapper>
-              <InputComponent.main
+              <InputComponent.inputBase
                 id="subcategory"
                 name="subcategory"
                 placeholder="Camisetas"
@@ -83,7 +83,7 @@ export default function Register() {
               text="Cor"
             />
             <InputComponent.wrapper>
-              <InputComponent.main
+              <InputComponent.inputBase
                 id="collor"
                 name="collor"
                 placeholder="Azul"
@@ -99,10 +99,14 @@ export default function Register() {
               text="Quantidade"
             />
             <InputComponent.wrapper>
-              <InputComponent.main
+              <InputComponent.inputBase
                 id="quantity"
                 name="quantity"
                 placeholder="0"
+                type="tel"
+                inputMode="numeric"
+                pattern="[0-9]"
+                isOnlyNumeric={true}
               />
             </InputComponent.wrapper>
           </InputComponent.root>
@@ -116,12 +120,7 @@ export default function Register() {
                   text="Preço Custo"
                 />
                 <InputComponent.wrapper>
-                  <InputComponent.main
-                    id="costPrice"
-                    name="costPrice"
-                    placeholder="0"
-                    IconMain="banknote"
-                  />
+                  <InputComponent.inputMaskPrice />
                 </InputComponent.wrapper>
               </InputComponent.root>
             </div>
@@ -134,12 +133,7 @@ export default function Register() {
                   text="Preço Venda"
                 />
                 <InputComponent.wrapper>
-                  <InputComponent.main
-                    id="sellingPrice"
-                    name="sellingPrice"
-                    placeholder="0"
-                    IconMain="banknote"
-                  />
+                  <InputComponent.inputMaskPrice />
                 </InputComponent.wrapper>
               </InputComponent.root>
             </div>
@@ -152,11 +146,11 @@ export default function Register() {
               text="Preço Custo"
             />
             <InputComponent.wrapper>
-              <InputComponent.main
+              <InputComponent.inputBase
                 id="sku"
                 name="sku"
                 placeholder="GERADO-AUTOMATICAMENTE"
-                IconMain="banknote"
+                IconMain="scanBarcode"
               />
             </InputComponent.wrapper>
           </InputComponent.root>

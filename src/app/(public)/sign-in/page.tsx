@@ -27,7 +27,7 @@ export default function SignIn() {
           <InputComponent.root>
             <InputComponent.label text="E-mail" htmlFor="email" />
             <InputComponent.wrapper>
-              <InputComponent.main
+              <InputComponent.inputBase
                 IconMain={'mail'}
                 placeholder="seu@email.com"
                 id="email"
@@ -41,7 +41,7 @@ export default function SignIn() {
             <InputComponent.root>
               <InputComponent.label text="Senha" htmlFor="password" />
               <InputComponent.wrapper>
-                <InputComponent.main
+                <InputComponent.inputBase
                   IconMain={'lock'}
                   placeholder="••••••••••"
                   id="password"

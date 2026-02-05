@@ -11,14 +11,16 @@ import {
   Store,
   Palette,
   Banknote,
+  ScanBarcode,
 } from 'lucide-react'
 import { InputHTMLAttributes, useRef, useState } from 'react'
 
-interface InputMainProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputBaseProps extends InputHTMLAttributes<HTMLInputElement> {
   IconMain?: keyof typeof iconMap
   classNameIconMain?: string
   classNameInput?: string
   isPassword?: boolean
+  isOnlyNumeric?: boolean
 }
 
 const iconMap = {
@@ -31,19 +33,24 @@ const iconMap = {
   store: Store,
   palette: Palette,
   banknote: Banknote,
+  scanBarcode: ScanBarcode,
 } as const
 
-export default function InputMain({
+export default function InputBase({
   IconMain,
   classNameIconMain,
   classNameInput,
   isPassword = false,
+  isOnlyNumeric = false,
+  onChange,
   ...props
-}: InputMainProps) {
+}: InputBaseProps) {
   const [visiblePassword, setVisiblePassword] = useState(true)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const Icon: LucideIcon | null = IconMain ? iconMap[IconMain] : null
+  const resolvedInputType =
+    isPassword && visiblePassword ? 'password' : (props.type ?? 'text')
 
   function handleVisiblePassword() {
     setVisiblePassword(!visiblePassword)
@@ -52,15 +59,24 @@ export default function InputMain({
 
   function moveCursorToEndFocus() {
     const input = inputRef.current
+    if (!input) return
 
-    if (input) {
-      input.focus()
-      setTimeout(() => {
-        const length = input.value.length
-        input.setSelectionRange(length, length)
-      }, 0)
-    }
+    input.focus()
+    setTimeout(() => {
+      const length = input.value.length
+      input.setSelectionRange(length, length)
+    }, 0)
   }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (isOnlyNumeric) {
+      const onlyNumbers = e.currentTarget.value.replace(/\D/g, '')
+      e.currentTarget.value = onlyNumbers
+    }
+
+    onChange?.(e)
+  }
+
   return (
     <>
       {Icon && (
@@ -72,15 +88,19 @@ export default function InputMain({
           )}
         />
       )}
+
       <input
-        type={isPassword && visiblePassword ? 'password' : 'text'}
         ref={inputRef}
+        type={isOnlyNumeric ? 'tel' : resolvedInputType}
+        inputMode={isOnlyNumeric ? 'numeric' : 'text'}
+        onChange={handleChange}
         className={cn(
-          'border-none outline-none bg-transparent flex-1 placeholder:text-base-secondary text-[0.8rem] sm:text-[1rem] dark:text-base-primary',
+          'border-none w-full outline-none bg-transparent placeholder:text-base-secondary text-[0.8rem] sm:text-[1rem] dark:text-base-primary',
           classNameInput,
         )}
         {...props}
       />
+
       {isPassword && (
         <button
           type="button"
