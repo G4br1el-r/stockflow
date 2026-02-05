@@ -12,6 +12,9 @@ import {
   Palette,
   Banknote,
   ScanBarcode,
+  ChartColumnStacked,
+  Spool,
+  Ruler,
 } from 'lucide-react'
 import { InputHTMLAttributes, useRef, useState } from 'react'
 
@@ -34,6 +37,9 @@ const iconMap = {
   palette: Palette,
   banknote: Banknote,
   scanBarcode: ScanBarcode,
+  chartColumnStacked: ChartColumnStacked,
+  spool: Spool,
+  ruler: Ruler,
 } as const
 
 export default function InputBase({
@@ -95,9 +101,10 @@ export default function InputBase({
         inputMode={isOnlyNumeric ? 'numeric' : 'text'}
         onChange={handleChange}
         className={cn(
-          'border-none w-full outline-none bg-transparent placeholder:text-base-secondary text-[0.8rem] sm:text-[1rem] dark:text-base-primary',
+          'border-none w-full outline-none bg-transparent placeholder:text-base-primary/50 text-[0.8rem] sm:text-[1rem]',
           classNameInput,
         )}
+        enterKeyHint="next"
         {...props}
       />
 

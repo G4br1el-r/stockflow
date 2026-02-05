@@ -35,9 +35,10 @@ export function InputMaskPrice({
       allowNegative={false}
       placeholder={placeholder}
       className={cn(
-        'border-none w-full outline-none bg-transparent placeholder:text-base-secondary text-[0.8rem] sm:text-[1rem] dark:text-base-primary',
+        'border-none w-full outline-none bg-transparent placeholder:text-base-secondary text-[0.8rem] sm:text-[1rem] ',
         classNameInput,
       )}
+      enterKeyHint="next"
       {...props}
     />
   )

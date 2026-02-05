@@ -12,7 +12,7 @@ export function WrapperAlignMainPages({
   return (
     <section
       className={cn(
-        'h-full w-full bg-background-main lg:rounded-b-2xl flex gap-3 px-3 lg:pt-0 pt-30 pb-5 flex-nowrap',
+        'bg-background-main lg:rounded-b-2xl flex gap-3 px-3 lg:pt-0 pt-25 pb-5 flex-nowrap',
         className,
       )}
     >

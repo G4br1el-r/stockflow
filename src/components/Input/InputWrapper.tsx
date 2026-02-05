@@ -12,7 +12,7 @@ export default function InputWrapper({
   return (
     <div
       className={cn(
-        'group w-full transition-colors duration-300 h-12 flex gap-2 items-center justify-start p-3 focus-within:border-icon-activate border border-border-main rounded-sm',
+        'group w-full transition-colors duration-300 h-12 flex gap-2 items-center justify-start p-3 focus-within:border-icon-activate border border-base-primary/40 rounded-sm',
         className,
       )}
     >
