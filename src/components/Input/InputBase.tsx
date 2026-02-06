@@ -15,6 +15,7 @@ import {
   ChartColumnStacked,
   Spool,
   Ruler,
+  BanknoteArrowUp,
 } from 'lucide-react'
 import { InputHTMLAttributes, useRef, useState } from 'react'
 
@@ -24,6 +25,7 @@ interface InputBaseProps extends InputHTMLAttributes<HTMLInputElement> {
   classNameInput?: string
   isPassword?: boolean
   isOnlyNumeric?: boolean
+  autoFocusNext?: boolean // NOVA PROP
 }
 
 const iconMap = {
@@ -40,6 +42,7 @@ const iconMap = {
   chartColumnStacked: ChartColumnStacked,
   spool: Spool,
   ruler: Ruler,
+  banknoteArrowUp: BanknoteArrowUp,
 } as const
 
 export default function InputBase({
@@ -48,7 +51,9 @@ export default function InputBase({
   classNameInput,
   isPassword = false,
   isOnlyNumeric = false,
+  autoFocusNext = true,
   onChange,
+  onKeyDown,
   ...props
 }: InputBaseProps) {
   const [visiblePassword, setVisiblePassword] = useState(true)
@@ -83,6 +88,32 @@ export default function InputBase({
     onChange?.(e)
   }
 
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Enter' && autoFocusNext && !props.disabled) {
+      e.preventDefault()
+
+      const form = e.currentTarget.form
+      if (!form) return
+
+      const formElements = Array.from(
+        form.querySelectorAll(
+          'input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled])',
+        ),
+      )
+
+      const currentIndex = formElements.indexOf(e.currentTarget)
+      const nextElement = formElements[currentIndex + 1] as HTMLElement
+
+      if (nextElement) {
+        nextElement.focus()
+      } else {
+        e.currentTarget.blur()
+      }
+    }
+
+    onKeyDown?.(e)
+  }
+
   return (
     <>
       {Icon && (
@@ -100,11 +131,12 @@ export default function InputBase({
         type={isOnlyNumeric ? 'tel' : resolvedInputType}
         inputMode={isOnlyNumeric ? 'numeric' : 'text'}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         className={cn(
           'border-none w-full outline-none bg-transparent placeholder:text-base-primary/50 text-[0.8rem] sm:text-[1rem]',
           classNameInput,
         )}
-        enterKeyHint="next"
+        enterKeyHint={autoFocusNext ? 'next' : 'done'}
         {...props}
       />
 

@@ -54,13 +54,13 @@ export function SwitchDarkMode() {
           setTimeout(() => setTheme(checked ? 'dark' : 'light'), 100)
         }}
         className={cn(
-          'relative h-6.25 w-12 cursor-pointer rounded-full outline-none data-[state=checked]:bg-black',
+          'relative h-5 w-10 cursor-pointer rounded-full outline-none data-[state=checked]:bg-black',
           localChecked
-            ? 'data-[state=checked]:bg-icon-activate'
+            ? 'data-[state=checked]:bg-icon-activate/70'
             : 'bg-gray-300',
         )}
       >
-        <Switch.Thumb className="block size-5.25 bg-white translate-x-0.5 rounded-full transition-transform duration-100 will-change-transform data-[state=checked]:translate-x-6" />
+        <Switch.Thumb className="block size-3.75 bg-white translate-x-0.5 rounded-full transition-transform duration-100 will-change-transform data-[state=checked]:translate-x-5.5" />
       </Switch.Root>
     </div>
   )

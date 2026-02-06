@@ -13,7 +13,10 @@ export default function InputLabel({
 }: InputLabelProps) {
   return (
     <label
-      className={cn('text-base-primary font-semibold', className)}
+      className={cn(
+        'text-variant-secondary/80 transition-colors duration-300 group-focus-within:text-icon-activate font-semibold',
+        className,
+      )}
       {...props}
     >
       {text}

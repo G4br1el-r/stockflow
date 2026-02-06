@@ -30,6 +30,8 @@
   --color-icon-not-activate: #6b7280;
   --color-blue-neon: #2563eb;
   --color-base-text: #f4f7f9;
+  --color-base-green: #10b981;
+  --color-base-orange: #f59e0b;
 
   --shadow-header: var(--shadow-header);
 

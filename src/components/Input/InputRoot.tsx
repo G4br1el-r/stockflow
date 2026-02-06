@@ -7,7 +7,7 @@ interface InputRootProps {
 
 export default function InputRoot({ children, className }: InputRootProps) {
   return (
-    <div className={cn('w-full flex flex-col gap-1', className)}>
+    <div className={cn('w-full flex flex-col gap-1 group', className)}>
       {children}
     </div>
   )
