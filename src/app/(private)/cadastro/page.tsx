@@ -1,5 +1,7 @@
+'use client'
 import { InputComponent } from '@/components/Input'
 import ClothesForm from '@/components/ProductForms/ClothesForm'
+import ShoesForm from '@/components/ProductForms/ShoesForm'
 import { Text } from '@/components/Text'
 import { WrapperAlignMainPages } from '@/components/WrapperAlignMainPages'
 import { cn } from '@/lib/utils'
@@ -14,16 +16,19 @@ import {
   Shirt,
   Trash2,
 } from 'lucide-react'
+import { useState } from 'react'
 
 export default function Register() {
   const SECTION_ITENS = [
-    { title: 'Roupas', icon: Shirt, checked: true },
-    { title: 'Sapatos', icon: Footprints },
-    { title: 'Acessórios', icon: Gem },
+    { title: 'Roupas', slug: 'clothes', icon: Shirt },
+    { title: 'Sapatos', slug: 'shoes', icon: Footprints },
+    { title: 'Acessórios', slug: 'acessory', icon: Gem },
   ]
+  const [activeSection, setActiveSection] = useState('clothes')
+  console.log(activeSection)
 
   return (
-    <WrapperAlignMainPages className="flex flex-col gap-6 items-center justify-between">
+    <WrapperAlignMainPages className="flex flex-col gap-6 items-center">
       <section className="w-full flex flex-col gap-6 md:grid md:grid-cols-2">
         <div className="flex flex-col w-full justify-start items-center gap-2">
           <div className="flex w-full items-center justify-start gap-2 text-icon-activate">
@@ -50,11 +55,13 @@ export default function Register() {
             const IconComponent = item.icon
 
             return (
-              <div
+              <button
+                type="button"
                 key={item.title}
+                onClick={() => setActiveSection(item.slug)}
                 className={cn(
                   'w-1/3 h-10 cursor-pointer font-bold rounded-sm text-center justify-center flex items-center bg gap-1',
-                  item.checked
+                  activeSection === item.slug
                     ? 'bg-icon-activate text-variant-primary dark:text-variant-secondary'
                     : 'bg-transparent text-variant-secondary',
                 )}
@@ -63,7 +70,7 @@ export default function Register() {
                 <Text as="span" className={'text-[0.8rem] '}>
                   {item.title}
                 </Text>
-              </div>
+              </button>
             )
           })}
         </div>
@@ -82,8 +89,8 @@ export default function Register() {
           <div className="flex-1 mx-5 lg:mx-30 h-px bg-linear-to-r from-border-main/10 via-border-main to-border-main/10" />
         </div>
 
-        <form className="w-full p-3 justify-between flex flex-col flex-1 gap-10">
-          <div className="flex flex-col gap-5">
+        <form className="w-full p-3 flex flex-col flex-1 gap-10">
+          <div className="flex flex-col flex-1 justify-around gap-5">
             <InputComponent.root>
               <InputComponent.label
                 htmlFor="product"
@@ -108,11 +115,15 @@ export default function Register() {
                   className="text-sm"
                 />
                 <InputComponent.wrapper>
-                  <InputComponent.inputBase
-                    id="store"
+                  <InputComponent.inputSelected
                     name="store"
-                    placeholder="Selecione a unidade"
                     IconMain="store"
+                    options={[
+                      { value: 'loja1', label: 'Loja Centro' },
+                      { value: 'loja2', label: 'Loja Shopping' },
+                      { value: 'loja3', label: 'Loja Norte' },
+                    ]}
+                    placeholder="Selecione a unidade"
                   />
                 </InputComponent.wrapper>
               </InputComponent.root>
@@ -290,7 +301,9 @@ export default function Register() {
           </div>
 
           <div className="bg-background-register/60 border border-border-register w-full p-3 rounded-sm">
-            <ClothesForm />
+            {activeSection === 'clothes' && <ClothesForm key="clothes" />}
+            {activeSection === 'shoes' && <ShoesForm key="shoes" />}
+            {/* {activeSection === 'acessory' && <AcessoryForm key="acessory" />} */}
           </div>
 
           <div className="flex flex-col extrasm:flex-row items-start justify-center gap-5 extrasm:items-center extrasm:justify-between">
@@ -305,7 +318,7 @@ export default function Register() {
             </div>
             <button
               type="submit"
-              className="w-full md:max-w-75 flex items-center justify-center gap-2 h-12 rounded-md bg-blue-neon text-white font-semibold hover:bg-blue-neon/90 
+              className="w-full md:max-w-75 flex items-center justify-center gap-2 h-12 rounded-4xl bg-blue-neon text-white font-semibold hover:bg-blue-neon/90 
              shadow-[0_0_20px_0px_rgba(0,112,255,0.7)] transition duration-300 ease-in-out hover:shadow-[0_0_10px_2px_rgba(0,112,255,0.7)] cursor-pointer focus:outline-none"
             >
               <Text as="span">Cadastrar Produto</Text>
