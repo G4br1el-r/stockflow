@@ -12,8 +12,6 @@ import {
   Package,
   X,
 } from 'lucide-react'
-import { Text } from '../Text'
-import { Logo } from '../Icon'
 import { UserSection } from '../UserSection'
 import { useTheme } from 'next-themes'
 import { PrismLogo } from '../PrismLogo'

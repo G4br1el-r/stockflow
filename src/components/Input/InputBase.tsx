@@ -25,7 +25,7 @@ interface InputBaseProps extends InputHTMLAttributes<HTMLInputElement> {
   classNameInput?: string
   isPassword?: boolean
   isOnlyNumeric?: boolean
-  autoFocusNext?: boolean // NOVA PROP
+  autoFocusNext?: boolean
 }
 
 const iconMap = {
@@ -45,19 +45,24 @@ const iconMap = {
   banknoteArrowUp: BanknoteArrowUp,
 } as const
 
-export default function InputBase({
-  IconMain,
-  classNameIconMain,
-  classNameInput,
-  isPassword = false,
-  isOnlyNumeric = false,
-  autoFocusNext = true,
-  onChange,
-  onKeyDown,
-  ...props
-}: InputBaseProps) {
+import { forwardRef } from 'react'
+
+export default forwardRef<HTMLInputElement, InputBaseProps>(function InputBase(
+  {
+    IconMain,
+    classNameIconMain,
+    classNameInput,
+    isPassword = false,
+    isOnlyNumeric = false,
+    autoFocusNext = true,
+    onChange,
+    onKeyDown,
+    ...props
+  },
+  forwardedRef,
+) {
   const [visiblePassword, setVisiblePassword] = useState(true)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const internalRef = useRef<HTMLInputElement>(null)
 
   const Icon: LucideIcon | null = IconMain ? iconMap[IconMain] : null
   const resolvedInputType =
@@ -69,7 +74,7 @@ export default function InputBase({
   }
 
   function moveCursorToEndFocus() {
-    const input = inputRef.current
+    const input = internalRef.current
     if (!input) return
 
     input.focus()
@@ -97,7 +102,7 @@ export default function InputBase({
 
       const formElements = Array.from(
         form.querySelectorAll(
-          'input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled])',
+          'input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), button[role="combobox"]:not([disabled])',
         ),
       )
 
@@ -114,6 +119,16 @@ export default function InputBase({
     onKeyDown?.(e)
   }
 
+  function setRefs(element: HTMLInputElement | null) {
+    internalRef.current = element
+
+    if (typeof forwardedRef === 'function') {
+      forwardedRef(element)
+    } else if (forwardedRef) {
+      forwardedRef.current = element
+    }
+  }
+
   return (
     <>
       {Icon && (
@@ -127,7 +142,7 @@ export default function InputBase({
       )}
 
       <input
-        ref={inputRef}
+        ref={setRefs}
         type={isOnlyNumeric ? 'tel' : resolvedInputType}
         inputMode={isOnlyNumeric ? 'numeric' : 'text'}
         onChange={handleChange}
@@ -144,6 +159,7 @@ export default function InputBase({
         <button
           type="button"
           className="cursor-pointer"
+          tabIndex={-1}
           onClick={handleVisiblePassword}
         >
           {visiblePassword ? (
@@ -155,4 +171,4 @@ export default function InputBase({
       )}
     </>
   )
-}
+})
