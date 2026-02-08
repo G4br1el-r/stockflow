@@ -1,19 +1,26 @@
 import { Rocket, Trash2 } from 'lucide-react'
 import { Text } from '@/components/Text'
 import { cn } from '@/lib/utils'
+import { useFormContext } from 'react-hook-form'
 
 export default function FooterForm() {
+  const { reset } = useFormContext()
+
   return (
     <div className="flex flex-col extrasm:flex-row items-start justify-center gap-5 extrasm:items-center extrasm:justify-between">
-      <div className="flex group items-center self-start justify-center md:self-end cursor-pointer gap-2">
-        <Trash2 className="group-hover:text-red-300 transition-colors duration-300 ease-in-out text-base-secondary h-4 w-4" />
+      <button
+        onClick={() => reset()}
+        type="button"
+        className="flex group items-center self-start justify-center md:self-end cursor-pointer gap-1"
+      >
+        <Trash2 className="lg:group-hover:text-red-400 transition-colors duration-300 ease-in-out text-red-400 lg:text-base-secondary h-4 w-4" />
         <Text
           as="span"
-          className="text-base-secondary group-hover:text-red-300 transition-colors duration-300 ease-in-out"
+          className="text-red-400 lg:text-base-secondary lg:group-hover:text-red-400 transition-colors duration-300 ease-in-out"
         >
           Limpar Tudo
         </Text>
-      </div>
+      </button>
       <button
         type="submit"
         className={cn(

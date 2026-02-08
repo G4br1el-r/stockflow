@@ -1,9 +1,9 @@
 import { Text } from '@/components/Text'
 import { cn } from '@/lib/utils'
-import { BadgeInfo, Banknote, LucideIcon, Package } from 'lucide-react'
+import { BadgeInfo, Banknote, Package } from 'lucide-react'
 
 interface TitleSectionFormProps {
-  IconMain?: keyof typeof iconMap
+  IconMain: string
   classNameBackgroundIcon?: string
   classNameIcon?: string
   label: string
@@ -21,7 +21,7 @@ export default function TitleSectionForm({
   classNameBackgroundIcon,
   classNameIcon,
 }: TitleSectionFormProps) {
-  const Icon: LucideIcon | null = IconMain ? iconMap[IconMain] : null
+  const Icon = IconMain ? iconMap[IconMain as keyof typeof iconMap] : null
 
   return (
     <div className="w-full flex items-center gap-2">
@@ -37,8 +37,6 @@ export default function TitleSectionForm({
       <Text as="span" className="text-[1.2rem] font-bold whitespace-nowrap">
         {label}
       </Text>
-
-      <div className="flex-1 mx-5 lg:mx-30 h-px bg-linear-to-r from-border-main/10 via-border-main to-border-main/10" />
     </div>
   )
 }

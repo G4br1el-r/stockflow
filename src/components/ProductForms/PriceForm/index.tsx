@@ -1,6 +1,9 @@
 import { InputComponent } from '@/components/Input'
+import { Controller, useFormContext } from 'react-hook-form'
 
 export default function PriceForm() {
+  const { control } = useFormContext()
+
   return (
     <div>
       <div className="flex flex-col gap-5 md:grid md:grid-cols-3">
@@ -12,7 +15,16 @@ export default function PriceForm() {
               text="Preço Custo"
             />
             <InputComponent.wrapper>
-              <InputComponent.inputMaskPrice />
+              <Controller
+                name="costPrice"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <InputComponent.inputMaskPrice
+                    defaultValue={value}
+                    onValueChange={onChange}
+                  />
+                )}
+              />
             </InputComponent.wrapper>
           </InputComponent.root>
         </div>
@@ -25,7 +37,16 @@ export default function PriceForm() {
               text="Preço Venda"
             />
             <InputComponent.wrapper>
-              <InputComponent.inputMaskPrice />
+              <Controller
+                name="sellingPrice"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <InputComponent.inputMaskPrice
+                    defaultValue={value}
+                    onValueChange={onChange}
+                  />
+                )}
+              />
             </InputComponent.wrapper>
           </InputComponent.root>
         </div>
@@ -36,13 +57,14 @@ export default function PriceForm() {
             className="text-sm"
             text="Lucro Bruto"
           />
-          <InputComponent.wrapper className="bg-variant-primary">
+          <InputComponent.wrapper className="border border-base-green border-dashed bg-base-green/10">
             <InputComponent.inputBase
               id="profitMargin"
-              placeholder="Margem de Lucro"
-              className="cursor-not-allowed w-full disabled:text-base-primary"
-              disabled={true}
               IconMain="banknoteArrowUp"
+              classNameIconMain="text-base-green"
+              className="cursor-not-allowed w-full pointer-events-none select-none text-base-green"
+              readOnly
+              tabIndex={-1}
             />
           </InputComponent.wrapper>
         </InputComponent.root>

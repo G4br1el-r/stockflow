@@ -1,63 +1,76 @@
 import { InputComponent } from '@/components/Input'
-import SizeForm from '../SizeForm'
-import WrapperSegment from '../WrapperSegment'
+import { useFormContext } from 'react-hook-form'
 
 export default function ClothesForm() {
+  const { register } = useFormContext()
+
   return (
-    <WrapperSegment>
-      <div className="lg:grid lg:grid-cols-[auto_1fr] flex flex-col gap-5">
-        <SizeForm />
-
-        <div className="flex flex-col gap-5 md:grid md:grid-cols-3">
-          <InputComponent.root>
-            <InputComponent.label
-              htmlFor="clothing"
-              className="text-sm"
-              text="Tecido"
+    <div className="flex flex-col gap-5 lg:col-span-2">
+      <div className="flex flex-col gap-5 md:grid md:grid-cols-4">
+        <InputComponent.root>
+          <InputComponent.label
+            htmlFor="collor"
+            className="text-sm"
+            text="Cor"
+          />
+          <InputComponent.wrapper>
+            <InputComponent.inputBase
+              id="collor"
+              placeholder="Azul"
+              IconMain="palette"
+              {...register('collor')}
             />
-            <InputComponent.wrapper>
-              <InputComponent.inputBase
-                id="clothing"
-                name="clothing"
-                placeholder="Algodão"
-                IconMain="spool"
-              />
-            </InputComponent.wrapper>
-          </InputComponent.root>
+          </InputComponent.wrapper>
+        </InputComponent.root>
 
-          <InputComponent.root>
-            <InputComponent.label
-              htmlFor="sleeve"
-              text="Tipo de Manga"
-              className="text-sm"
+        <InputComponent.root>
+          <InputComponent.label
+            htmlFor="clothing"
+            className="text-sm"
+            text="Tecido"
+          />
+          <InputComponent.wrapper>
+            <InputComponent.inputBase
+              id="clothing"
+              placeholder="Algodão"
+              IconMain="spool"
+              {...register('clothing')}
             />
-            <InputComponent.wrapper>
-              <InputComponent.inputBase
-                id="sleeve"
-                name="sleeve"
-                placeholder="Longa"
-                IconMain="shirt"
-              />
-            </InputComponent.wrapper>
-          </InputComponent.root>
+          </InputComponent.wrapper>
+        </InputComponent.root>
 
-          <InputComponent.root>
-            <InputComponent.label
-              htmlFor="lenght"
-              text="Comprimento"
-              className="text-sm"
+        <InputComponent.root>
+          <InputComponent.label
+            htmlFor="sleeve"
+            text="Tipo de Manga"
+            className="text-sm"
+          />
+          <InputComponent.wrapper>
+            <InputComponent.inputBase
+              id="sleeve"
+              placeholder="Longa"
+              IconMain="shirt"
+              {...register('sleeve')}
             />
-            <InputComponent.wrapper>
-              <InputComponent.inputBase
-                id="lenght"
-                name="lenght"
-                placeholder="Longa"
-                IconMain="ruler"
-              />
-            </InputComponent.wrapper>
-          </InputComponent.root>
-        </div>
+          </InputComponent.wrapper>
+        </InputComponent.root>
+
+        <InputComponent.root>
+          <InputComponent.label
+            htmlFor="lenght"
+            text="Comprimento"
+            className="text-sm"
+          />
+          <InputComponent.wrapper>
+            <InputComponent.inputBase
+              id="lenght"
+              placeholder="Longa"
+              IconMain="ruler"
+              {...register('lenght')}
+            />
+          </InputComponent.wrapper>
+        </InputComponent.root>
       </div>
-    </WrapperSegment>
+    </div>
   )
 }

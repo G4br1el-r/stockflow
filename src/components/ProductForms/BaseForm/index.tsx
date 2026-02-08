@@ -1,4 +1,5 @@
 import { InputComponent } from '@/components/Input'
+import { Controller, useFormContext } from 'react-hook-form'
 
 const CLOTHES_CATEGORIES = [
   {
@@ -124,6 +125,7 @@ const SHOES_CATEGORIES = [
 ]
 
 export default function BaseForm() {
+  const { register, control } = useFormContext()
   return (
     <>
       <InputComponent.root>
@@ -137,11 +139,12 @@ export default function BaseForm() {
             id="product"
             placeholder="Camiseta Oversized"
             IconMain="shirt"
+            {...register('product')}
           />
         </InputComponent.wrapper>
       </InputComponent.root>
 
-      <div className="flex flex-col gap-5 md:grid md:grid-cols-3">
+      <div className="flex flex-col gap-5 md:grid md:grid-cols-2">
         <InputComponent.root>
           <InputComponent.label
             htmlFor="store"
@@ -149,15 +152,22 @@ export default function BaseForm() {
             className="text-sm"
           />
           <InputComponent.wrapper>
-            <InputComponent.inputSelected
+            <Controller
               name="store"
-              IconMain="store"
-              options={[
-                { value: 'loja1', label: 'Loja Centro' },
-                { value: 'loja2', label: 'Loja Shopping' },
-                { value: 'loja3', label: 'Loja Norte' },
-              ]}
-              placeholder="Selecione a unidade"
+              control={control}
+              render={({ field }) => (
+                <InputComponent.inputSelected
+                  {...field}
+                  onValueChange={field.onChange}
+                  IconMain="store"
+                  options={[
+                    { value: 'loja1', label: 'Loja Centro' },
+                    { value: 'loja2', label: 'Loja Shopping' },
+                    { value: 'loja3', label: 'Loja Norte' },
+                  ]}
+                  placeholder="Selecione a unidade"
+                />
+              )}
             />
           </InputComponent.wrapper>
         </InputComponent.root>
@@ -169,27 +179,19 @@ export default function BaseForm() {
             text="Subcategoria"
           />
           <InputComponent.wrapper>
-            <InputComponent.inputSelected
+            <Controller
               name="subcategory"
-              IconMain="chartColumnStacked"
-              options={CLOTHES_CATEGORIES}
-              placeholder="Selecione a unidade"
-              hasTitleGroup
-            />
-          </InputComponent.wrapper>
-        </InputComponent.root>
-
-        <InputComponent.root>
-          <InputComponent.label
-            htmlFor="collor"
-            className="text-sm"
-            text="Cor"
-          />
-          <InputComponent.wrapper>
-            <InputComponent.inputBase
-              id="collor"
-              placeholder="Azul"
-              IconMain="palette"
+              control={control}
+              render={({ field }) => (
+                <InputComponent.inputSelected
+                  {...field}
+                  IconMain="chartColumnStacked"
+                  onValueChange={field.onChange}
+                  options={CLOTHES_CATEGORIES}
+                  placeholder="Selecione a unidade"
+                  hasTitleGroup
+                />
+              )}
             />
           </InputComponent.wrapper>
         </InputComponent.root>

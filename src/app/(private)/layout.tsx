@@ -36,11 +36,11 @@ export default function RootLayout({
               <SidebarDesktop />
             </aside>
 
-            <header className="col-start-2 col-end-3 lg:pr-3 lg:pt-3 row-start-1 row-end-2 lg:col-start-2">
+            <header className="col-start-2 col-end-3 lg:pr-5 lg:pt-5 row-start-1 row-end-2 lg:col-start-2">
               <Header />
             </header>
 
-            <section className="col-start-2 lg:pr-3 lg:pb-3 col-end-3 row-start-2 row-end-3 flex flex-col overflow-x-hidden lg:ml-0">
+            <section className="col-start-2 lg:pr-5 lg:pb-5 col-end-3 row-start-2 row-end-3 flex flex-col overflow-x-hidden lg:ml-0">
               {children}
             </section>
           </section>

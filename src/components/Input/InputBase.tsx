@@ -20,7 +20,7 @@ import {
 import { InputHTMLAttributes, useRef, useState } from 'react'
 
 interface InputBaseProps extends InputHTMLAttributes<HTMLInputElement> {
-  IconMain?: keyof typeof iconMap
+  IconMain?: string
   classNameIconMain?: string
   classNameInput?: string
   isPassword?: boolean
@@ -64,7 +64,7 @@ export default forwardRef<HTMLInputElement, InputBaseProps>(function InputBase(
   const [visiblePassword, setVisiblePassword] = useState(true)
   const internalRef = useRef<HTMLInputElement>(null)
 
-  const Icon: LucideIcon | null = IconMain ? iconMap[IconMain] : null
+  const Icon = IconMain ? iconMap[IconMain as keyof typeof iconMap] : null
   const resolvedInputType =
     isPassword && visiblePassword ? 'password' : (props.type ?? 'text')
 

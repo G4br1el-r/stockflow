@@ -25,7 +25,6 @@ export function InputMaskPrice({
       value={value}
       onValueChange={(values) => {
         onValueChange?.(values.floatValue)
-        console.log(values)
       }}
       thousandSeparator="."
       decimalSeparator=","

@@ -27,7 +27,7 @@ interface CategoryGroup {
 
 interface InputSelectedProps {
   // Props customizadas
-  IconMain?: keyof typeof iconMap
+  IconMain: string
   classNameIconMain?: string
   classNameTrigger?: string
   classNameContent?: string
@@ -39,6 +39,7 @@ interface InputSelectedProps {
   value?: string
   defaultValue?: string
   onValueChange?: (value: string) => void
+  onChange?: (value: string) => void
   name?: string
 }
 
@@ -58,9 +59,10 @@ export default function InputSelected({
   value,
   defaultValue,
   onValueChange,
+  onChange,
   name,
 }: InputSelectedProps) {
-  const Icon: LucideIcon | null = IconMain ? iconMap[IconMain] : null
+  const Icon = IconMain ? iconMap[IconMain as keyof typeof iconMap] : null
 
   return (
     <Select.Root
