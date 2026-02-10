@@ -1,5 +1,5 @@
 import { InputComponent } from '@/components/Input'
-import { Text } from '@/components/Text'
+import { Text } from '@/components/TextBase'
 import { Zap } from 'lucide-react'
 
 export default function SignIn() {

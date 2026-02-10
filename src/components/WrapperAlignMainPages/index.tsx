@@ -2,20 +2,15 @@ import { cn } from '@/lib/utils'
 
 interface WrapperAlignMainPagesProps {
   children: React.ReactNode
-  className?: string
+  classNameWrapper?: string
 }
 
 export function WrapperAlignMainPages({
   children,
-  className,
+  classNameWrapper,
 }: WrapperAlignMainPagesProps) {
   return (
-    <section
-      className={cn(
-        'bg-background-main lg:rounded-b-2xl flex gap-3 px-3 pt-25 lg:pt-3 pb-3 flex-nowrap flex-1 md:px-5 md:pb-5',
-        className,
-      )}
-    >
+    <section className={cn('w-full flex flex-col px-3', classNameWrapper)}>
       {children}
     </section>
   )

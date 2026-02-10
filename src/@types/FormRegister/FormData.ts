@@ -4,9 +4,9 @@ export interface FormData {
   subcategory: string
   costPrice: number | undefined
   sellingPrice: number | undefined
+  collor: string
   sizes: {
     size: string
-    collor: string
     quantity: string
     minimumStock: string
     sku: string

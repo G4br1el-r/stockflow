@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-dvh h-dvh antialiased bg-background-sidebar-main`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-dvh h-dvh antialiased bg-main`}
       >
         <ProvidersSwitchDarkAndLight>
           <section className="grid w-full grid-cols-[auto_1fr] grid-rows-[auto_1fr] min-h-screen">
@@ -40,7 +40,7 @@ export default function RootLayout({
               <Header />
             </header>
 
-            <section className="col-start-2 lg:pr-5 lg:pb-5 col-end-3 row-start-2 row-end-3 flex flex-col overflow-x-hidden lg:ml-0">
+            <section className="col-start-2 col-end-3 row-start-2 row-end-3 pt-20 flex flex-col">
               {children}
             </section>
           </section>

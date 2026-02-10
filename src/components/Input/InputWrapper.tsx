@@ -1,21 +1,26 @@
 import { cn } from '@/lib/utils'
+import { iconMap, type IconName } from '@/utils/iconsMap'
 
 interface InputWrapperProps {
   children: React.ReactNode
-  className?: string
+  iconName: IconName
+  classNameWrapper?: string
 }
 
-export default function InputWrapper({
+export function InputWrapper({
   children,
-  className,
+  iconName,
+  classNameWrapper,
 }: InputWrapperProps) {
+  const Icon = iconMap[iconName]
   return (
     <div
       className={cn(
-        'group w-full transition-colors duration-300 h-12 flex gap-2 items-center justify-start p-3 focus-within:border-icon-activate border border-base-primary/50 rounded-sm',
-        className,
+        'w-full h-11.75 px-3 py-3 flex gap-3 items-center rounded-md border border-green-100',
+        classNameWrapper,
       )}
     >
+      <Icon className="w-5 h-5" />
       {children}
     </div>
   )

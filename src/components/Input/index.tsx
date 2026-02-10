@@ -1,15 +1,17 @@
-import InputBase from './InputBase'
-import InputRoot from './InputRoot'
-import InputSelected from './InputSelected'
-import InputLabel from './InputText'
-import InputWrapper from './InputWrapper'
-import { InputMaskPrice } from './MaskInputs/InputMaskPrice'
+import { InputBase } from './InputBase'
+import { InputLabel } from './InputLabel'
+import { InputMoney } from './InputMoney'
+import { InputRoot } from './InputRoot'
+import { InputSelectedBasic } from './InputSelectedBasic'
+import { InputSelectedGroup } from './InputSelectedGroup'
+import { InputWrapper } from './InputWrapper'
 
 export const InputComponent = {
   root: InputRoot,
   inputBase: InputBase,
-  inputMaskPrice: InputMaskPrice,
-  inputSelected: InputSelected,
+  inputMoney: InputMoney,
+  inputSelectedBasic: InputSelectedBasic,
+  inputSelectedGroup: InputSelectedGroup,
   label: InputLabel,
   wrapper: InputWrapper,
 }

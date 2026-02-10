@@ -5,9 +5,11 @@ interface InputRootProps {
   className?: string
 }
 
-export default function InputRoot({ children, className }: InputRootProps) {
+export function InputRoot({ children, className }: InputRootProps) {
   return (
-    <div className={cn('w-full flex flex-col gap-1 group', className)}>
+    <div
+      className={cn('w-full flex flex-col gap-1 justify-between', className)}
+    >
       {children}
     </div>
   )

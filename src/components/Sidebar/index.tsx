@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
@@ -43,7 +43,7 @@ function SidebarContent({
   const isDarkTheme = theme === 'dark'
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col h-full overflow-hidden backdrop-blur-md">
       <div className="flex items-center h-17 justify-between px-3 py-4 gap-2">
         <div className="relative flex items-center h-9">
           <div className="relative w-11 h-full shrink-0 z-10">
@@ -62,7 +62,12 @@ function SidebarContent({
           </div>
         </div>
         {showClose && (
-          <button type="button" onClick={onClose} aria-label="Fechar">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Fechar"
+            className="cursor-pointer text-text-secondary"
+          >
             <X className="w-6 h-6" />
           </button>
         )}
@@ -79,26 +84,26 @@ function SidebarContent({
               className={cn(
                 'relative flex items-center h-11 group w-full px-3 rounded-lg transition-colors mb-2',
                 isActive
-                  ? 'bg-background-menu-activate text-blue-neon border border-blue-neon'
-                  : 'hover:bg-background-hover-sidebar-menu',
+                  ? 'bg-background-modal text-icon-active border border-icon-active'
+                  : 'hover:bg-icon-default/5',
               )}
             >
               <item.icon
                 className={cn(
                   'w-5 h-5 shrink-0 z-10',
                   !isActive &&
-                    'text-icon-not-activate group-hover:text-icon-hover-sidebar-menu',
+                    'text-icon-default transition-colors duration-300 ease-in-out group-hover:text-text-primary',
                 )}
               />
 
               <span
                 className={cn(
-                  'absolute left-12 whitespace-nowrap text-sm font-semibold transition-all duration-500 ease-in-out origin-left pointer-events-none',
+                  'absolute left-12 whitespace-nowrap text-sm font-semibold transition-all duration-300 ease-in-out origin-left pointer-events-none',
                   isCollapsed
                     ? 'opacity-0 -translate-x-1.5 scale-x-95'
                     : 'opacity-100 translate-x-0 scale-x-100',
                   !isActive &&
-                    'text-icon-not-activate group-hover:text-icon-hover-sidebar-menu',
+                    'text-text-secondary group-hover:text-text-primary',
                 )}
               >
                 {item.title}
@@ -129,7 +134,7 @@ export function SidebarDesktop() {
   return (
     <aside
       className={cn(
-        'hidden lg:flex lg:sticky flex-col bg-background-sidebar-main left-0 top-0 h-screen transition-[width] duration-500',
+        'hidden lg:flex lg:sticky flex-col  left-0 top-0 h-screen transition-[width] duration-500',
         hovered ? 'w-64' : 'w-17',
       )}
       onMouseEnter={() => setHovered(true)}
@@ -144,12 +149,24 @@ export function SidebarMobile({
   mobileOpen,
   setMobileOpen,
 }: SidebarMobileProps) {
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen])
+
   return (
     <>
       {mobileOpen && (
         <button
           type="button"
-          className="fixed  inset-0 bg-black/50 backdrop-blur-sm z-40"
+          className="fixed  inset-0 bg-background-modal/50 backdrop-blur-lg z-40"
           onClick={() => setMobileOpen(false)}
           aria-label="Fechar menu"
         />
@@ -157,7 +174,7 @@ export function SidebarMobile({
 
       <aside
         className={cn(
-          'fixed left-0 top-0 h-dvh w-64 bg-background-sidebar-main z-50 shadow-xl transition-transform duration-300 ease-in-out border-r border-border-main',
+          'fixed left-0 top-0 h-dvh w-64 z-50 shadow-xl transition-transform duration-300 ease-in-out border-r border-border-subtle',
           mobileOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >

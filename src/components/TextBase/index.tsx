@@ -16,7 +16,7 @@ const defaultStyles = {
   span: 'text-[1rem]',
 }
 
-export function Text({
+export function TextBase({
   as: Tag = 'p',
   children,
   className,
