@@ -25,6 +25,7 @@
     "rules": {
       "recommended": true,
       "suspicious": {
+        "noArrayIndexKey": "error",
         "noUnknownAtRules": "off"
       },
       "a11y": {

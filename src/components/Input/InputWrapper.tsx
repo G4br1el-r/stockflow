@@ -3,14 +3,16 @@ import { iconMap, type IconName } from '@/utils/iconsMap'
 
 interface InputWrapperProps {
   children: React.ReactNode
-  iconName: IconName
+  iconName?: IconName
   classNameWrapper?: string
+  classNameIcon?: string
 }
 
 export function InputWrapper({
   children,
   iconName,
   classNameWrapper,
+  classNameIcon,
 }: InputWrapperProps) {
   const Icon = iconMap[iconName]
   return (
@@ -20,7 +22,7 @@ export function InputWrapper({
         classNameWrapper,
       )}
     >
-      <Icon className="w-5 h-5" />
+      {Icon && <Icon className={cn('w-5 h-5 shrink-0', classNameIcon)} />}
       {children}
     </div>
   )

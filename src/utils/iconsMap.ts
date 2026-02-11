@@ -1,4 +1,8 @@
 import {
+  Palette,
+  Blocks,
+  LayersPlus,
+  Package,
   FilePlus,
   HandCoins,
   Pencil,
@@ -24,6 +28,11 @@ export const iconMap = {
   handCoins: HandCoins,
   filePlus: FilePlus,
   shirt: Shirt,
+  package: Package,
+  layersPlus: LayersPlus,
+  noIcon: null,
+  blocks: Blocks,
+  collor: Palette,
 } as const
 
 export type IconName = keyof typeof iconMap

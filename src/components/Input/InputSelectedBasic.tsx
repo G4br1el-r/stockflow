@@ -1,19 +1,26 @@
 import * as Select from '@radix-ui/react-select'
 import { Check, ChevronDown } from 'lucide-react'
 
-const storeMap = [
-  { value: 'mall', label: 'Loja Shopping' },
-  { value: 'downtown', label: 'Loja Centro' },
-  { value: 'north', label: 'Loja Zona Norte' },
-]
+interface inputSelectedBasic {
+  placeHolder: string
+  DataArray: DataProps[]
+}
 
-export function InputSelectedBasic() {
+interface DataProps {
+  value: string
+  label: string
+}
+
+export function InputSelectedBasic({
+  placeHolder,
+  DataArray,
+}: inputSelectedBasic) {
   return (
     <Select.Root>
-      <Select.Trigger className="flex w-full focus:outline-none justify-between group">
-        <Select.Value placeholder="Selecione uma Categoria" />
+      <Select.Trigger className="flex items-center gap-1 flex-1 focus:outline-none justify-between group">
+        <Select.Value placeholder={placeHolder} />
         <Select.Icon asChild>
-          <ChevronDown className="transition-transform duration-200 group-data-[state=open]:rotate-180" />
+          <ChevronDown className="w-4 h-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
         </Select.Icon>
       </Select.Trigger>
 
@@ -24,7 +31,7 @@ export function InputSelectedBasic() {
           className="bg-blue-950 rounded-lg shadow-lg border border-gray-200 overflow-hidden  max-h-70 w-45 z-50"
         >
           <Select.Viewport className="p-1">
-            {storeMap.map((store, index) => (
+            {DataArray.map((store, index) => (
               <Select.Item
                 key={`${store.value}-${index}`}
                 value={store.value}
