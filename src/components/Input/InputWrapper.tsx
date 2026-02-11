@@ -3,7 +3,7 @@ import { iconMap, type IconName } from '@/utils/iconsMap'
 
 interface InputWrapperProps {
   children: React.ReactNode
-  iconName?: IconName
+  iconName: IconName
   classNameWrapper?: string
   classNameIcon?: string
 }
