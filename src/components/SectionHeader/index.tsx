@@ -20,7 +20,7 @@ export function SectionHeader({
         classNameBackGround,
       )}
     >
-      <Icon className={cn('w-6 h-6', classNameIcon)} />
+      {Icon && <Icon className={cn('w-6 h-6', classNameIcon)} />}
     </div>
   )
 }
