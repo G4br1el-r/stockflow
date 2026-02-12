@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 
 interface InputBaseWrapper {
   className?: string
-  placeHolder: string
+  placeHolder?: string
 }
 
 export function InputBase({ className, placeHolder }: InputBaseWrapper) {

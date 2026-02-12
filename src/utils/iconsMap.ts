@@ -1,4 +1,6 @@
 import {
+  ArrowDown10,
+  Eye,
   Palette,
   Blocks,
   LayersPlus,
@@ -33,6 +35,8 @@ export const iconMap = {
   noIcon: null,
   blocks: Blocks,
   collor: Palette,
+  eye: Eye,
+  stock: ArrowDown10,
 } as const
 
 export type IconName = keyof typeof iconMap

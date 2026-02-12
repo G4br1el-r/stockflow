@@ -4,7 +4,16 @@ import { SectionDivider } from '@/components/SectionDivider'
 import { SectionHeader } from '@/components/SectionHeader'
 import { TextBase } from '@/components/TextBase'
 import { WrapperAlignMainPages } from '@/components/WrapperAlignMainPages'
-import { CircleFadingPlus, Trash2 } from 'lucide-react'
+import {
+  CircleFadingPlus,
+  Trash2,
+  CirclePlus,
+  Palette,
+  Archive,
+  Heart,
+  RefreshCcw,
+  Rocket,
+} from 'lucide-react'
 
 const sizes = ['PP', 'P', 'M', 'G', 'GG', 'XG']
 
@@ -58,8 +67,8 @@ export default function RegisterProducts() {
           </TextBase>
         </div>
       </div>
-      <main className="w-full h-full flex flex-col gap-5">
-        <section className="flex pb-20 flex-col gap-5 w-full h-full">
+      <main className="w-full h-full flex flex-col">
+        <form className="flex pb-5 flex-col gap-5 w-full h-full">
           <div className="w-full h-full flex items-center gap-3">
             <SectionHeader
               classNameBackGround="bg-blue-neon/20 border-blue-neon"
@@ -182,41 +191,298 @@ export default function RegisterProducts() {
             </TextBase>
           </div>
 
-          <div className="w-full px-4 bg-blue-950/40 rounded-sm flex flex-col gap-3.5">
-            <InputComponent.root className="pt-3.5 w-full flex-row items-center gap-5">
-              <div className="flex items-center justify-between flex-row gap-3 w-full h-10 border border-gray-400 bg-gray-950/80 px-3 py-1 rounded-lg">
-                <div className="w-4 h-4 shrink-0 bg-blue-neon rounded-full " />
-                <InputComponent.inputSelectedBasic
-                  placeHolder="Cor"
-                  DataArray={collorMap}
-                />
+          <section className="w-full bg-gray-950/30 border-2 border-blue-neon/20 rounded-2xl flex flex-col">
+            <div className="w-full h-20 p-3 flex items-center justify-between bg-blue-neon/5 rounded-t-2xl border-b-2 border-blue-neon/20">
+              <div className="flex-center gap-3">
+                <div className="bg-blue-neon h-8 w-8 rounded-sm" />
+                <TextBase as="span">Azul Neon</TextBase>
               </div>
-              <Trash2 className="h-5 w-5 shrink-0" />
-            </InputComponent.root>
-            <SectionDivider />
-            <div className="flex items-center justify-between gap-3">
-              <InputComponent.root className="w-full">
-                <InputComponent.label label="Estoque Minimo" />
+              <Trash2 className="w-4 h-4" />
+            </div>
+
+            <div className="w-full h-full p-3 flex flex-col gap-3">
+              <InputComponent.root>
+                <InputComponent.label label="Estoque Mínimo" />
                 <InputComponent.wrapper
-                  iconName="blocks"
-                  classNameWrapper="flex items-center justify-between flex-row gap-3 w-full h-10 border border-gray-400 bg-gray-950/80 px-3 rounded-lg"
+                  iconName="stock"
+                  classNameWrapper="bg-gray-950 rounded-sm flex-1 text-center"
                 >
-                  <InputComponent.inputBase placeHolder="0" />
+                  <InputComponent.inputBase />
                 </InputComponent.wrapper>
               </InputComponent.root>
 
-              <InputComponent.root className="w-full">
-                <InputComponent.label label="Localização" />
+              <div className="flex items-center justify-between">
+                <TextBase as="span" className="text-[0.8rem]">
+                  TAMANHOS & QUANTIDADES
+                </TextBase>
+                <div className="bg-blue-neon/20 px-2 py-1 flex-center rounded-sm border border-blue-neon/50">
+                  <TextBase as="span" className="text-[0.7rem] text-blue-neon">
+                    Total: 55
+                  </TextBase>
+                </div>
+              </div>
+              <div className="w-full h-full grid grid-cols-3 gap-3">
+                <div className="w-full h-25 border bg-gray-950/70 rounded-lg flex flex-col justify-between items-center p-3 gap-1.5">
+                  <TextBase as="span" className="text-[0.9rem]">
+                    TAM P
+                  </TextBase>
+                  <InputComponent.inputBase className="w-full h-5 bg-gray-950 border border-gray-700 rounded-sm flex-1 text-center" />
+                  <div className="w-full h-1 bg-blue-neon rounded-full" />
+                </div>
+                <div className="w-full h-25 bg-gray-950/70 border rounded-lg flex flex-col justify-between items-center p-3 gap-1.5">
+                  <TextBase as="span" className="text-[0.9rem]">
+                    TAM M
+                  </TextBase>
+                  <InputComponent.inputBase className="w-full h-5 bg-gray-950 border border-gray-700 rounded-sm flex-1 text-center" />
+                  <div className="w-full h-1 bg-blue-neon rounded-full" />
+                </div>
+                <div className="w-full h-25 bg-gray-950/70 border rounded-lg flex flex-col justify-between items-center p-3 gap-1.5">
+                  <TextBase as="span" className="text-[0.9rem]">
+                    TAM G
+                  </TextBase>
+                  <InputComponent.inputBase className="w-full h-5 bg-gray-950 border border-gray-700 rounded-sm flex-1 text-center" />
+                  <div className="w-full h-1 bg-blue-neon rounded-full" />
+                </div>
+                <div className="w-full h-25 bg-blue-neon/10 rounded-lg flex flex-col justify-between items-center p-3 gap-1.5 border overflow-hidden border-blue-neon relative">
+                  <div className="bg-blue-neon w-5 h-5 rounded-full absolute -top-1.5 -right-1.5" />
+                  <TextBase as="span" className="text-[0.9rem] font-bold">
+                    TAM GG
+                  </TextBase>
+                  <InputComponent.inputBase className="w-full h-5 bg-gray-950 border border-blue-neon/80 rounded-sm flex-1 text-center" />
+                  <div className="w-full h-1 bg-blue-neon rounded-full" />
+                </div>
+                <div className="w-full h-25 bg-gray-950/30 rounded-lg flex flex-col justify-center items-center p-3 gap-1.5 border-dashed border-2">
+                  <CirclePlus className="text-gray-600" />
+                  <TextBase as="span" className="text-[0.9rem] text-gray-600">
+                    Adicionar
+                  </TextBase>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="w-full bg-gray-950/30 border-2 border-red-500/20 rounded-2xl flex flex-col">
+            <div className="w-full h-20 p-3 flex items-center justify-between bg-red-500/5 rounded-t-2xl border-b-2 border-red-500/20">
+              <div className="flex-center gap-3">
+                <div className="bg-red-500 h-8 w-8 rounded-sm" />
+                <TextBase as="span">Vermelho Vívido</TextBase>
+              </div>
+              <Trash2 className="w-4 h-4" />
+            </div>
+
+            <div className="w-full h-full p-3 flex flex-col gap-3">
+              <InputComponent.root>
+                <InputComponent.label label="Estoque Mínimo" />
                 <InputComponent.wrapper
-                  iconName="blocks"
-                  classNameWrapper="flex items-center justify-between flex-row gap-3 w-full h-10 border border-gray-400 bg-gray-950/80 px-3 rounded-lg"
+                  iconName="stock"
+                  classNameWrapper="bg-gray-950 rounded-sm flex-1 text-center"
                 >
-                  <InputComponent.inputBase placeHolder="0" />
+                  <InputComponent.inputBase />
                 </InputComponent.wrapper>
               </InputComponent.root>
+
+              <div className="flex items-center justify-between">
+                <TextBase as="span" className="text-[0.8rem]">
+                  TAMANHOS & QUANTIDADES
+                </TextBase>
+                <div className="bg-red-500/20 px-2 py-1 flex-center rounded-sm border border-red-500/50">
+                  <TextBase as="span" className="text-[0.7rem] text-red-500">
+                    Total: 55
+                  </TextBase>
+                </div>
+              </div>
+              <div className="w-full h-full grid grid-cols-3 gap-3">
+                <div className="w-full h-25 border bg-gray-950/70 rounded-lg flex flex-col justify-between items-center p-3 gap-1.5">
+                  <TextBase as="span" className="text-[0.9rem]">
+                    TAM P
+                  </TextBase>
+                  <InputComponent.inputBase className="w-full h-5 bg-gray-950 border border-gray-700 rounded-sm flex-1 text-center" />
+                  <div className="w-full h-1 bg-red-500 rounded-full" />
+                </div>
+                <div className="w-full h-25 bg-gray-950/70 border rounded-lg flex flex-col justify-between items-center p-3 gap-1.5">
+                  <TextBase as="span" className="text-[0.9rem]">
+                    TAM M
+                  </TextBase>
+                  <InputComponent.inputBase className="w-full h-5 bg-gray-950 border border-gray-700 rounded-sm flex-1 text-center" />
+                  <div className="w-full h-1 bg-red-500 rounded-full" />
+                </div>
+                <div className="w-full h-25 bg-gray-950/70 border rounded-lg flex flex-col justify-between items-center p-3 gap-1.5">
+                  <TextBase as="span" className="text-[0.9rem]">
+                    TAM G
+                  </TextBase>
+                  <InputComponent.inputBase className="w-full h-5 bg-gray-950 border border-gray-700 rounded-sm flex-1 text-center" />
+                  <div className="w-full h-1 bg-red-500 rounded-full" />
+                </div>
+                <div className="w-full h-25 bg-red-500/10 rounded-lg flex flex-col justify-between items-center p-3 gap-1.5 border overflow-hidden border-red-500 relative">
+                  <div className="bg-red-500 w-5 h-5 rounded-full absolute -top-1.5 -right-1.5" />
+                  <TextBase as="span" className="text-[0.9rem] font-bold">
+                    TAM GG
+                  </TextBase>
+                  <InputComponent.inputBase className="w-full h-5 bg-gray-950 border border-red-500/80 rounded-sm flex-1 text-center" />
+                  <div className="w-full h-1 bg-red-500 rounded-full" />
+                </div>
+                <div className="w-full h-25 bg-gray-950/30 rounded-lg flex flex-col justify-center items-center p-3 gap-1.5 border-dashed border-2">
+                  <CirclePlus className="text-gray-600" />
+                  <TextBase as="span" className="text-[0.9rem] text-gray-600">
+                    Adicionar
+                  </TextBase>
+                </div>
+              </div>
             </div>
+          </section>
+
+          <div className="w-full h-15 shrink-0 rounded-lg bg-gray-950/30 border-2 border-dashed flex-center gap-3">
+            <Palette className="w-5 h-5 text-gray-600" />
+            <TextBase as="span" className="text-gray-600">
+              Nova Variante de Cor
+            </TextBase>
           </div>
-        </section>
+
+          <div className="flex items-center gap-3">
+            <SectionHeader
+              classNameBackGround="bg-blue-neon/20 border-blue-neon"
+              classNameIcon="text-blue-neon"
+              iconName="eye"
+            />
+            <TextBase as="span" className="font-bold">
+              Live Preview
+            </TextBase>
+          </div>
+
+          <section className="w-full h-120 border rounded-lg shrink-0 flex flex-col">
+            <div className="w-full h-70 rounded-t-lg bg-gray-100/5 flex-center relative">
+              <Archive className="w-10 h-10 text-gray-600" />
+              <TextBase
+                as="span"
+                className="text-[0.6em] px-2 py-0.5 bg-gray-600/90 border border-gray-600 rounded-lg absolute top-2 right-2"
+              >
+                NOVO
+              </TextBase>
+            </div>
+            <div className="w-full flex-1 gap-7 p-3 flex flex-col items-center bg-blue-900/5">
+              <div className="w-full flex justify-between">
+                <div className="flex flex-col">
+                  <TextBase
+                    as="span"
+                    className="text-[0.8rem] text-blue-neon font-semibold"
+                  >
+                    CAMISETAS
+                  </TextBase>
+                  <TextBase as="span" className="font-bold">
+                    Camiseta Oversized Nike
+                  </TextBase>
+                </div>
+                <Heart className="w-5 h-5 text-red-500 fill-current" />
+              </div>
+
+              <div className="w-full flex flex-col gap-3">
+                <div className="flex items-center gap-5 w-full">
+                  <TextBase
+                    as="span"
+                    className="text-[0.8rem] whitespace-nowrap"
+                  >
+                    OPÇÕES DE GRADE
+                  </TextBase>
+                  <SectionDivider />
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-blue-neon" />
+                      <TextBase
+                        as="span"
+                        className="text-gray-500 font-semibold"
+                      >
+                        Azul Neon
+                      </TextBase>
+                    </div>
+                    <TextBase
+                      as="span"
+                      className="text-[0.8rem] bg-gray-100/5 px-2 rounded-full text-gray-500"
+                    >
+                      45 Uni
+                    </TextBase>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className=" bg-blue-neon/10 w-7 items-center justify-center flex px-2 py-0.5 rounded-lg border-blue-neon border">
+                      <TextBase as="span" className="font-bold text-[0.6rem]">
+                        P
+                      </TextBase>
+                    </div>
+                    <div className=" bg-blue-neon/10 w-7 items-center justify-center flex px-2 py-0.5 rounded-lg border-blue-neon border">
+                      <TextBase as="span" className="font-bold text-[0.6rem]">
+                        M
+                      </TextBase>
+                    </div>
+                    <div className=" bg-blue-neon/10 w-7 items-center justify-center flex px-2 py-0.5 rounded-lg border-blue-neon border">
+                      <TextBase as="span" className="font-bold text-[0.6rem]">
+                        G
+                      </TextBase>
+                    </div>
+                    <div className=" bg-blue-neon/10 w-7 items-center justify-center flex px-2 py-0.5 rounded-lg border-blue-neon border">
+                      <TextBase as="span" className="font-bold text-[0.6rem]">
+                        GG
+                      </TextBase>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500" />
+                      <TextBase
+                        as="span"
+                        className="text-gray-500 font-semibold"
+                      >
+                        Vermelho Vívido
+                      </TextBase>
+                    </div>
+                    <TextBase
+                      as="span"
+                      className="text-[0.8rem] bg-gray-100/5 px-2 rounded-full text-gray-500"
+                    >
+                      20 Uni
+                    </TextBase>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className=" bg-red-500/10 w-7 items-center justify-center flex px-2 py-0.5 rounded-lg border-red-500/60 border">
+                      <TextBase as="span" className="font-bold text-[0.6rem]">
+                        P
+                      </TextBase>
+                    </div>
+                    <div className=" bg-red-500/10 w-7 items-center justify-center flex px-2 py-0.5 rounded-lg border-red-500/60 border">
+                      <TextBase as="span" className="font-bold text-[0.6rem]">
+                        G
+                      </TextBase>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className=" w-full h-10 bg-gray-950/50 text-gray-600 border-t rounded-b-lg flex-center gap-2">
+              <RefreshCcw className="w-3 h-3" />
+              <TextBase as="span" className="text-[0.8rem]">
+                Atualizado em tempo real
+              </TextBase>
+            </div>
+          </section>
+
+          <section className="flex flex-col w-full gap-5">
+            <button type="button" className="flex items-center gap-1">
+              <Trash2 className="w-3.5 h-3.5" />
+              <TextBase as="span">Limpar</TextBase>
+            </button>
+            <button
+              type="submit"
+              className="w-full h-12 bg-blue-neon flex-center rounded-lg gap-2"
+            >
+              <TextBase as="span">Cadastrar Produto</TextBase>
+              <Rocket className="w-4 h-4" />
+            </button>
+          </section>
+        </form>
       </main>
     </WrapperAlignMainPages>
   )

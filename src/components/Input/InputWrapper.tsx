@@ -18,7 +18,7 @@ export function InputWrapper({
   return (
     <div
       className={cn(
-        'w-full h-11.75 px-3 py-3 flex gap-3 items-center rounded-md border border-green-100',
+        'w-full h-11.75 px-3 py-3 flex gap-3 items-center rounded-md border',
         classNameWrapper,
       )}
     >
