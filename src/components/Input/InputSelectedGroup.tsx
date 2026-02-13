@@ -1,55 +1,20 @@
+import { DataArrayCategoryProps } from '@/@types/Form/Register/ProductDetailsForm/category.types'
 import * as Select from '@radix-ui/react-select'
 import { Check, ChevronDown } from 'lucide-react'
 
-const clothingGroups = [
-  {
-    id: 'upper',
-    label: 'Parte Superior',
-    items: [
-      { value: 'coat', label: 'Casaco' },
-      { value: 'tshirt', label: 'Camiseta' },
-      { value: 'shirt', label: 'Camisa' },
-      { value: 'blouse', label: 'Blusa' },
-      { value: 'sweater', label: 'Suéter' },
-    ],
-  },
-  {
-    id: 'lower',
-    label: 'Parte Inferior',
-    items: [
-      { value: 'pants', label: 'Calça' },
-      { value: 'shorts', label: 'Shorts' },
-      { value: 'skirt', label: 'Saia' },
-      { value: 'jeans', label: 'Jeans' },
-    ],
-  },
-  {
-    id: 'footwear',
-    label: 'Calçados',
-    items: [
-      { value: 'sneakers', label: 'Tênis' },
-      { value: 'shoes', label: 'Sapato' },
-      { value: 'sandals', label: 'Sandália' },
-      { value: 'boots', label: 'Bota' },
-    ],
-  },
-  {
-    id: 'accessories',
-    label: 'Acessórios',
-    items: [
-      { value: 'hat', label: 'Chapéu' },
-      { value: 'belt', label: 'Cinto' },
-      { value: 'scarf', label: 'Cachecol' },
-      { value: 'bag', label: 'Bolsa' },
-    ],
-  },
-]
+export interface InputSelectedGroupProps {
+  placeHolder: string
+  dataArray: DataArrayCategoryProps[]
+}
 
-export function InputSelectedGroup() {
+export function InputSelectedGroup({
+  placeHolder,
+  dataArray,
+}: InputSelectedGroupProps) {
   return (
     <Select.Root>
-      <Select.Trigger className="flex w-full focus:outline-none justify-between group">
-        <Select.Value placeholder="Selecione uma Categoria" />
+      <Select.Trigger className="flex w-full focus:outline-none justify-between group data-placeholder:text-gray-300/40">
+        <Select.Value placeholder={placeHolder} />
         <Select.Icon asChild>
           <ChevronDown className="transition-transform duration-200 group-data-[state=open]:rotate-180" />
         </Select.Icon>
@@ -62,7 +27,7 @@ export function InputSelectedGroup() {
           className="bg-blue-950 rounded-lg shadow-lg border border-gray-200 overflow-hidden  max-h-70 z-50"
         >
           <Select.Viewport className="p-1">
-            {clothingGroups.map((group) => (
+            {dataArray.map((group) => (
               <Select.Group key={group.id}>
                 <Select.Label className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase">
                   {group.label}

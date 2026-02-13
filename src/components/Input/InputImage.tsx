@@ -31,10 +31,10 @@ export function InputImage() {
       {!preview ? (
         <div
           {...getRootProps()}
-          className={`flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
+          className={`flex flex-col items-center justify-center w-full h-60 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
             isDragActive
               ? 'border-blue-500 bg-blue-50'
-              : 'border-gray-300 hover:bg-gray-50'
+              : 'text-gray-300/40 hover:bg-gray-50'
           }`}
         >
           <input {...getInputProps()} />
@@ -47,7 +47,7 @@ export function InputImage() {
           <span className="text-xs text-gray-400 mt-1">PNG, JPG até 5MB</span>
         </div>
       ) : (
-        <div className="relative w-full h-48 rounded-lg overflow-hidden border border-gray-300">
+        <div className="relative w-full h-60 rounded-lg overflow-hidden border border-gray-300">
           <Image
             src={preview}
             alt="Preview"

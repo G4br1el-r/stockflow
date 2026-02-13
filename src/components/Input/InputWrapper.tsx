@@ -22,7 +22,11 @@ export function InputWrapper({
         classNameWrapper,
       )}
     >
-      {Icon && <Icon className={cn('w-5 h-5 shrink-0', classNameIcon)} />}
+      {Icon && (
+        <Icon
+          className={cn('w-5 h-5 shrink-0 text-gray-300/40', classNameIcon)}
+        />
+      )}
       {children}
     </div>
   )
