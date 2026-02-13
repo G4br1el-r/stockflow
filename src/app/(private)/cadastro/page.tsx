@@ -60,11 +60,12 @@ const clothingGroupsMap = [
 
 export default function Cadastro() {
   // FAZER OS FETCH INICIAIS
+
   return (
     <RegisterProductsForm
       dataArrayCategory={clothingGroupsMap}
-      dataArraySize={storeMap}
-      dataArrayStore={sizesMap}
+      dataArraySize={sizesMap}
+      dataArrayStore={storeMap}
     />
   )
 }

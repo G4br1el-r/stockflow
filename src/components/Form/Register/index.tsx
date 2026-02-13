@@ -25,14 +25,16 @@ export default function RegisterProductsForm({
       <ProductFormHeader />
       <main className="w-full h-full flex flex-col">
         <form className="flex pb-5 flex-col gap-5 w-full h-full">
-          <ProductDetails
-            dataArrayCategory={dataArrayCategory}
-            dataArrayStore={dataArrayStore}
-          />
-          <ProductPricing />
-          <ProductVariantGrid dataArraySize={dataArraySize} />
-          <ProductLivePreview />
-          <ProductFormActions />
+          <div className="w-full h-full flex flex-col gap-15">
+            <ProductDetails
+              dataArrayCategory={dataArrayCategory}
+              dataArrayStore={dataArrayStore}
+            />
+            <ProductPricing />
+            <ProductVariantGrid dataArraySize={dataArraySize} />
+            <ProductLivePreview />
+            <ProductFormActions />
+          </div>
         </form>
       </main>
     </WrapperAlignMainPages>

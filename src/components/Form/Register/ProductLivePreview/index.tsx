@@ -15,8 +15,8 @@ export function ProductLivePreview() {
           Live Preview
         </TextBase>
       </div>
-      <section className="w-full h-120 border rounded-lg shrink-0 flex flex-col">
-        <div className="w-full h-70 rounded-t-lg bg-gray-100/5 flex-center relative">
+      <section className="w-full h-170 border rounded-lg shrink-0 flex flex-col">
+        <div className="w-full  flex-1 rounded-t-lg bg-gray-100/5 flex-center relative">
           <Archive className="w-10 h-10 text-gray-600" />
           <TextBase
             as="span"
@@ -25,7 +25,7 @@ export function ProductLivePreview() {
             NOVO
           </TextBase>
         </div>
-        <div className="w-full flex-1 gap-7 p-3 flex flex-col items-center bg-blue-900/5">
+        <div className="w-full gap-7 px-3 py-6 flex flex-col items-center bg-blue-900/5">
           <div className="w-full flex justify-between">
             <div className="flex flex-col">
               <TextBase

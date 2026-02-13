@@ -40,7 +40,10 @@ export default function RootLayout({
               <Header />
             </header>
 
-            <section className="col-start-2 col-end-3 row-start-2 row-end-3 pt-20 flex flex-col">
+            <section
+              className="col-start-2 col-end-3 row-start-2 row-end-3 pt-20 flex flex-col items-center
+            "
+            >
               {children}
             </section>
           </section>

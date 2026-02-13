@@ -48,13 +48,7 @@ export function InputImage() {
         </div>
       ) : (
         <div className="relative w-full h-60 rounded-lg overflow-hidden border border-gray-300">
-          <Image
-            src={preview}
-            alt="Preview"
-            fill
-            className="object-contain"
-            unoptimized
-          />
+          <Image src={preview} alt="Preview" fill className="object-contain" />
           <button
             type="button"
             onClick={handleRemove}
