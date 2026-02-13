@@ -1,10 +1,10 @@
-import { DataArrayCategoryProps } from '@/@types/Form/Register/ProductDetailsForm/category.types'
+import { CategoryTypes } from '@/@types/Form/Register/ProductDetailsForm/category.types'
 import * as Select from '@radix-ui/react-select'
 import { Check, ChevronDown } from 'lucide-react'
 
 export interface InputSelectedGroupProps {
   placeHolder: string
-  dataArray: DataArrayCategoryProps[]
+  dataArray: CategoryTypes[]
 }
 
 export function InputSelectedGroup({
