@@ -19,7 +19,7 @@ export function User() {
         </div>
         <div className="shrink-0">
           <TextBase as="p" className="font-bold lg:leading-4">
-            Maria Julia
+            Gabriel
           </TextBase>
           <TextBase as="p" className="text-[0.8rem] text-text-secondary">
             Administrador

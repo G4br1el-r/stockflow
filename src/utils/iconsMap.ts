@@ -1,4 +1,6 @@
 import {
+  ScanBarcode,
+  ChartNoAxesCombined,
   ArrowDown10,
   Eye,
   Palette,
@@ -16,6 +18,7 @@ import {
   BanknoteArrowDown,
   PiggyBank,
   Shirt,
+  ShieldCheck,
 } from 'lucide-react'
 
 export const iconMap = {
@@ -37,6 +40,9 @@ export const iconMap = {
   collor: Palette,
   eye: Eye,
   stock: ArrowDown10,
+  chartNoAxesCombined: ChartNoAxesCombined,
+  scanBarCode: ScanBarcode,
+  shieldCheck: ShieldCheck,
 } as const
 
 export type IconName = keyof typeof iconMap

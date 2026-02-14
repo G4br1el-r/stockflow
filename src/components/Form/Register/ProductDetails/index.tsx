@@ -15,7 +15,7 @@ export function ProductDetails({
   dataArrayCategory,
 }: ProductDetailsProps) {
   return (
-    <>
+    <div className="flex flex-col gap-5">
       <div className="w-full h-full flex items-center gap-3">
         <SectionHeader
           classNameBackGround="bg-blue-neon/20 border-blue-neon"
@@ -27,47 +27,71 @@ export function ProductDetails({
         </TextBase>
       </div>
 
-      <div className="flex flex-col gap-5">
-        <InputComponent.root>
-          <InputComponent.label label="Nome do Produto" />
-          <InputComponent.wrapper
-            iconName="pencil"
-            classNameWrapper="bg-gray-950/70"
-          >
-            <InputComponent.inputBase placeHolder="Camiseta Oversized" />
-          </InputComponent.wrapper>
-        </InputComponent.root>
-
-        <div className="flex flex-col gap-5 extrasm:grid extrasm:grid-cols-2">
+      <section className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 extralg:order-2">
           <InputComponent.root>
-            <InputComponent.label label="Loja" />
+            <InputComponent.label label="Nome do Produto" />
             <InputComponent.wrapper
-              iconName="store"
+              iconName="pencil"
               classNameWrapper="bg-gray-950/70"
             >
-              <InputComponent.inputSelectedBasic
-                dataArray={dataArrayStore}
-                placeHolder="-"
-              />
+              <InputComponent.inputBase placeHolder="Camiseta Oversized" />
             </InputComponent.wrapper>
           </InputComponent.root>
 
-          <InputComponent.root>
-            <InputComponent.label label="Categoria" />
-            <InputComponent.wrapper
-              iconName="category"
-              classNameWrapper="bg-gray-950/70"
-            >
-              <InputComponent.inputSelectedGroup
-                placeHolder="-"
-                dataArray={dataArrayCategory}
-              />
-            </InputComponent.wrapper>
-          </InputComponent.root>
+          <div className="flex flex-col gap-5 extramd:grid extramd:grid-cols-[auto_1fr]">
+            <div className="flex flex-col gap-5 order-1 justify-between">
+              <InputComponent.root>
+                <InputComponent.label label="Loja" />
+                <InputComponent.wrapper
+                  iconName="store"
+                  classNameWrapper="bg-gray-950/70"
+                >
+                  <InputComponent.inputSelectedBasic
+                    dataArray={dataArrayStore}
+                    placeHolder="-"
+                  />
+                </InputComponent.wrapper>
+              </InputComponent.root>
+
+              <InputComponent.root>
+                <InputComponent.label label="Categoria" />
+                <InputComponent.wrapper
+                  iconName="category"
+                  classNameWrapper="bg-gray-950/70"
+                >
+                  <InputComponent.inputSelectedGroup
+                    placeHolder="-"
+                    dataArray={dataArrayCategory}
+                  />
+                </InputComponent.wrapper>
+              </InputComponent.root>
+
+              <InputComponent.root>
+                <InputComponent.label label="Situação" />
+                <InputComponent.wrapper
+                  iconName="shieldCheck"
+                  classNameWrapper="bg-gray-950/70"
+                >
+                  <InputComponent.inputSelectedBasic placeHolder="-" />
+                </InputComponent.wrapper>
+              </InputComponent.root>
+
+              <InputComponent.root>
+                <InputComponent.label label="SKU" />
+                <InputComponent.wrapper
+                  iconName="scanBarCode"
+                  classNameWrapper="bg-gray-950/70"
+                >
+                  <InputComponent.inputBase />
+                </InputComponent.wrapper>
+              </InputComponent.root>
+            </div>
+
+            <InputImage />
+          </div>
         </div>
-      </div>
-
-      <InputImage />
-    </>
+      </section>
+    </div>
   )
 }

@@ -5,16 +5,26 @@ import { Check, ChevronDown } from 'lucide-react'
 
 export interface inputSelectedBasicProps {
   placeHolder: string
-  dataArray: StoreType[]
+  dataArray?: StoreType[]
   classNameArrow?: string
 }
 
+const statusProduct = [
+  {
+    value: 'active',
+    label: 'Ativo',
+  },
+  {
+    value: 'inactive',
+    label: 'Inativo',
+  },
+]
+
 export function InputSelectedBasic({
   placeHolder,
-  dataArray,
+  dataArray = statusProduct,
   classNameArrow,
 }: inputSelectedBasicProps) {
-  console.log(dataArray)
   return (
     <Select.Root>
       <Select.Trigger className="flex w-full items-center focus:outline-none justify-between group data-placeholder:text-gray-300/40">

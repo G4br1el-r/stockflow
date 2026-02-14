@@ -1,16 +1,16 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { SidebarMobile } from '../Sidebar'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { useTheme } from 'next-themes'
 import { Bell, Menu } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import { useEffect, useRef, useState } from 'react'
 import { PrismLogo } from '../PrismLogo'
 import { TextBase } from '../TextBase'
+import { SidebarMobile } from '../Sidebar'
 
 export function Header() {
   const headerRef = useRef<HTMLDivElement>(null)
-  const isMobile = useIsMobile(1024)
+  const isMobile = useIsMobile(1280)
   const [mobileOpen, setMobileOpen] = useState(false)
   const { theme } = useTheme()
 
@@ -43,7 +43,7 @@ export function Header() {
       <div
         ref={headerRef}
         data-visible="true"
-        className="fixed w-full data-[visible=true]:translate-y-0 data-[visible=false]:-translate-y-20 transition-all duration-500 ease-in-out"
+        className="fixed w-full data-[visible=true]:translate-y-0 data-[visible=false]:-translate-y-20 xl:hidden transition-all duration-500 ease-in-out"
       >
         <div className="px-4 backdrop-blur-lg bg-gray-950/20 flex items-center justify-center h-17">
           <div className="flex items-center w-full h-full justify-between">

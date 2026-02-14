@@ -8,7 +8,9 @@
 
   --breakpoint-xs: 375px;
   --breakpoint-extrasm: 425px;
+  --breakpoint-medium: 500px;
   --breakpoint-extramd: 600px;
+  --breakpoint-extralg: 900px;
 
   /* CUSTOM */
 

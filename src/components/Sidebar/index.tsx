@@ -134,7 +134,7 @@ export function SidebarDesktop() {
   return (
     <aside
       className={cn(
-        'hidden lg:flex lg:sticky flex-col  left-0 top-0 h-screen transition-[width] duration-500',
+        'hidden lg:flex lg:sticky flex-col xl:border-r-2 xl:border-gray-100/5 bg-gray-950/30 left-0 top-0 h-screen transition-[width] duration-500',
         hovered ? 'w-64' : 'w-17',
       )}
       onMouseEnter={() => setHovered(true)}

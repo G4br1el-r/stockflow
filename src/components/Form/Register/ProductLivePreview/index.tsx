@@ -4,7 +4,7 @@ import { Archive, Heart, RefreshCcw } from 'lucide-react'
 
 export function ProductLivePreview() {
   return (
-    <>
+    <div className="flex flex-col gap-5">
       <div className="flex items-center gap-3">
         <SectionHeader
           classNameBackGround="bg-blue-neon/20 border-blue-neon"
@@ -124,6 +124,6 @@ export function ProductLivePreview() {
           </TextBase>
         </div>
       </section>
-    </>
+    </div>
   )
 }

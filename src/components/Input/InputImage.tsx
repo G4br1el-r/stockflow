@@ -6,6 +6,7 @@ import Image from 'next/image'
 
 export function InputImage() {
   const [preview, setPreview] = useState<string | null>(null)
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { 'image/*': ['.png', '.jpg', '.jpeg', '.webp'] },
@@ -14,7 +15,15 @@ export function InputImage() {
     onDrop: (acceptedFiles) => {
       const file = acceptedFiles[0]
       if (file) {
-        setPreview(URL.createObjectURL(file))
+        const url = URL.createObjectURL(file)
+        setPreview(url)
+
+        // Obter dimensões da imagem
+        const img = new window.Image()
+        img.onload = () => {
+          setDimensions({ width: img.width, height: img.height })
+        }
+        img.src = url
       }
     },
   })
@@ -24,14 +33,15 @@ export function InputImage() {
       URL.revokeObjectURL(preview)
     }
     setPreview(null)
+    setDimensions({ width: 0, height: 0 })
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full xl:max-w-100.75">
       {!preview ? (
         <div
           {...getRootProps()}
-          className={`flex flex-col items-center justify-center w-full h-60 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
+          className={`flex flex-col extramd:w-70.5 md:w-90 items-center justify-center w-full h-60 extramd:min-h-100 extramd:h-full border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
             isDragActive
               ? 'border-blue-500 bg-blue-50'
               : 'text-gray-300/40 hover:bg-gray-50'
@@ -47,8 +57,20 @@ export function InputImage() {
           <span className="text-xs text-gray-400 mt-1">PNG, JPG até 5MB</span>
         </div>
       ) : (
-        <div className="relative w-full h-60 rounded-lg overflow-hidden border border-gray-300">
-          <Image src={preview} alt="Preview" fill className="object-contain" />
+        <div className="relative w-full extramd:w-70.5 md:w-90 extramd:h-100 max-h-100 rounded-lg overflow-hidden border border-blue-neon bg-gray-950/70 ">
+          <div
+            className="relative w-full h-full"
+            style={{
+              aspectRatio: `${dimensions.width} / ${dimensions.height}`,
+            }}
+          >
+            <Image
+              src={preview}
+              alt="Preview"
+              fill
+              className="object-fill rounded-sm"
+            />
+          </div>
           <button
             type="button"
             onClick={handleRemove}

@@ -32,18 +32,15 @@ export default function RootLayout({
       >
         <ProvidersSwitchDarkAndLight>
           <section className="grid w-full grid-cols-[auto_1fr] grid-rows-[auto_1fr] min-h-screen">
-            <aside className="col-start-1 col-end-2 row-start-1 row-end-3 hidden lg:block">
+            <section className="col-start-1 col-end-2 row-start-1 row-end-3 hidden xl:block">
               <SidebarDesktop />
-            </aside>
+            </section>
 
-            <header className="col-start-2 col-end-3 lg:pr-5 lg:pt-5 row-start-1 row-end-2 lg:col-start-2">
+            <header className="col-start-2 col-end-3 row-start-1 row-end-2">
               <Header />
             </header>
 
-            <section
-              className="col-start-2 col-end-3 row-start-2 row-end-3 pt-20 flex flex-col items-center
-            "
-            >
+            <section className="col-start-2 col-end-3 row-start-2 row-end-3 pt-25 xl:pt-0 flex flex-col items-center">
               {children}
             </section>
           </section>
