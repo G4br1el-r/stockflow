@@ -12,6 +12,7 @@ import { ProductVariantGrid } from '@/components/Form/Register/ProductVariantGri
 import { TextBase } from '@/components/TextBase'
 import { WrapperAlignMainPages } from '@/components/WrapperAlignMainPages'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { ProductSidebarPreview } from './ProductSidebarPreview'
 
 interface RegisterProductsFormProps {
   dataArrayCategory: CategoryTypes[]
@@ -30,8 +31,8 @@ export default function RegisterProductsForm({
     <WrapperAlignMainPages classNameWrapper="gap-5 extrasm:max-w-125 extrasm:mx-auto extramd:max-w-full xl:gap-0 xl:p-0 lg:max-w-250 xl:max-w-full">
       <ProductFormHeader />
 
-      <main className="w-full h-full flex flex-col xl:grid xl:grid-cols-[1fr_500px] xl:gap-10">
-        <form className="flex pb-5 flex-col gap-10 w-full h-full xl:py-15 xl:pl-15 2xl:max-w-300 2xl:mx-auto">
+      <main className="w-full h-full flex flex-col xl:grid xl:grid-cols-[1fr_400px]">
+        <form className="custom-scrollbar flex pb-5 flex-col gap-10 w-full xl:h-[calc(100vh-109.6px)] xl:max-h-full xl:overflow-y-auto xl:py-15 xl:px-20 2xl:px-50">
           <TextBase
             as="span"
             className="text-[1.2rem] hidden xl:block w-2/3 text-gray-600"
@@ -39,21 +40,17 @@ export default function RegisterProductsForm({
             Cadastre seus produtos de forma prática e rápida. Preencha as
             informações essenciais e organize seu catálogo em minutos
           </TextBase>
-          <div className="w-full h-full flex flex-col gap-20">
+          <div className="w-full flex flex-col gap-20">
             <ProductDetails
               dataArrayCategory={dataArrayCategory}
               dataArrayStore={dataArrayStore}
             />
             <ProductPricing />
             <ProductVariantGrid dataArraySize={dataArraySize} />
-            <ProductFormActions />
+            {isMobile && <ProductFormActions />}
           </div>
         </form>
-        {!isMobile && (
-          <aside className="w-full p-5 xl:sticky xl:h-dvh xl:top-0 xl:border-l-2 xl:border-gray-100/5 bg-gray-950/30">
-            <ProductLivePreview />
-          </aside>
-        )}
+        {!isMobile && <ProductSidebarPreview />}
       </main>
     </WrapperAlignMainPages>
   )

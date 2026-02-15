@@ -12,10 +12,10 @@ export function ProductLivePreview() {
           iconName="eye"
         />
         <TextBase as="span" className="font-bold text-[1.2rem]">
-          Live Preview
+          Pré-visualização
         </TextBase>
       </div>
-      <section className="w-full h-170 border rounded-lg shrink-0 flex flex-col">
+      <section className="w-full h-130 border rounded-lg shrink-0 flex flex-col">
         <div className="w-full  flex-1 rounded-t-lg bg-gray-100/5 flex-center relative">
           <Archive className="w-10 h-10 text-gray-600" />
           <TextBase

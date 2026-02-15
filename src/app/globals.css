@@ -3,6 +3,24 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #3333343d;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #1e293b;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #080d18;
+  }
+}
+
 @theme inline {
   /* BREAKPOINT */
 
