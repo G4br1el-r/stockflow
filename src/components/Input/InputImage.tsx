@@ -43,8 +43,8 @@ export function InputImage() {
           {...getRootProps()}
           className={`flex flex-col extramd:w-70.5 md:w-90 items-center justify-center w-full h-60 extramd:min-h-100 extramd:h-full border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
             isDragActive
-              ? 'border-blue-500 bg-blue-50'
-              : 'text-gray-300/40 hover:bg-gray-50'
+              ? 'border-blue-neon'
+              : 'text-gray-300/40 hover:border-blue-neon'
           }`}
         >
           <input {...getInputProps()} />
@@ -57,7 +57,7 @@ export function InputImage() {
           <span className="text-xs text-gray-400 mt-1">PNG, JPG até 5MB</span>
         </div>
       ) : (
-        <div className="relative w-full extramd:w-70.5 md:w-90 extramd:h-100 max-h-100 rounded-lg overflow-hidden border border-blue-neon bg-gray-950/70 ">
+        <div className="relative w-full focus-within:border-blue-neon extramd:w-70.5 md:w-90 extramd:h-100 max-h-100 rounded-lg overflow-hidden border border-blue-neon bg-gray-950/70 ">
           <div
             className="relative w-full h-full"
             style={{
@@ -74,7 +74,7 @@ export function InputImage() {
           <button
             type="button"
             onClick={handleRemove}
-            className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 z-10"
+            className="absolute top-2 right-2 p-1 cursor-pointer  bg-red-500 text-white rounded-full hover:bg-red-600 z-10"
           >
             <X className="w-4 h-4" />
           </button>

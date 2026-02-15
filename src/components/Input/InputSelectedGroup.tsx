@@ -13,10 +13,10 @@ export function InputSelectedGroup({
 }: InputSelectedGroupProps) {
   return (
     <Select.Root>
-      <Select.Trigger className="flex w-full focus:outline-none justify-between group data-placeholder:text-gray-300/40">
+      <Select.Trigger className="flex cursor-pointer w-full focus:outline-none justify-between group data-placeholder:text-input-placeholder transition-all duration-300 hover:text-text-primary">
         <Select.Value placeholder={placeHolder} />
         <Select.Icon asChild>
-          <ChevronDown className="transition-transform duration-200 group-data-[state=open]:rotate-180" />
+          <ChevronDown className="w-4 h-4 transition-all duration-300 group-data-[state=open]:rotate-180 group-hover:text-blue-neon" />
         </Select.Icon>
       </Select.Trigger>
 
@@ -24,23 +24,25 @@ export function InputSelectedGroup({
         <Select.Content
           align="end"
           position="popper"
-          className="bg-blue-950 rounded-lg shadow-lg border border-gray-200 overflow-hidden  max-h-70 z-50"
+          className="bg-gray-950 rounded-lg shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-gray-800 overflow-hidden max-h-70 z-50 animate-in fade-in-0 zoom-in-95 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
         >
-          <Select.Viewport className="p-1">
+          <Select.Viewport className="p-2">
             {dataArray.map((group) => (
-              <Select.Group key={group.id}>
-                <Select.Label className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase">
+              <Select.Group key={group.id} className="mb-2 last:mb-0">
+                <Select.Label className="px-3 py-2 text-xs font-bold text-blue-neon/70 uppercase tracking-wider border-b border-gray-800/50 mb-1">
                   {group.label}
                 </Select.Label>
                 {group.items.map((item, index) => (
                   <Select.Item
                     key={`${item.value}-${index}`}
                     value={item.value}
-                    className="flex gap-4 items-center px-3 py-2 rounded cursor-pointer outline-none transition-colors data-highlighted:bg-green-900 data-[state=checked]:bg-yellow-950 data-[state=checked]:text-blue-600"
+                    className="relative flex gap-3 items-center px-3 py-2.5 rounded-md cursor-pointer outline-none transition-all duration-200 text-gray-400 hover:bg-gray-800/70 hover:text-white hover:pl-4 data-[state=checked]:bg-blue-neon/10 data-[state=checked]:text-blue-neon data-[state=checked]:border-l-2 data-[state=checked]:border-blue-neon group/item"
                   >
-                    <Select.ItemText>{item.label}</Select.ItemText>
+                    <Select.ItemText className="flex-1 font-medium">
+                      {item.label}
+                    </Select.ItemText>
                     <Select.ItemIndicator>
-                      <Check className="w-4 h-4" />
+                      <Check className="w-4 h-4 text-blue-neon transition-transform duration-200 group-hover/item:scale-110" />
                     </Select.ItemIndicator>
                   </Select.Item>
                 ))}

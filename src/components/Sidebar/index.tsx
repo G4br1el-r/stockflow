@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
@@ -43,10 +43,10 @@ function SidebarContent({
   const isDarkTheme = theme === 'dark'
 
   return (
-    <div className="flex flex-col h-full overflow-hidden backdrop-blur-md">
+    <div className="flex flex-col h-full overflow-hidden backdrop-blur-md bg-sidebar-lateral-background/90">
       <div className="flex items-center h-17 justify-between px-3 py-4 gap-2">
-        <div className="relative flex items-center h-9">
-          <div className="relative w-11 h-full shrink-0 z-10">
+        <div className="relative flex items-center h-9 group/logo">
+          <div className="relative w-11 h-full shrink-0 z-10 transition-all duration-300 group-hover/logo:scale-110">
             <PrismLogo isDarkTheme={isDarkTheme} show="icon" />
           </div>
 
@@ -66,7 +66,7 @@ function SidebarContent({
             type="button"
             onClick={onClose}
             aria-label="Fechar"
-            className="cursor-pointer text-text-secondary"
+            className="cursor-pointer transition-all duration-300 hover:text-red-400 hover:scale-110 hover:rotate-90 active:scale-95"
           >
             <X className="w-6 h-6" />
           </button>
@@ -82,17 +82,17 @@ function SidebarContent({
               href={item.url}
               onClick={onClose}
               className={cn(
-                'relative flex items-center h-11 group w-full px-3 rounded-lg transition-colors mb-2',
+                'relative flex items-center h-11 group/nav w-full px-3 rounded-lg transition-all duration-300 mb-2',
                 isActive
-                  ? 'bg-background-modal text-icon-active border border-icon-active'
-                  : 'hover:bg-icon-default/5',
+                  ? 'text-blue-neon border border-icon-active '
+                  : 'hover:-translate-x-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.2)]',
               )}
             >
               <item.icon
                 className={cn(
-                  'w-5 h-5 shrink-0 z-10',
+                  'w-5 h-5 shrink-0 z-10 transition-all duration-300',
                   !isActive &&
-                    'text-icon-default transition-colors duration-300 ease-in-out group-hover:text-text-primary',
+                    'text-text-tertiary group-hover/nav:text-text-primary group-hover/nav:scale-110',
                 )}
               />
 
@@ -103,7 +103,7 @@ function SidebarContent({
                     ? 'opacity-0 -translate-x-1.5 scale-x-95'
                     : 'opacity-100 translate-x-0 scale-x-100',
                   !isActive &&
-                    'text-text-secondary group-hover:text-text-primary',
+                    'text-text-tertiary group-hover/nav:text-text-primary',
                 )}
               >
                 {item.title}
@@ -134,7 +134,7 @@ export function SidebarDesktop() {
   return (
     <aside
       className={cn(
-        'hidden lg:flex lg:sticky flex-col xl:border-r-2 xl:border-gray-100/5 bg-gray-950/30 left-0 top-0 h-screen transition-[width] duration-500',
+        'hidden lg:flex lg:sticky flex-col xl:border-r-2 xl:border-sidebar-lateral-border bg-sidebar-lateral-background left-0 top-0 h-screen transition-all duration-500',
         hovered ? 'w-64' : 'w-17',
       )}
       onMouseEnter={() => setHovered(true)}
@@ -166,7 +166,7 @@ export function SidebarMobile({
       {mobileOpen && (
         <button
           type="button"
-          className="fixed  inset-0 bg-background-modal/50 backdrop-blur-lg z-40"
+          className="fixed inset-0 bg-sidebar-lateral-background backdrop-blur-lg z-40"
           onClick={() => setMobileOpen(false)}
           aria-label="Fechar menu"
         />

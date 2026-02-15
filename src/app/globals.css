@@ -9,15 +9,15 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: #3333343d;
+    background: var(--color-scrollbar-track);
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #1e293b;
+    background: var(--color-scrollbar-thumb);
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #080d18;
+    background: var(--color-scrollbar-thumb-hover);
   }
 }
 
@@ -29,6 +29,33 @@
   --breakpoint-medium: 500px;
   --breakpoint-extramd: 600px;
   --breakpoint-extralg: 900px;
+
+  /* Títulos */
+  --color-title-page: var(--color-title-page);
+  --color-title-section: var(--color-title-section);
+
+  /* Labels */
+  --color-label-input: var(--color-label-input);
+
+  /* Inputs */
+  --color-input-background: var(--color-input-background);
+  --color-input-placeholder: var(--color-input-placeholder);
+  --color-input-border: var(--color-input-border);
+  --color-input-border-hover: var(--color-input-border-hover);
+
+  /* Sidebar Lateral */
+  --color-sidebar-lateral-background: var(--color-sidebar-lateral-background);
+  --color-sidebar-lateral-border: var(--color-sidebar-lateral-border);
+
+  /* Collors */
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+
+  /* Scrollbar */
+  --color-scrollbar-track: var(--color-scrollbar-track);
+  --color-scrollbar-thumb: var(--color-scrollbar-thumb);
+  --color-scrollbar-thumb-hover: var(--color-scrollbar-thumb-hover);
 
   /* CUSTOM */
 
@@ -116,6 +143,65 @@
 }
 
 :root {
+  /* --- */
+
+  /* Títulos */
+  --color-title-page: #1e293b;
+  --color-title-section: #334155;
+
+  /* Labels */
+  --color-label-input: #475569;
+
+  /* Inputs */
+  --color-input-background: #ffffff;
+  --color-input-placeholder: #94a3b8;
+  --color-input-border: #cbd5e1;
+  --color-input-border-hover: #94a3b8;
+
+  /* Sidebar Lateral */
+  --color-sidebar-lateral-background: rgba(255, 255, 255, 0.6);
+  --color-sidebar-lateral-border: rgba(148, 163, 184, 0.2);
+
+  /* Textos */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748b;
+
+  /* Scrollbar */
+  --color-scrollbar-track: rgba(148, 163, 184, 0.15);
+  --color-scrollbar-thumb: #cbd5e1;
+  --color-scrollbar-thumb-hover: #94a3b8;
+
+  /* --- */
+
+  --ds-gradient-main:
+    radial-gradient(
+      ellipse 1100px 800px at 20% 15%,
+      rgba(205, 222, 255, 0.4) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 900px 700px at 75% 70%,
+      rgba(195, 215, 255, 0.35) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(200, 218, 255, 0.32) 0%,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 15% 85%,
+      rgba(190, 212, 255, 0.34) 0%,
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 55% 45%,
+      rgba(198, 216, 255, 0.25) 0%,
+      transparent 40%
+    ),
+    radial-gradient(1200px circle at top, #f7f8fb 0%, #fafafa 50%, #ebeef2 100%);
+
   /* ---   */
 
   --radius: 0.625rem;
@@ -184,12 +270,63 @@
 }
 
 .dark {
-  --ds-gradient-main: radial-gradient(
-    1200px circle at top,
-    #101a2e 0%,
-    #0b1220 45%,
-    #070b14 100%
-  );
+  /* --- */
+
+  /* Títulos */
+  --color-title-page: #e2e8f0;
+  --color-title-section: #cbd5e1;
+
+  /* Labels */
+  --color-label-input: #94a3b8;
+
+  /* Inputs */
+  --color-input-background: rgba(15, 23, 42, 0.4);
+  --color-input-placeholder: #64748b;
+  --color-input-border: rgba(71, 85, 105, 0.5);
+  --color-input-border-hover: rgba(100, 116, 139, 0.7);
+
+  /* Sidebar Lateral */
+  --color-sidebar-lateral-background: rgba(15, 23, 42, 0.5);
+  --color-sidebar-lateral-border: rgba(71, 85, 105, 0.3);
+
+  /* Textos */
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #cbd5e1;
+  --color-text-tertiary: #94a3b8;
+
+  /* Scrollbar */
+  --color-scrollbar-track: rgba(51, 51, 52, 0.24);
+  --color-scrollbar-thumb: #1e293b;
+  --color-scrollbar-thumb-hover: #0f172a;
+
+  /* --- */
+  --ds-gradient-main:
+    radial-gradient(
+      ellipse 1100px 800px at 20% 15%,
+      rgba(0, 60, 255, 0.09) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 900px 700px at 75% 70%,
+      rgba(0, 65, 255, 0.07) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(0, 50, 255, 0.05) 0%,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 15% 85%,
+      rgba(0, 70, 255, 0.06) 0%,
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 55% 45%,
+      rgba(0, 55, 255, 0.03) 0%,
+      transparent 40%
+    ),
+    radial-gradient(1200px circle at top, #0c141f 0%, #07101a 50%, #040a14 100%);
 
   /* --- */
 

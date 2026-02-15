@@ -10,7 +10,7 @@ export function InputBase({ className, placeHolder }: InputBaseWrapper) {
     <input
       placeholder={placeHolder}
       className={cn(
-        'w-full h-full placeholder:text-gray-300/40 focus:outline-none flex',
+        'w-full h-full placeholder:text-input-placeholder focus:outline-none flex',
         className,
       )}
     />
