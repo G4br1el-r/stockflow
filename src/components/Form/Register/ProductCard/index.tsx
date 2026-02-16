@@ -2,7 +2,7 @@ import { SizesType } from '@/@types/Form/Register/ProductDetailsForm/sizes.types
 import { InputComponent } from '@/components/Input'
 import { TextBase } from '@/components/TextBase'
 import { CirclePlus, Palette, Trash2 } from 'lucide-react'
-import { useFieldArray, useFormContext } from 'react-hook-form' // ← Remove useWatch
+import { useFieldArray, useFormContext, useWatch } from 'react-hook-form'
 import { ProductSize } from '../ProductSize'
 
 interface ProductCardProps {
@@ -43,25 +43,25 @@ const colorMap = [
 ]
 
 export function ProductCard({ dataArraySize }: ProductCardProps) {
-  const { control, getValues, watch } = useFormContext() // ← Adiciona getValues e watch
+  const { control } = useFormContext()
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'variants',
   })
 
-  // ❌ Remove useWatch - estava causando re-render
-  // const allVariants: Variant[] = useWatch({ control, name: 'variants' }) || []
+  const allVariants: Variant[] =
+    useWatch({
+      control,
+      name: 'variants',
+    }) || []
 
   const showRemoveButton = fields.length > 1
 
-  // ✅ Usa getValues - não re-renderiza
   function getAvailableColors(currentIndex: number) {
-    const allVariants = getValues('variants') || []
-
     const usedColors = allVariants
-      .filter((_: any, idx: number) => idx !== currentIndex)
-      .map((v: any) => v?.color)
+      .filter((_, idx) => idx !== currentIndex)
+      .map((v) => v?.color)
       .filter(Boolean)
 
     return colorMap.filter((cor) => !usedColors.includes(cor.value))
@@ -81,8 +81,7 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
     <>
       <section className="extramd:grid extramd:grid-cols-2 extramd:w-fit extralg:grid-cols-3 xl:extramd:grid-cols-2 2xl:grid-cols-3 2xl:w-full gap-5 flex flex-col items-center w-full">
         {fields.map((field, index) => {
-          // ✅ Usa watch ESPECÍFICO só pra cor (re-render isolado)
-          const selectedColor = watch(`variants.${index}.color`)
+          const selectedColor = allVariants[index]?.color
 
           return (
             <div
