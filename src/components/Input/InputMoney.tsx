@@ -1,21 +1,42 @@
 'use client'
+import { cn } from '@/lib/utils'
+import { Controller, useFormContext } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 
-export function InputMoney() {
+interface InputMoneyProps {
+  id: string
+  name: string
+  readOnly?: boolean
+}
+
+export function InputMoney({ id, name, readOnly }: InputMoneyProps) {
+  const { control } = useFormContext()
+
   return (
-    <NumericFormat
-      className="w-full h-full focus:outline-none placeholder:text-input-placeholder"
-      placeholder="R$ 0,00"
-      prefix="R$ "
-      thousandSeparator="."
-      decimalSeparator=","
-      decimalScale={2}
-      fixedDecimalScale
-      allowNegative={false}
-      onValueChange={(values) => {
-        console.log(values.floatValue)
-        console.log(values.formattedValue)
-      }}
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <NumericFormat
+          id={id}
+          value={field.value}
+          className={cn(
+            'w-full h-full focus:outline-none placeholder:text-input-placeholder',
+            readOnly && 'cursor-not-allowed',
+          )}
+          placeholder="R$ 0,00"
+          prefix="R$ "
+          thousandSeparator="."
+          decimalSeparator=","
+          decimalScale={2}
+          fixedDecimalScale
+          allowNegative={false}
+          readOnly={readOnly}
+          onValueChange={(values) => {
+            field.onChange(values.floatValue)
+          }}
+        />
+      )}
     />
   )
 }

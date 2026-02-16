@@ -7,7 +7,7 @@ import { TextBase } from '../TextBase'
 
 export function User() {
   return (
-    <div className="flex gap-2 group/user items-center lg:h-11 lg:pl-1.25 lg:pr-3 bg-background-hover border border-border-default p-3 rounded-lg justify-between overflow-hidden transition-all duration-300 hover:bg-background-modal hover:border-border-hover hover:shadow-[0_2px_12px_rgba(0,0,0,0.2)]">
+    <div className="flex gap-2 group/user items-center lg:h-11 lg:pl-1.25 lg:pr-3 bg-background-hover border border-border-default p-3 rounded-lg justify-between overflow-hidden transition-all duration-300 hover:bg-background-modal hover:border-border-hover">
       <div className="flex gap-2">
         <div className="h-12 w-12 lg:h-8 lg:w-8 shrink-0 relative rounded-full shadow-lg border-2 transition-all duration-300 group-hover/user:scale-110 group-hover/user:shadow-[0_0_15px_rgba(0,209,255,0.3)]">
           <Image

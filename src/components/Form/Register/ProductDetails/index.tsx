@@ -34,9 +34,13 @@ export function ProductDetails({
         <div className="flex flex-col gap-5 extralg:order-2">
           <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
             <InputComponent.root>
-              <InputComponent.label label="Nome do Produto" />
+              <InputComponent.label label="Nome do Produto" htmlFor="product" />
               <InputComponent.wrapper iconName="pencil">
-                <InputComponent.inputBase placeHolder="Camiseta Oversized" />
+                <InputComponent.inputBase
+                  placeHolder="Camiseta Oversized"
+                  id="product"
+                  name="product"
+                />
               </InputComponent.wrapper>
             </InputComponent.root>
           </div>
@@ -45,9 +49,11 @@ export function ProductDetails({
             <div className="flex flex-col gap-5 order-1 justify-between">
               <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
                 <InputComponent.root>
-                  <InputComponent.label label="Loja" />
+                  <InputComponent.label label="Loja" htmlFor="store" />
                   <InputComponent.wrapper iconName="store">
                     <InputComponent.inputSelectedBasic
+                      id="store"
+                      name="store"
                       dataArray={dataArrayStore}
                       placeHolder="-"
                     />
@@ -57,9 +63,11 @@ export function ProductDetails({
 
               <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
                 <InputComponent.root>
-                  <InputComponent.label label="Categoria" />
+                  <InputComponent.label label="Categoria" htmlFor="category" />
                   <InputComponent.wrapper iconName="category">
                     <InputComponent.inputSelectedGroup
+                      id="category"
+                      name="category"
                       placeHolder="-"
                       dataArray={dataArrayCategory}
                     />
@@ -69,18 +77,22 @@ export function ProductDetails({
 
               <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
                 <InputComponent.root>
-                  <InputComponent.label label="Situação" />
+                  <InputComponent.label label="Situação" htmlFor="status" />
                   <InputComponent.wrapper iconName="shieldCheck">
-                    <InputComponent.inputSelectedBasic placeHolder="-" />
+                    <InputComponent.inputSelectedBasic
+                      placeHolder="-"
+                      id="status"
+                      name="status"
+                    />
                   </InputComponent.wrapper>
                 </InputComponent.root>
               </div>
 
-              <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
-                <InputComponent.root>
-                  <InputComponent.label label="SKU" />
-                  <InputComponent.wrapper iconName="scanBarCode">
-                    <InputComponent.inputBase />
+              <div className="group/input">
+                <InputComponent.root readOnly>
+                  <InputComponent.label label="SKU" htmlFor="sku" readOnly />
+                  <InputComponent.wrapper iconName="scanBarCode" readOnly>
+                    <InputComponent.inputBase readOnly id="sku" name="sku" />
                   </InputComponent.wrapper>
                 </InputComponent.root>
               </div>

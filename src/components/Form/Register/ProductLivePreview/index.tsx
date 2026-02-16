@@ -120,7 +120,7 @@ export function ProductLivePreview() {
             </div>
           </div>
         </div>
-        <div className="w-full h-10 bg-gray-950/50 text-gray-600 border-t rounded-b-lg flex-center gap-2 group/footer transition-colors duration-300 hover:bg-gray-950/70">
+        <div className="w-full h-10 bg-modal-background  text-gray-600 border-t rounded-b-lg flex-center gap-2 group/footer transition-colors duration-300">
           <RefreshCcw className="w-3 h-3 transition-all duration-300 group-hover/footer:rotate-180 group-hover/footer:text-gray-400" />
           <TextBase
             as="span"

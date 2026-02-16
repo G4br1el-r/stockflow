@@ -18,7 +18,7 @@ export function SwitchDarkMode() {
   const isDark = localChecked
 
   return (
-    <div className="group/switch relative w-full h-14 lg:h-11 px-1.25 flex items-center mx-auto rounded-lg bg-background-hover border border-border-default overflow-hidden justify-between transition-all duration-300 hover:bg-background-modal hover:border-border-hover hover:shadow-[0_2px_12px_rgba(0,0,0,0.2)]">
+    <div className="group/switch relative w-full h-14 lg:h-11 px-1.25 flex items-center mx-auto rounded-lg bg-background-hover border border-border-default overflow-hidden justify-between transition-all duration-300 hover:bg-background-modal hover:border-border-hover ">
       <div className="flex items-center gap-2 relative z-10">
         <div
           className={cn(

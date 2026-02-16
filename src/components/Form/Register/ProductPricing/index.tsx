@@ -23,18 +23,18 @@ export function ProductPricing() {
         <div className="extrasm:grid extrasm:grid-cols-2 extrasm:gap-5 flex flex-col gap-5">
           <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
             <InputComponent.root>
-              <InputComponent.label label="Preço Custo" />
+              <InputComponent.label label="Preço Custo" htmlFor="costPrice" />
               <InputComponent.wrapper iconName="bankNoteArrowDown">
-                <InputComponent.inputMoney />
+                <InputComponent.inputMoney id="costPrice" name="costPrice" />
               </InputComponent.wrapper>
             </InputComponent.root>
           </div>
 
           <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
             <InputComponent.root>
-              <InputComponent.label label="Preço Venda" />
+              <InputComponent.label label="Preço Venda" htmlFor="salePrice" />
               <InputComponent.wrapper iconName="banknoteArrowUp">
-                <InputComponent.inputMoney />
+                <InputComponent.inputMoney id="salePrice" name="salePrice" />
               </InputComponent.wrapper>
             </InputComponent.root>
           </div>

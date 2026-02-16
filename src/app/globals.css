@@ -43,11 +43,17 @@
   --color-input-border: var(--color-input-border);
   --color-input-border-hover: var(--color-input-border-hover);
 
+  /* Modal/Card */
+  --color-modal-background: var(--color-modal-background);
+  --color-modal-border: var(--color-modal-border);
+  --color-modal-nested-background: var(--color-modal-nested-background);
+  --color-modal-nested-border: var(--color-modal-nested-border);
+
   /* Sidebar Lateral */
   --color-sidebar-lateral-background: var(--color-sidebar-lateral-background);
   --color-sidebar-lateral-border: var(--color-sidebar-lateral-border);
 
-  /* Collors */
+  /* colors */
   --color-text-primary: var(--color-text-primary);
   --color-text-secondary: var(--color-text-secondary);
   --color-text-tertiary: var(--color-text-tertiary);
@@ -157,6 +163,12 @@
   --color-input-placeholder: #94a3b8;
   --color-input-border: #cbd5e1;
   --color-input-border-hover: #94a3b8;
+
+  /* Modal/Card */
+  --color-modal-background: #f0f4f8;
+  --color-modal-border: rgba(203, 213, 225, 0.6);
+  --color-modal-nested-background: #f8fafc;
+  --color-modal-nested-border: rgba(203, 213, 225, 0.5);
 
   /* Sidebar Lateral */
   --color-sidebar-lateral-background: rgba(255, 255, 255, 0.6);
@@ -284,6 +296,12 @@
   --color-input-placeholder: #64748b;
   --color-input-border: rgba(71, 85, 105, 0.5);
   --color-input-border-hover: rgba(100, 116, 139, 0.7);
+
+  /* Modal/Card */
+  --color-modal-background: #0a0f1a;
+  --color-modal-border: rgba(100, 116, 139, 0.5);
+  --color-modal-nested-background: #0f1420;
+  --color-modal-nested-border: rgba(100, 116, 139, 0.4);
 
   /* Sidebar Lateral */
   --color-sidebar-lateral-background: rgba(15, 23, 42, 0.5);

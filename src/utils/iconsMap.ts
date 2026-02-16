@@ -37,7 +37,7 @@ export const iconMap = {
   layersPlus: LayersPlus,
   noIcon: null,
   blocks: Blocks,
-  collor: Palette,
+  color: Palette,
   eye: Eye,
   stock: ArrowDown10,
   chartNoAxesCombined: ChartNoAxesCombined,
