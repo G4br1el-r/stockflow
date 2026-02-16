@@ -10,7 +10,8 @@ interface ProductCardProps {
 }
 
 interface Variant {
-  color: string
+  colorName: string
+  hexName: string
   minimumStock: number
   sizes: Array<{ size: string; quantity: number }>
 }
@@ -43,7 +44,7 @@ const colorMap = [
 ]
 
 export function ProductCard({ dataArraySize }: ProductCardProps) {
-  const { control } = useFormContext()
+  const { control, setValue } = useFormContext()
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -61,27 +62,34 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
   function getAvailableColors(currentIndex: number) {
     const usedColors = allVariants
       .filter((_, idx) => idx !== currentIndex)
-      .map((v) => v?.color)
+      .map((v) => v?.hexName)
       .filter(Boolean)
 
-    return colorMap.filter((cor) => !usedColors.includes(cor.value))
+    return colorMap.filter((color) => !usedColors.includes(color.value))
   }
 
   function AddNewCard() {
-    append({ color: '', minimumStock: 0, sizes: [{ size: '', quantity: '' }] })
+    append({
+      colorName: '',
+      hexName: '',
+      minimumStock: '',
+      sizes: [{ size: '', quantity: '' }],
+    })
   }
 
   function removeCard(index: number) {
     remove(index)
   }
 
-  console.log('renderizou o productcard')
-
   return (
     <>
       <section className="extramd:grid extramd:grid-cols-2 extramd:w-fit extralg:grid-cols-3 xl:extramd:grid-cols-2 2xl:grid-cols-3 2xl:w-full gap-5 flex flex-col items-center w-full">
         {fields.map((field, index) => {
-          const selectedColor = allVariants[index]?.color
+          const selectedColor = allVariants[index]?.hexName
+          const totalQuantity =
+            allVariants[index]?.sizes?.reduce((acc, cur) => {
+              return acc + (Number(cur.quantity) || 0)
+            }, 0) || 0
 
           return (
             <div
@@ -108,9 +116,17 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
                 <InputComponent.root>
                   <InputComponent.inputSelectedBasic
                     id={`color-${index}`}
-                    name={`variants.${index}.color`}
+                    name={`variants.${index}.hexName`}
                     dataArray={getAvailableColors(index)}
                     placeHolder="Selecione uma cor"
+                    onValueChange={(hexValue) => {
+                      const colorData = colorMap.find(
+                        (c) => c.value === hexValue,
+                      )
+                      if (colorData) {
+                        setValue(`variants.${index}.colorName`, colorData.label)
+                      }
+                    }}
                   />
                 </InputComponent.root>
 
@@ -170,7 +186,7 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
                             : selectedColor || '#808080',
                       }}
                     >
-                      Total: 55
+                      Total: {totalQuantity}
                     </TextBase>
                   </div>
                 </div>

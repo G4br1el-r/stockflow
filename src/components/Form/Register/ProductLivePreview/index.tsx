@@ -1,8 +1,28 @@
+import { ProductFormData } from '@/@types/Form/Register/ProductDetailsForm/product-form.types'
 import { SectionHeader } from '@/components/SectionHeader'
 import { TextBase } from '@/components/TextBase'
+import { cn } from '@/lib/utils'
 import { Archive, Heart, RefreshCcw } from 'lucide-react'
+import { useFormContext, useWatch } from 'react-hook-form'
 
 export function ProductLivePreview() {
+  const { control } = useFormContext()
+
+  const { product, categoryLabel, statusLabel } = useWatch({
+    control,
+  }) as ProductFormData
+
+  const status = {
+    Ativo: 'bg-green-neon/50 border-green-neon text-green-neon',
+    Inativo: 'bg-red-neon/50 border-red-neon text-red-neon',
+  }
+
+  const statusClassName =
+    statusLabel && status[statusLabel]
+      ? status[statusLabel]
+      : 'bg-gray-neon/50 border-gray-neon text-gray-neon'
+
+  console.log(statusClassName)
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center gap-3">
@@ -23,9 +43,12 @@ export function ProductLivePreview() {
           <Archive className="w-10 h-10 text-gray-600 transition-all duration-300 group-hover/image:scale-110 group-hover/image:text-gray-500" />
           <TextBase
             as="span"
-            className="text-[0.6em] px-2 py-0.5 bg-gray-600/90 border border-gray-600 rounded-lg absolute top-2 right-2"
+            className={cn(
+              'text-[0.7em] font-bold px-2 py-0.5 border rounded-lg absolute top-2 right-2',
+              statusClassName,
+            )}
           >
-            NOVO
+            {statusLabel ? statusLabel : 'Aguardando'}
           </TextBase>
         </div>
         <div className="w-full gap-7 px-3 py-6 flex flex-col items-center bg-blue-900/5">
@@ -35,10 +58,10 @@ export function ProductLivePreview() {
                 as="span"
                 className="text-[0.8rem] text-blue-neon font-semibold"
               >
-                CAMISETAS
+                {categoryLabel ? categoryLabel : 'Categoria'}
               </TextBase>
               <TextBase as="span" className="font-bold">
-                Camiseta Oversized Nike
+                {product ? product : 'Produto'}
               </TextBase>
             </div>
             <Heart className="w-5 h-5 text-red-500 fill-current cursor-pointer transition-all duration-300 hover:scale-125 active:scale-95" />
@@ -46,7 +69,10 @@ export function ProductLivePreview() {
 
           <div className="w-full flex flex-col gap-5">
             <div className="flex items-center gap-5 w-full">
-              <TextBase as="span" className="text-[0.8rem] whitespace-nowrap">
+              <TextBase
+                as="span"
+                className="text-[0.8rem] whitespace-nowrap font-bold"
+              >
                 OPÇÕES DE GRADE
               </TextBase>
             </div>

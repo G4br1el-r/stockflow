@@ -8,6 +8,7 @@ export interface InputSelectedGroupProps {
   id: string
   name: string
   placeHolder: string
+  onValueChange?: (value: string) => void
   dataArray: CategoryTypes[]
   readOnly?: boolean
 }
@@ -16,6 +17,7 @@ export function InputSelectedGroup({
   id,
   name,
   placeHolder,
+  onValueChange,
   dataArray,
   readOnly,
 }: InputSelectedGroupProps) {
@@ -28,7 +30,10 @@ export function InputSelectedGroup({
       render={({ field }) => (
         <Select.Root
           value={field.value}
-          onValueChange={field.onChange}
+          onValueChange={(value) => {
+            field.onChange(value)
+            onValueChange?.(value)
+          }}
           disabled={readOnly}
         >
           <Select.Trigger

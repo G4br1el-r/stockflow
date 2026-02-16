@@ -15,6 +15,7 @@ import { WrapperAlignMainPages } from '@/components/WrapperAlignMainPages'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { ProductSidebarPreview } from './ProductSidebarPreview'
 import { FormProvider, useForm } from 'react-hook-form'
+import { ProductFormData } from '@/@types/Form/Register/ProductDetailsForm/product-form.types'
 
 interface RegisterProductsFormProps {
   dataArrayCategory: CategoryTypes[]
@@ -30,17 +31,21 @@ export default function RegisterProductsForm({
   const isMobile = useIsMobile(1280)
   const formRef = useRef<HTMLFormElement>(null)
 
-  const methodsProduct = useForm({
+  const methodsProduct = useForm<ProductFormData>({
     defaultValues: {
       product: '',
       store: '',
+      storeLabel: '',
       category: '',
+      categoryLabel: '',
       status: '',
+      statusLabel: '',
       costPrice: '',
       salePrice: '',
       variants: [
         {
-          color: '',
+          colorName: '',
+          hexName: '',
           minimumStock: '',
           sizes: [{ size: '', quantity: '' }],
         },
@@ -50,6 +55,7 @@ export default function RegisterProductsForm({
 
   function handleFormSubmit(data: any) {
     console.log(data)
+    methodsProduct.reset()
   }
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: scroll reset intencional na mudança de breakpoint

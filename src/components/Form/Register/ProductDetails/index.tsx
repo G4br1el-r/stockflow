@@ -4,16 +4,30 @@ import { InputComponent } from '@/components/Input'
 import { InputImage } from '@/components/Input/InputImage'
 import { SectionHeader } from '@/components/SectionHeader'
 import { TextBase } from '@/components/TextBase'
+import { useFormContext } from 'react-hook-form'
 
 interface ProductDetailsProps {
   dataArrayStore: StoreType[]
   dataArrayCategory: CategoryTypes[]
 }
 
+const DataStatusProduct = [
+  {
+    value: 'active',
+    label: 'Ativo',
+  },
+  {
+    value: 'inactive',
+    label: 'Inativo',
+  },
+]
+
 export function ProductDetails({
   dataArrayStore,
   dataArrayCategory,
 }: ProductDetailsProps) {
+  const { setValue } = useFormContext()
+
   return (
     <div className="flex flex-col gap-5">
       <div className="w-full h-full flex items-center gap-3">
@@ -56,6 +70,14 @@ export function ProductDetails({
                       name="store"
                       dataArray={dataArrayStore}
                       placeHolder="-"
+                      onValueChange={(storeValue) => {
+                        const storeLabel = dataArrayStore.find(
+                          (item) => item.value === storeValue,
+                        )
+                        if (storeLabel) {
+                          setValue(`storeLabel`, storeLabel.label)
+                        }
+                      }}
                     />
                   </InputComponent.wrapper>
                 </InputComponent.root>
@@ -70,6 +92,18 @@ export function ProductDetails({
                       name="category"
                       placeHolder="-"
                       dataArray={dataArrayCategory}
+                      onValueChange={(categoryValue) => {
+                        for (const category of dataArrayCategory) {
+                          const item = category.items.find(
+                            (i) => i.value === categoryValue,
+                          )
+
+                          if (item) {
+                            setValue('categoryLabel', item.label)
+                            break
+                          }
+                        }
+                      }}
                     />
                   </InputComponent.wrapper>
                 </InputComponent.root>
@@ -83,6 +117,15 @@ export function ProductDetails({
                       placeHolder="-"
                       id="status"
                       name="status"
+                      dataArray={DataStatusProduct}
+                      onValueChange={(statusValue) => {
+                        const statusLabel = DataStatusProduct.find(
+                          (item) => item.value === statusValue,
+                        )
+                        if (statusLabel) {
+                          setValue(`statusLabel`, statusLabel.label)
+                        }
+                      }}
                     />
                   </InputComponent.wrapper>
                 </InputComponent.root>

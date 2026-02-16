@@ -8,28 +8,19 @@ export interface inputSelectedBasicProps {
   id: string
   name: string
   placeHolder: string
-  dataArray?: StoreType[]
+  dataArray: StoreType[]
+  onValueChange?: (value: string) => void
   classNameArrow?: string
   classNameWrapper?: string
   readOnly?: boolean
 }
 
-const statusProduct = [
-  {
-    value: 'active',
-    label: 'Ativo',
-  },
-  {
-    value: 'inactive',
-    label: 'Inativo',
-  },
-]
-
 export function InputSelectedBasic({
   id,
   name,
   placeHolder,
-  dataArray = statusProduct,
+  dataArray,
+  onValueChange,
   classNameArrow,
   readOnly,
   classNameWrapper,
@@ -42,7 +33,10 @@ export function InputSelectedBasic({
       render={({ field }) => (
         <Select.Root
           value={field.value}
-          onValueChange={field.onChange}
+          onValueChange={(value) => {
+            field.onChange(value)
+            onValueChange?.(value)
+          }}
           disabled={readOnly}
         >
           <Select.Trigger
