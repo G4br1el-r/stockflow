@@ -1,4 +1,4 @@
-import { ProductFormActions } from '../ProductFormActions'
+import { ProductFormActionsDesktop } from '../ProductFormActionsDesktop'
 import { ProductLivePreview } from '../ProductLivePreview'
 import { ProductProgressRegister } from '../ProductProgressRegister'
 
@@ -12,7 +12,7 @@ export function ProductSidebarPreview({ idForm }: ProductSidebarPreviewProps) {
       <div className="flex flex-col gap-10">
         <ProductLivePreview />
         <ProductProgressRegister />
-        <ProductFormActions idForm={idForm} />
+        <ProductFormActionsDesktop idForm={idForm} />
       </div>
     </aside>
   )

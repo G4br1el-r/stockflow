@@ -32,6 +32,9 @@ export function InputMoney({ id, name, readOnly }: InputMoneyProps) {
           fixedDecimalScale
           allowNegative={false}
           readOnly={readOnly}
+          type="tel"
+          inputMode="decimal"
+          enterKeyHint="next"
           onValueChange={(values) => {
             field.onChange(values.floatValue)
           }}

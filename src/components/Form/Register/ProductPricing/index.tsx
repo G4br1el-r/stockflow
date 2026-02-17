@@ -1,8 +1,32 @@
 import { InputComponent } from '@/components/Input'
 import { SectionHeader } from '@/components/SectionHeader'
 import { TextBase } from '@/components/TextBase'
+import { useProductFormData } from '@/hooks/useProductFormData'
 
 export function ProductPricing() {
+  const { costPrice, salePrice } = useProductFormData()
+
+  const profit =
+    costPrice && salePrice ? parseFloat(salePrice) - parseFloat(costPrice) : 0
+
+  const profitMargin =
+    costPrice && salePrice && parseFloat(salePrice) > 0
+      ? (
+          ((parseFloat(salePrice) - parseFloat(costPrice)) /
+            parseFloat(salePrice)) *
+          100
+        ).toFixed(1)
+      : '0.0'
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(price)
+  }
+
+  const isNegative = profit < 0
+
   return (
     <div className="flex flex-col gap-5">
       <div className=" w-full h-full flex items-center gap-3">
@@ -45,14 +69,24 @@ export function ProductPricing() {
             <InputComponent.root>
               <InputComponent.wrapper
                 iconName="chartNoAxesCombined"
-                classNameWrapper="border-dashed bg-green-100/20 justify-between h-full transition-all duration-300 group-hover/calc:bg-green-100/30 group-hover/calc:shadow-[0_2px_12px_rgba(0,0,0,0.3)] group-hover/calc:border-green-neon/30"
-                classNameIcon="text-green-neon"
+                classNameWrapper={`border-dashed justify-between h-full transition-all duration-300 group-hover/calc:shadow-[0_2px_12px_rgba(0,0,0,0.3)] ${
+                  isNegative
+                    ? 'bg-red-100/20 group-hover/calc:bg-red-100/30 group-hover/calc:border-red-500/30'
+                    : 'bg-green-100/20 group-hover/calc:bg-green-100/30 group-hover/calc:border-green-neon/30'
+                }`}
+                classNameIcon={isNegative ? 'text-red-500' : 'text-green-neon'}
               >
-                <TextBase as="span" className="text-green-neon w-full">
-                  Margem Calculada
+                <TextBase
+                  as="span"
+                  className={`w-full ${isNegative ? 'text-red-500' : 'text-green-neon'}`}
+                >
+                  Margem de Lucro
                 </TextBase>
-                <TextBase as="span" className="text-green-neon">
-                  20%
+                <TextBase
+                  as="span"
+                  className={isNegative ? 'text-red-500' : 'text-green-neon'}
+                >
+                  {profitMargin}%
                 </TextBase>
               </InputComponent.wrapper>
             </InputComponent.root>
@@ -62,14 +96,24 @@ export function ProductPricing() {
             <InputComponent.root>
               <InputComponent.wrapper
                 iconName="piggyBank"
-                classNameWrapper="border-dashed bg-green-100/20 justify-between h-full transition-all duration-300 group-hover/profit:bg-green-100/30 group-hover/profit:shadow-[0_2px_12px_rgba(0,0,0,0.3)] group-hover/profit:border-green-neon/30"
-                classNameIcon="text-green-neon"
+                classNameWrapper={`border-dashed justify-between h-full transition-all duration-300 group-hover/profit:shadow-[0_2px_12px_rgba(0,0,0,0.3)] ${
+                  isNegative
+                    ? 'bg-red-100/20 group-hover/profit:bg-red-100/30 group-hover/profit:border-red-500/30'
+                    : 'bg-green-100/20 group-hover/profit:bg-green-100/30 group-hover/profit:border-green-neon/30'
+                }`}
+                classNameIcon={isNegative ? 'text-red-500' : 'text-green-neon'}
               >
-                <TextBase as="span" className="text-green-neon flex-1">
-                  Lucro Líquido
+                <TextBase
+                  as="span"
+                  className={`flex-1 ${isNegative ? 'text-red-500' : 'text-green-neon'}`}
+                >
+                  Lucro Bruto
                 </TextBase>
-                <TextBase as="span" className="text-green-neon">
-                  R$ 73,85
+                <TextBase
+                  as="span"
+                  className={isNegative ? 'text-red-500' : 'text-green-neon'}
+                >
+                  {formatPrice(profit)}
                 </TextBase>
               </InputComponent.wrapper>
             </InputComponent.root>

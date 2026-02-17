@@ -1,21 +1,27 @@
 import { TextBase } from '@/components/TextBase'
 import { Rocket, Trash2 } from 'lucide-react'
+import { useFormContext } from 'react-hook-form'
 
-interface ProductFormActionsProps {
+interface ProductFormActionsDesktopProps {
   idForm?: string
 }
 
-export function ProductFormActions({ idForm }: ProductFormActionsProps) {
+export function ProductFormActionsDesktop({
+  idForm,
+}: ProductFormActionsDesktopProps) {
+  const { reset } = useFormContext()
+
   return (
     <div className="flex flex-col w-full gap-5">
       <button
         type="button"
+        onClick={() => reset()}
         className="flex active:scale-95 cursor-pointer items-center gap-1 group/clear transition-all duration-300 w-fit focus:outline-none"
       >
-        <Trash2 className="w-3.5 h-3.5 transition-all duration-300 group-hover/clear:text-red-400 group-hover/clear:scale-110 group-focus/clear:text-red-400 group-focus/clear:scale-110" />
+        <Trash2 className="w-3.5 h-3.5 text-red-400 xl:text-white transition-all duration-300 group-hover/clear:text-red-400 group-hover/clear:scale-110 group-focus/clear:text-red-400 group-focus/clear:scale-110" />
         <TextBase
           as="span"
-          className="transition-colors duration-300 group-hover/clear:text-red-400 group-focus/clear:text-red-400"
+          className="transition-colors text-red-400 xl:text-white duration-300 group-hover/clear:text-red-400 group-focus/clear:text-red-400"
         >
           Limpar
         </TextBase>

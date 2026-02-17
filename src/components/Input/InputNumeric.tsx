@@ -12,7 +12,6 @@ interface InputNumericProps {
   thousandSeparator?: boolean
   decimalScale?: number
   prefix?: string
-  onValueChange?: (value: number | undefined) => void
 }
 
 export function InputNumeric({
@@ -24,7 +23,6 @@ export function InputNumeric({
   thousandSeparator = true,
   decimalScale = 0,
   prefix,
-  onValueChange,
 }: InputNumericProps) {
   const { control } = useFormContext()
 
@@ -45,6 +43,9 @@ export function InputNumeric({
           fixedDecimalScale={decimalScale > 0}
           allowNegative={false}
           prefix={prefix}
+          type="tel"
+          inputMode="decimal"
+          enterKeyHint="next"
           onValueChange={(values) => {
             field.onChange(values.floatValue)
           }}

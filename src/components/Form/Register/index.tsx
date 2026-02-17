@@ -5,7 +5,7 @@ import { CategoryTypes } from '@/@types/Form/Register/ProductDetailsForm/categor
 import { SizesType } from '@/@types/Form/Register/ProductDetailsForm/sizes.types'
 import { StoreType } from '@/@types/Form/Register/ProductDetailsForm/story.types'
 import { ProductDetails } from '@/components/Form/Register/ProductDetails'
-import { ProductFormActions } from '@/components/Form/Register/ProductFormActions'
+import { ProductFormActionsDesktop } from '@/components/Form/Register/ProductFormActionsDesktop'
 import { ProductFormHeader } from '@/components/Form/Register/ProductFormHeader'
 import { ProductLivePreview } from '@/components/Form/Register/ProductLivePreview'
 import { ProductPricing } from '@/components/Form/Register/ProductPricing'
@@ -97,7 +97,7 @@ export default function RegisterProductsForm({
               />
               <ProductPricing />
               <ProductVariantGrid dataArraySize={dataArraySize} />
-              {isMobile && <ProductFormActions />}
+              {isMobile && <ProductFormActionsDesktop />}
             </div>
           </form>
           {!isMobile && <ProductSidebarPreview idForm="product-form" />}

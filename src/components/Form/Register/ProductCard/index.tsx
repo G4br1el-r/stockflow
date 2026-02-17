@@ -83,7 +83,7 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
 
   return (
     <>
-      <section className="extramd:grid extramd:grid-cols-2 extramd:w-fit extralg:grid-cols-3 xl:extramd:grid-cols-2 2xl:grid-cols-3 2xl:w-full gap-5 flex flex-col items-center w-full">
+      <section className="extramd:grid extramd:grid-cols-2 extramd:w-fit extralg:grid-cols-3 xl:extramd:grid-cols-2 2xl:grid-cols-3 2xl:w-full h-fit gap-5 flex flex-col items-center w-full">
         {fields.map((field, index) => {
           const selectedColor = allVariants[index]?.hexName
           const totalQuantity =
@@ -94,7 +94,7 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
           return (
             <div
               key={field.id}
-              className="w-full h-full bg-modal-background border-2 rounded-2xl flex flex-col 2xl:max-w-full relative overflow-hidden group/card transition-all duration-500 hover:-translate-y-1 focus-within:-translate-y-1"
+              className="w-full h-fit extramd:h-full bg-modal-background border-2 rounded-2xl flex flex-col 2xl:max-w-full relative overflow-hidden group/card transition-all duration-500 hover:-translate-y-1 focus-within:-translate-y-1"
               style={{
                 borderColor: selectedColor ? `${selectedColor}33` : '#80808033',
               }}

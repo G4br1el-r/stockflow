@@ -43,7 +43,7 @@ export function Header() {
       <div
         ref={headerRef}
         data-visible="true"
-        className="fixed w-full data-[visible=true]:translate-y-0 data-[visible=false]:-translate-y-20 xl:hidden transition-all duration-500 ease-in-out"
+        className="fixed z-20 w-full data-[visible=true]:translate-y-0 data-[visible=false]:-translate-y-20 xl:hidden transition-all duration-500 ease-in-out"
       >
         <div className="px-4 backdrop-blur-lg bg-sidebar-lateral-background flex items-center justify-center h-17">
           <div className="flex items-center w-full h-full justify-between">
