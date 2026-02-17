@@ -1,7 +1,7 @@
 import { SizesType } from '@/@types/Form/Register/ProductDetailsForm/sizes.types'
 import { InputComponent } from '@/components/Input'
 import { TextBase } from '@/components/TextBase'
-import { CirclePlus, Palette, Trash2 } from 'lucide-react'
+import { Palette, Trash2 } from 'lucide-react'
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form'
 import { ProductSize } from '../ProductSize'
 import { cn } from '@/lib/utils'
@@ -78,14 +78,15 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
     append({
       colorName: '',
       hexName: '',
-      minimumStock: '',
-      sizes: [{ size: '', quantity: '' }],
+      minimumStock: 0,
+      sizes: [{ size: '', quantity: 0 }],
     })
   }
 
   function removeCard(index: number) {
     remove(index)
   }
+
   return (
     <>
       <section className="extramd:grid extramd:grid-cols-2 extramd:w-fit extralg:grid-cols-3 xl:extramd:grid-cols-2 2xl:grid-cols-3 2xl:w-full h-fit gap-5 flex flex-col items-center w-full">

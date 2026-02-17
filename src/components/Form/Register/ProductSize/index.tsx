@@ -131,7 +131,7 @@ export function ProductSize({
         {showAddSize && (
           <button
             type="button"
-            onClick={() => addSize({ size: '', quantity: '' })}
+            onClick={() => addSize({ size: '', quantity: 0 })}
             className="w-full h-35 bg-input-background cursor-pointer rounded-lg flex flex-col justify-center items-center p-3 gap-1.5 border-dashed border-2 transition-all duration-300 hover:bg-input-background/50 hover:-translate-y-1 group/add relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-white/0 group-hover/add:bg-white/2 rounded-lg transition-all duration-500" />

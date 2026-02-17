@@ -11,16 +11,11 @@ export function ProductPricing() {
     formState: { errors },
   } = useFormContext()
 
-  const profit =
-    costPrice && salePrice ? parseFloat(salePrice) - parseFloat(costPrice) : 0
+  const profit = costPrice && salePrice ? salePrice - costPrice : 0
 
   const profitMargin =
-    costPrice && salePrice && parseFloat(salePrice) > 0
-      ? (
-          ((parseFloat(salePrice) - parseFloat(costPrice)) /
-            parseFloat(salePrice)) *
-          100
-        ).toFixed(1)
+    costPrice && salePrice && salePrice > 0
+      ? (((salePrice - costPrice) / salePrice) * 100).toFixed(1)
       : '0.0'
 
   const formatPrice = (price: number) => {
