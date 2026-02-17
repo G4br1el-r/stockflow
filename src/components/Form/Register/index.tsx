@@ -1,11 +1,11 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { CategoryTypes } from '@/@types/Form/Register/ProductDetailsForm/category.types'
 import { SizesType } from '@/@types/Form/Register/ProductDetailsForm/sizes.types'
 import { StoreType } from '@/@types/Form/Register/ProductDetailsForm/story.types'
 import { ProductDetails } from '@/components/Form/Register/ProductDetails'
-import { ProductFormActionsDesktop } from '@/components/Form/Register/ProductFormActionsDesktop'
+import { ProductFormActions } from '@/components/Form/Register/ProductFormActions'
 import { ProductFormHeader } from '@/components/Form/Register/ProductFormHeader'
 import { ProductLivePreview } from '@/components/Form/Register/ProductLivePreview'
 import { ProductPricing } from '@/components/Form/Register/ProductPricing'
@@ -16,6 +16,7 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 import { ProductSidebarPreview } from './ProductSidebarPreview'
 import { FormProvider, useForm } from 'react-hook-form'
 import { ProductFormData } from '@/@types/Form/Register/ProductDetailsForm/product-form.types'
+import toast from 'react-hot-toast'
 
 interface RegisterProductsFormProps {
   dataArrayCategory: CategoryTypes[]
@@ -30,6 +31,7 @@ export default function RegisterProductsForm({
 }: RegisterProductsFormProps) {
   const isMobile = useIsMobile(1280)
   const formRef = useRef<HTMLFormElement>(null)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const methodsProduct = useForm<ProductFormData>({
     defaultValues: {
@@ -53,9 +55,11 @@ export default function RegisterProductsForm({
     },
   })
 
-  function handleFormSubmit(data: any) {
+  function handleFormSubmit(data: ProductFormData) {
     console.log(data)
     methodsProduct.reset()
+    setIsDialogOpen(false)
+    toast.success(`${data.product} cadastrado com sucesso!`)
   }
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: scroll reset intencional na mudança de breakpoint
@@ -97,10 +101,22 @@ export default function RegisterProductsForm({
               />
               <ProductPricing />
               <ProductVariantGrid dataArraySize={dataArraySize} />
-              {isMobile && <ProductFormActionsDesktop />}
+              {isMobile && (
+                <ProductFormActions
+                  onSubmit={methodsProduct.handleSubmit(handleFormSubmit)}
+                  isDialogOpen={isDialogOpen}
+                  setIsDialogOpen={setIsDialogOpen}
+                />
+              )}
             </div>
           </form>
-          {!isMobile && <ProductSidebarPreview idForm="product-form" />}
+          {!isMobile && (
+            <ProductSidebarPreview
+              onSubmit={methodsProduct.handleSubmit(handleFormSubmit)}
+              isDialogOpen={isDialogOpen}
+              setIsDialogOpen={setIsDialogOpen}
+            />
+          )}
         </FormProvider>
       </main>
     </WrapperAlignMainPages>

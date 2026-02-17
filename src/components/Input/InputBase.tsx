@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils'
-import { useFormContext } from 'react-hook-form'
-import { readonly } from 'zod'
+import { useFormContext, Controller } from 'react-hook-form'
 
 interface InputBaseWrapper {
   id: string
@@ -17,17 +16,23 @@ export function InputBase({
   placeHolder,
   readOnly,
 }: InputBaseWrapper) {
-  const { register } = useFormContext()
+  const { control } = useFormContext()
   return (
-    <input
-      id={id}
-      {...register(name)}
-      tabIndex={readOnly ? -1 : 0}
-      placeholder={placeHolder}
-      readOnly={readOnly}
-      className={cn(
-        'w-full h-full placeholder:text-input-placeholder focus:outline-none flex ',
-        className,
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <input
+          {...field}
+          id={id}
+          tabIndex={readOnly ? -1 : 0}
+          placeholder={placeHolder}
+          readOnly={readOnly}
+          className={cn(
+            'w-full h-full placeholder:text-input-placeholder focus:outline-none flex',
+            className,
+          )}
+        />
       )}
     />
   )
