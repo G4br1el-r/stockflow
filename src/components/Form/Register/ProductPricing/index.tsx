@@ -2,9 +2,14 @@ import { InputComponent } from '@/components/Input'
 import { SectionHeader } from '@/components/SectionHeader'
 import { TextBase } from '@/components/TextBase'
 import { useProductFormData } from '@/hooks/useProductFormData'
+import { cn } from '@/lib/utils'
+import { useFormContext } from 'react-hook-form'
 
 export function ProductPricing() {
   const { costPrice, salePrice } = useProductFormData()
+  const {
+    formState: { errors },
+  } = useFormContext()
 
   const profit =
     costPrice && salePrice ? parseFloat(salePrice) - parseFloat(costPrice) : 0
@@ -48,18 +53,34 @@ export function ProductPricing() {
           <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
             <InputComponent.root>
               <InputComponent.label label="Preço Custo" htmlFor="costPrice" />
-              <InputComponent.wrapper iconName="bankNoteArrowDown">
+              <InputComponent.wrapper
+                iconName="bankNoteArrowDown"
+                classNameWrapper={cn(errors.costPrice && 'border-red-500')}
+              >
                 <InputComponent.inputMoney id="costPrice" name="costPrice" />
               </InputComponent.wrapper>
+              {errors.costPrice && (
+                <TextBase as="span" className="text-red-500 text-sm mt-1">
+                  {errors.costPrice.message as string}
+                </TextBase>
+              )}
             </InputComponent.root>
           </div>
 
           <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
             <InputComponent.root>
               <InputComponent.label label="Preço Venda" htmlFor="salePrice" />
-              <InputComponent.wrapper iconName="banknoteArrowUp">
+              <InputComponent.wrapper
+                iconName="banknoteArrowUp"
+                classNameWrapper={cn(errors.costPrice && 'border-red-500')}
+              >
                 <InputComponent.inputMoney id="salePrice" name="salePrice" />
               </InputComponent.wrapper>
+              {errors.salePrice && (
+                <TextBase as="span" className="text-red-500 text-sm mt-1">
+                  {errors.salePrice.message as string}
+                </TextBase>
+              )}
             </InputComponent.root>
           </div>
         </div>

@@ -14,9 +14,13 @@ import { TextBase } from '@/components/TextBase'
 import { WrapperAlignMainPages } from '@/components/WrapperAlignMainPages'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { ProductSidebarPreview } from './ProductSidebarPreview'
-import { FormProvider, useForm } from 'react-hook-form'
-import { ProductFormData } from '@/@types/Form/Register/ProductDetailsForm/product-form.types'
+import { FieldErrors, FormProvider, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import toast from 'react-hot-toast'
+import {
+  ProductFormData,
+  productRegisterSchema,
+} from '@/@schema/Form/product-form.schema'
 
 interface RegisterProductsFormProps {
   dataArrayCategory: CategoryTypes[]
@@ -34,6 +38,9 @@ export default function RegisterProductsForm({
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const methodsProduct = useForm<ProductFormData>({
+    resolver: zodResolver(productRegisterSchema),
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
     defaultValues: {
       product: '',
       store: '',
@@ -62,6 +69,17 @@ export default function RegisterProductsForm({
     toast.success(`${data.product} cadastrado com sucesso!`)
   }
 
+  async function handleFormError(data: FieldErrors<ProductFormData>) {
+    const isValid = await methodsProduct.trigger()
+    console.log(data)
+
+    if (!isValid) {
+      toast.error('Ops! Alguns campos precisam de atenção antes de salvar.')
+
+      setIsDialogOpen(false)
+    }
+  }
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: scroll reset intencional na mudança de breakpoint
   useEffect(() => {
     formRef.current?.scrollTo({ top: 0 })
@@ -83,7 +101,10 @@ export default function RegisterProductsForm({
         <FormProvider {...methodsProduct}>
           <form
             id="product-form"
-            onSubmit={methodsProduct.handleSubmit(handleFormSubmit)}
+            onSubmit={methodsProduct.handleSubmit(
+              handleFormSubmit,
+              handleFormError,
+            )}
             ref={formRef}
             className="custom-scrollbar flex pb-5 flex-col gap-10 w-full xl:h-[calc(100vh-109.6px)] xl:overflow-y-auto xl:py-15 xl:px-20"
           >
@@ -103,7 +124,10 @@ export default function RegisterProductsForm({
               <ProductVariantGrid dataArraySize={dataArraySize} />
               {isMobile && (
                 <ProductFormActions
-                  onSubmit={methodsProduct.handleSubmit(handleFormSubmit)}
+                  onSubmit={methodsProduct.handleSubmit(
+                    handleFormSubmit,
+                    handleFormError,
+                  )}
                   isDialogOpen={isDialogOpen}
                   setIsDialogOpen={setIsDialogOpen}
                 />
@@ -112,7 +136,10 @@ export default function RegisterProductsForm({
           </form>
           {!isMobile && (
             <ProductSidebarPreview
-              onSubmit={methodsProduct.handleSubmit(handleFormSubmit)}
+              onSubmit={methodsProduct.handleSubmit(
+                handleFormSubmit,
+                handleFormError,
+              )}
               isDialogOpen={isDialogOpen}
               setIsDialogOpen={setIsDialogOpen}
             />

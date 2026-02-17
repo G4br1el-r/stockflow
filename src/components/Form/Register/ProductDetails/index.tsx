@@ -5,6 +5,7 @@ import { InputImage } from '@/components/Input/InputImage'
 import { SectionHeader } from '@/components/SectionHeader'
 import { TextBase } from '@/components/TextBase'
 import { useFormContext } from 'react-hook-form'
+import { cn } from '@/lib/utils'
 
 interface ProductDetailsProps {
   dataArrayStore: StoreType[]
@@ -26,7 +27,10 @@ export function ProductDetails({
   dataArrayStore,
   dataArrayCategory,
 }: ProductDetailsProps) {
-  const { setValue } = useFormContext()
+  const {
+    setValue,
+    formState: { errors },
+  } = useFormContext()
 
   return (
     <div className="flex flex-col gap-5">
@@ -49,13 +53,21 @@ export function ProductDetails({
           <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
             <InputComponent.root>
               <InputComponent.label label="Nome do Produto" htmlFor="product" />
-              <InputComponent.wrapper iconName="pencil">
+              <InputComponent.wrapper
+                iconName="pencil"
+                classNameWrapper={cn(errors.product && 'border-red-500')}
+              >
                 <InputComponent.inputBase
                   placeHolder="Camiseta Oversized"
                   id="product"
                   name="product"
                 />
               </InputComponent.wrapper>
+              {errors.product && (
+                <TextBase as="span" className="text-red-500 text-sm mt-1">
+                  {errors.product.message as string}
+                </TextBase>
+              )}
             </InputComponent.root>
           </div>
 
@@ -64,7 +76,10 @@ export function ProductDetails({
               <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
                 <InputComponent.root>
                   <InputComponent.label label="Loja" htmlFor="store" />
-                  <InputComponent.wrapper iconName="store">
+                  <InputComponent.wrapper
+                    iconName="store"
+                    classNameWrapper={cn(errors.store && 'border-red-500')}
+                  >
                     <InputComponent.inputSelectedBasic
                       id="store"
                       name="store"
@@ -80,13 +95,21 @@ export function ProductDetails({
                       }}
                     />
                   </InputComponent.wrapper>
+                  {errors.store && (
+                    <TextBase as="span" className="text-red-500 text-sm mt-1">
+                      {errors.store.message as string}
+                    </TextBase>
+                  )}
                 </InputComponent.root>
               </div>
 
               <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
                 <InputComponent.root>
                   <InputComponent.label label="Categoria" htmlFor="category" />
-                  <InputComponent.wrapper iconName="category">
+                  <InputComponent.wrapper
+                    iconName="category"
+                    classNameWrapper={cn(errors.category && 'border-red-500')}
+                  >
                     <InputComponent.inputSelectedGroup
                       id="category"
                       name="category"
@@ -106,13 +129,21 @@ export function ProductDetails({
                       }}
                     />
                   </InputComponent.wrapper>
+                  {errors.category && (
+                    <TextBase as="span" className="text-red-500 text-sm mt-1">
+                      {errors.category.message as string}
+                    </TextBase>
+                  )}
                 </InputComponent.root>
               </div>
 
               <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
                 <InputComponent.root>
                   <InputComponent.label label="Situação" htmlFor="status" />
-                  <InputComponent.wrapper iconName="shieldCheck">
+                  <InputComponent.wrapper
+                    iconName="shieldCheck"
+                    classNameWrapper={cn(errors.status && 'border-red-500')}
+                  >
                     <InputComponent.inputSelectedBasic
                       placeHolder="-"
                       id="status"
@@ -128,6 +159,11 @@ export function ProductDetails({
                       }}
                     />
                   </InputComponent.wrapper>
+                  {errors.status && (
+                    <TextBase as="span" className="text-red-500 text-sm mt-1">
+                      {errors.status.message as string}
+                    </TextBase>
+                  )}
                 </InputComponent.root>
               </div>
 

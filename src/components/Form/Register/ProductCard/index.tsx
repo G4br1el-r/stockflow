@@ -4,6 +4,8 @@ import { TextBase } from '@/components/TextBase'
 import { CirclePlus, Palette, Trash2 } from 'lucide-react'
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form'
 import { ProductSize } from '../ProductSize'
+import { cn } from '@/lib/utils'
+import { ProductFormData } from '@/@schema/Form/product-form.schema'
 
 interface ProductCardProps {
   dataArraySize: SizesType[]
@@ -44,14 +46,18 @@ const colorMap = [
 ]
 
 export function ProductCard({ dataArraySize }: ProductCardProps) {
-  const { control, setValue } = useFormContext()
+  const {
+    control,
+    setValue,
+    formState: { errors },
+  } = useFormContext<ProductFormData>()
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'variants',
   })
 
-  const allVariants: Variant[] =
+  const allVariants =
     useWatch({
       control,
       name: 'variants',
@@ -80,7 +86,6 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
   function removeCard(index: number) {
     remove(index)
   }
-
   return (
     <>
       <section className="extramd:grid extramd:grid-cols-2 extramd:w-fit extralg:grid-cols-3 xl:extramd:grid-cols-2 2xl:grid-cols-3 2xl:w-full h-fit gap-5 flex flex-col items-center w-full">
@@ -107,7 +112,7 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
                 }}
               >
                 <div
-                  className="w-9 h-9 rounded-full shrink-0 transition-all duration-500 group-hover/card:scale-110 group-focus-within/card:scale-110"
+                  className="w-9 h-9 bg-red-950 rounded-full shrink-0 transition-all duration-500 group-hover/card:scale-110 group-focus-within/card:scale-110"
                   style={{
                     backgroundColor: selectedColor || '#808080',
                   }}
@@ -119,6 +124,9 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
                     name={`variants.${index}.hexName`}
                     dataArray={getAvailableColors(index)}
                     placeHolder="Selecione uma cor"
+                    classNameWrapper={cn(
+                      errors.variants?.[index]?.hexName && 'text-red-500!',
+                    )}
                     onValueChange={(hexValue) => {
                       const colorData = colorMap.find(
                         (c) => c.value === hexValue,
@@ -151,7 +159,10 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
                   />
                   <InputComponent.wrapper
                     iconName="stock"
-                    classNameWrapper="w-1/2 rounded-sm flex-1 text-center"
+                    classNameWrapper={cn(
+                      'w-1/2 rounded-sm flex-1 text-center',
+                      errors.product && 'border-red-500',
+                    )}
                     classNameIcon="!text-gray-600"
                   >
                     <InputComponent.inputNumeric
@@ -160,6 +171,11 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
                       name={`variants.${index}.minimumStock`}
                     />
                   </InputComponent.wrapper>
+                  {errors.variants?.[index]?.minimumStock && (
+                    <TextBase as="span" className="text-red-500 text-sm mt-1">
+                      {errors.variants?.[index]?.minimumStock.message as string}
+                    </TextBase>
+                  )}
                 </InputComponent.root>
 
                 <div className="flex items-center justify-between">

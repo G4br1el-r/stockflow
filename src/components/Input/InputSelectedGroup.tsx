@@ -62,12 +62,12 @@ export function InputSelectedGroup({
             <Select.Content
               align="end"
               position="popper"
-              className="bg-gray-950 rounded-lg shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-gray-800 overflow-hidden max-h-70 z-50 animate-in fade-in-0 zoom-in-95 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
+              className="bg-modal-background rounded-lg shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-modal-border overflow-hidden max-h-70 z-50 animate-in fade-in-0 zoom-in-95 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
             >
               <Select.Viewport className="p-2">
                 {dataArray.map((group) => (
                   <Select.Group key={group.id} className="mb-2 last:mb-0">
-                    <Select.Label className="px-3 py-2 text-xs font-bold text-blue-neon/70 uppercase tracking-wider border-b border-gray-800/50 mb-1">
+                    <Select.Label className="px-3 py-2 text-xs font-bold text-blue-neon/70 uppercase tracking-wider border-b border-modal-border/50 mb-1">
                       {group.label}
                     </Select.Label>
                     {group.items.map((item, index) => (

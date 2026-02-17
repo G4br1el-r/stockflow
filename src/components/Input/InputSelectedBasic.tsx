@@ -67,7 +67,7 @@ export function InputSelectedBasic({
             <Select.Content
               align="end"
               position="popper"
-              className="bg-gray-950 rounded-lg shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-gray-800 overflow-hidden max-h-70 w-45 z-50 animate-in fade-in-0 zoom-in-95 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
+              className="bg-modal-background rounded-lg shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-modal-border overflow-hidden max-h-70 w-50 z-50 animate-in fade-in-0 zoom-in-95 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
             >
               <Select.Viewport className="p-2">
                 {dataArray.map((store, index) => (

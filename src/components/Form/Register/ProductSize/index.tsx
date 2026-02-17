@@ -3,6 +3,8 @@ import { InputComponent } from '@/components/Input'
 import { TextBase } from '@/components/TextBase'
 import { CirclePlus } from 'lucide-react'
 import { SizesType } from '@/@types/Form/Register/ProductDetailsForm/sizes.types'
+import { ProductFormData } from '@/@schema/Form/product-form.schema'
+import { cn } from '@/lib/utils'
 
 interface ProductSizeProps {
   variantIndex: number
@@ -20,7 +22,10 @@ export function ProductSize({
   selectedColor,
   dataArraySize,
 }: ProductSizeProps) {
-  const { control } = useFormContext()
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<ProductFormData>()
 
   const {
     fields: sizesFields,
@@ -31,7 +36,7 @@ export function ProductSize({
     name: `variants.${variantIndex}.sizes`,
   })
 
-  const selectedSizes: Size[] =
+  const selectedSizes =
     useWatch({
       control,
       name: `variants.${variantIndex}.sizes`,
@@ -79,6 +84,10 @@ export function ProductSize({
                   dataArray={getAvailableSizes(sizeIndex)}
                   placeHolder="-"
                   classNameArrow="h-3 w-3"
+                  classNameWrapper={cn(
+                    errors.variants?.[sizeIndex]?.sizes?.[sizeIndex]?.size &&
+                      'text-red-500!',
+                  )}
                 />
               </InputComponent.wrapper>
             </InputComponent.root>
@@ -92,7 +101,11 @@ export function ProductSize({
                 id={`quantity-${variantIndex}-${sizeIndex}`}
                 name={`variants.${variantIndex}.sizes.${sizeIndex}.quantity`}
                 placeHolder="-"
-                className="w-full h-13 border border-modal-border rounded-sm text-center shrink-0 transition-all duration-300"
+                className={cn(
+                  'w-full h-13 border border-modal-border rounded-sm text-center shrink-0 transition-all duration-300',
+                  errors.variants?.[sizeIndex]?.sizes?.[sizeIndex]?.quantity &&
+                    'border-red-500!',
+                )}
               />
             </InputComponent.root>
 
