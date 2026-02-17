@@ -1,14 +1,12 @@
-import { ProductFormData } from '@/@types/Form/Register/ProductDetailsForm/product-form.types'
 import { SectionHeader } from '@/components/SectionHeader'
 import { TextBase } from '@/components/TextBase'
 import { useProductFormData } from '@/hooks/useProductFormData'
 import { cn } from '@/lib/utils'
 import { Archive, Heart, RefreshCcw, TrendingUp } from 'lucide-react'
-import { useFormContext, useWatch } from 'react-hook-form'
 
 const sizeOrder = ['PP', 'P', 'M', 'G', 'GG', 'XG', 'XGG', 'EXGG']
 
-function sortSizes(sizes: Array<{ size: string; quantity: string }>) {
+function sortSizes(sizes: Array<{ size: string; quantity: string | number }>) {
   return [...sizes].sort((a, b) => {
     const indexA = sizeOrder.indexOf(a.size)
     const indexB = sizeOrder.indexOf(b.size)
@@ -33,11 +31,13 @@ export function ProductLivePreview() {
   const status = {
     Ativo: 'bg-green-neon/50 border-green-neon text-green-neon',
     Inativo: 'bg-red-neon/50 border-red-neon text-red-neon',
-  }
+  } as const
+
+  type StatusKey = keyof typeof status
 
   const statusClassName =
-    statusLabel && status[statusLabel]
-      ? status[statusLabel]
+    statusLabel && status[statusLabel as StatusKey]
+      ? status[statusLabel as StatusKey]
       : 'bg-gray-neon/50 border-gray-neon text-gray-neon'
 
   const validVariants =
@@ -46,21 +46,20 @@ export function ProductLivePreview() {
         variant.hexName && variant.sizes?.some((size) => size.size !== ''),
     ) || []
 
-  const formatPrice = (price: string) => {
+  function formatPrice(price: number) {
     if (!price) return 'R$ 0,00'
-    const numPrice = parseFloat(price)
+
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL',
-    }).format(numPrice)
+    }).format(price)
   }
 
-  const profit =
-    costPrice && salePrice ? parseFloat(salePrice) - parseFloat(costPrice) : 0
+  const profit = costPrice && salePrice ? salePrice - costPrice : 0
 
   const profitPercentage =
-    costPrice && salePrice && parseFloat(costPrice) > 0
-      ? ((profit / parseFloat(costPrice)) * 100).toFixed(1)
+    costPrice && salePrice && costPrice > 0
+      ? ((profit / costPrice) * 100).toFixed(1)
       : '0'
 
   const hasPricing = costPrice && salePrice
@@ -191,7 +190,7 @@ export function ProductLivePreview() {
                     return acc + (Number(cur.quantity) || 0)
                   }, 0) || 0
 
-                const sortedSizes = sortSizes(items.sizes || [])
+                const sortedSizes = sortSizes(items.sizes)
 
                 return (
                   <div key={items.hexName} className="flex flex-col gap-1">

@@ -1,6 +1,6 @@
 // hooks/useProductFormData.ts
+import { ProductFormData } from '@/@schema/Form/product-form.schema'
 import { useFormContext, useWatch } from 'react-hook-form'
-import { ProductFormData } from '@/@types/Form/Register/ProductDetailsForm/product-form.types'
 
 export function useProductFormData() {
   const { control } = useFormContext()

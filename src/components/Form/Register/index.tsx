@@ -49,14 +49,14 @@ export default function RegisterProductsForm({
       categoryLabel: '',
       status: '',
       statusLabel: '',
-      costPrice: '',
-      salePrice: '',
+      costPrice: undefined,
+      salePrice: undefined,
       variants: [
         {
           colorName: '',
           hexName: '',
-          minimumStock: '',
-          sizes: [{ size: '', quantity: '' }],
+          minimumStock: undefined,
+          sizes: [{ size: '', quantity: undefined }],
         },
       ],
     },

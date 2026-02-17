@@ -12,15 +12,9 @@ export const productRegisterSchema = z.object({
   status: z.string().min(1, 'Selecione um status'),
   statusLabel: z.string(),
 
-  costPrice: z.union([
-    z.string().min(1, 'Informe o preço de custo'),
-    z.number().positive('Preço deve ser maior que zero'),
-  ]),
+  costPrice: z.number().positive('Preço deve ser maior que zero'),
 
-  salePrice: z.union([
-    z.string().min(1, 'Informe o preço de venda'),
-    z.number().positive('Preço deve ser maior que zero'),
-  ]),
+  salePrice: z.number().min(1, 'Informe o preço de venda'),
 
   variants: z
     .array(
@@ -28,20 +22,14 @@ export const productRegisterSchema = z.object({
         colorName: z.string(),
         hexName: z.string().min(1, 'Selecione uma cor'),
 
-        minimumStock: z.union([
-          z.string().min(1, 'Informe o estoque mínimo'),
-          z.number().min(1, 'Informe o estoque mínimo'),
-        ]),
+        minimumStock: z.number().min(1, 'Informe o estoque mínimo'),
 
         sizes: z
           .array(
             z.object({
               size: z.string().min(1, 'Selecione um tamanho'),
 
-              quantity: z.union([
-                z.string().min(1, 'Informe a quantidade'),
-                z.number().min(0, 'Informe a quantidade'),
-              ]),
+              quantity: z.number().min(0, 'Informe a quantidade'),
             }),
           )
           .min(1, 'Adicione pelo menos um tamanho'),
