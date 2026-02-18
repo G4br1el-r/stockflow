@@ -1,12 +1,18 @@
+'use client'
+
 import { SectionHeader } from '@/components/SectionHeader'
 import { TextBase } from '@/components/TextBase'
 import { useProductFormData } from '@/hooks/useProductFormData'
 import { cn } from '@/lib/utils'
 import { Archive, Heart, RefreshCcw, TrendingUp } from 'lucide-react'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { useFormContext, useWatch } from 'react-hook-form'
+import { ProductFormData } from '@/@schema/Form/product-form.schema'
 
 const sizeOrder = ['PP', 'P', 'M', 'G', 'GG', 'XG', 'XGG', 'EXGG']
 
-function sortSizes(sizes: Array<{ size: string; quantity: string | number }>) {
+function sortSizes<T extends { size: string }>(sizes: T[]) {
   return [...sizes].sort((a, b) => {
     const indexA = sizeOrder.indexOf(a.size)
     const indexB = sizeOrder.indexOf(b.size)
@@ -28,9 +34,27 @@ export function ProductLivePreview() {
     salePrice,
   } = useProductFormData()
 
+  // ✅ pega o File da imagem direto do RHF
+  const { control } = useFormContext<ProductFormData>()
+  const imageFile = useWatch({ control, name: 'image' })
+
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!imageFile) {
+      setImagePreviewUrl(null)
+      return
+    }
+
+    const url = URL.createObjectURL(imageFile)
+    setImagePreviewUrl(url)
+
+    return () => URL.revokeObjectURL(url)
+  }, [imageFile])
+
   const status = {
-    Ativo: 'bg-green-neon/50 border-green-neon text-green-neon',
-    Inativo: 'bg-red-neon/50 border-red-neon text-red-neon',
+    Ativo: 'bg-green-neon/80 border-green-neon text-title-page',
+    Inativo: 'bg-red-neon/80 border-red-neon text-title-page',
   } as const
 
   type StatusKey = keyof typeof status
@@ -38,7 +62,7 @@ export function ProductLivePreview() {
   const statusClassName =
     statusLabel && status[statusLabel as StatusKey]
       ? status[statusLabel as StatusKey]
-      : 'bg-gray-neon/50 border-gray-neon text-gray-neon'
+      : 'bg-gray-neon/80 border-gray-neon text-title-page'
 
   const validVariants =
     variants?.filter(
@@ -81,12 +105,23 @@ export function ProductLivePreview() {
       </div>
 
       <section className="w-full h-fit border rounded-lg shrink-0 flex flex-col transition-all duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:border-gray-700 overflow-hidden">
-        <div className="w-full h-60 rounded-t-lg bg-gray-100/5 flex-center relative group/image transition-colors duration-300 hover:bg-gray-100/10 shrink-0">
-          <Archive className="w-10 h-10 text-gray-600 transition-all duration-300 group-hover/image:scale-110 group-hover/image:text-gray-500" />
+        <div className="w-full h-60 rounded-t-lg bg-gray-100/5 flex-center relative group/image transition-colors duration-300 hover:bg-gray-100/10 shrink-0 overflow-hidden">
+          {imagePreviewUrl ? (
+            <Image
+              src={imagePreviewUrl}
+              alt="Imagem do produto"
+              fill
+              className="object-cover"
+              priority={false}
+            />
+          ) : (
+            <Archive className="w-10 h-10 text-gray-600 transition-all duration-300 group-hover/image:scale-110 group-hover/image:text-gray-500" />
+          )}
+
           <TextBase
             as="span"
             className={cn(
-              'text-[0.7em] font-bold px-2 py-0.5 border rounded-lg absolute top-2 right-2',
+              'text-[0.7em] font-bold px-2 py-0.5 border rounded-lg absolute top-2 right-2 z-10',
               statusClassName,
             )}
           >

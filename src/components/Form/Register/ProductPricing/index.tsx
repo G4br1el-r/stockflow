@@ -1,15 +1,16 @@
+import { ProductFormData } from '@/@schema/Form/product-form.schema'
 import { InputComponent } from '@/components/Input'
 import { SectionHeader } from '@/components/SectionHeader'
 import { TextBase } from '@/components/TextBase'
 import { useProductFormData } from '@/hooks/useProductFormData'
 import { cn } from '@/lib/utils'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, useFormState } from 'react-hook-form'
 
 export function ProductPricing() {
   const { costPrice, salePrice } = useProductFormData()
-  const {
-    formState: { errors },
-  } = useFormContext()
+
+  const { control } = useFormContext<ProductFormData>()
+  const { errors } = useFormState({ control })
 
   const profit = costPrice && salePrice ? salePrice - costPrice : 0
 
@@ -48,10 +49,7 @@ export function ProductPricing() {
           <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
             <InputComponent.root>
               <InputComponent.label label="Preço Custo" htmlFor="costPrice" />
-              <InputComponent.wrapper
-                iconName="bankNoteArrowDown"
-                classNameWrapper={cn(errors.costPrice && 'border-red-500')}
-              >
+              <InputComponent.wrapper iconName="bankNoteArrowDown">
                 <InputComponent.inputMoney id="costPrice" name="costPrice" />
               </InputComponent.wrapper>
               {errors.costPrice && (
@@ -65,10 +63,7 @@ export function ProductPricing() {
           <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
             <InputComponent.root>
               <InputComponent.label label="Preço Venda" htmlFor="salePrice" />
-              <InputComponent.wrapper
-                iconName="banknoteArrowUp"
-                classNameWrapper={cn(errors.costPrice && 'border-red-500')}
-              >
+              <InputComponent.wrapper iconName="banknoteArrowUp">
                 <InputComponent.inputMoney id="salePrice" name="salePrice" />
               </InputComponent.wrapper>
               {errors.salePrice && (

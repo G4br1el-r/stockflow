@@ -1,8 +1,14 @@
+'use client'
 import { SizesType } from '@/@types/Form/Register/ProductDetailsForm/sizes.types'
 import { InputComponent } from '@/components/Input'
 import { TextBase } from '@/components/TextBase'
 import { Palette, Trash2 } from 'lucide-react'
-import { useFieldArray, useFormContext, useWatch } from 'react-hook-form'
+import {
+  useFieldArray,
+  useFormContext,
+  useFormState,
+  useWatch,
+} from 'react-hook-form'
 import { ProductSize } from '../ProductSize'
 import { cn } from '@/lib/utils'
 import { ProductFormData } from '@/@schema/Form/product-form.schema'
@@ -46,11 +52,8 @@ const colorMap = [
 ]
 
 export function ProductCard({ dataArraySize }: ProductCardProps) {
-  const {
-    control,
-    setValue,
-    formState: { errors },
-  } = useFormContext<ProductFormData>()
+  const { control, setValue } = useFormContext<ProductFormData>()
+  const { errors } = useFormState({ control })
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -78,8 +81,8 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
     append({
       colorName: '',
       hexName: '',
-      minimumStock: 0,
-      sizes: [{ size: '', quantity: 0 }],
+      minimumStock: undefined,
+      sizes: [{ size: '', quantity: undefined }],
     })
   }
 
@@ -160,10 +163,7 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
                   />
                   <InputComponent.wrapper
                     iconName="stock"
-                    classNameWrapper={cn(
-                      'w-1/2 rounded-sm flex-1 text-center',
-                      errors.product && 'border-red-500',
-                    )}
+                    classNameWrapper="w-1/2 rounded-sm flex-1 text-center"
                     classNameIcon="!text-gray-600"
                   >
                     <InputComponent.inputNumeric

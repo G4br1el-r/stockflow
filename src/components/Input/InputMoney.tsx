@@ -19,7 +19,7 @@ export function InputMoney({ id, name, readOnly }: InputMoneyProps) {
       render={({ field }) => (
         <NumericFormat
           id={id}
-          value={field.value}
+          value={field.value ?? ''}
           className={cn(
             'w-full h-full focus:outline-none placeholder:text-input-placeholder',
             readOnly && 'cursor-not-allowed',
@@ -36,7 +36,7 @@ export function InputMoney({ id, name, readOnly }: InputMoneyProps) {
           inputMode="decimal"
           enterKeyHint="next"
           onValueChange={(values) => {
-            field.onChange(values.floatValue)
+            field.onChange(values.floatValue ?? undefined)
           }}
         />
       )}

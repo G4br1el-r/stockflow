@@ -39,10 +39,11 @@ export default function RegisterProductsForm({
 
   const methodsProduct = useForm<ProductFormData>({
     resolver: zodResolver(productRegisterSchema),
-    mode: 'onTouched',
+    mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: {
       product: '',
+      image: undefined,
       store: '',
       storeLabel: '',
       category: '',
@@ -70,14 +71,9 @@ export default function RegisterProductsForm({
   }
 
   async function handleFormError(data: FieldErrors<ProductFormData>) {
-    const isValid = await methodsProduct.trigger()
     console.log(data)
-
-    if (!isValid) {
-      toast.error('Ops! Alguns campos precisam de atenção antes de salvar.')
-
-      setIsDialogOpen(false)
-    }
+    toast.error('Ops! Alguns campos precisam de atenção antes de salvar.')
+    setIsDialogOpen(false)
   }
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: scroll reset intencional na mudança de breakpoint

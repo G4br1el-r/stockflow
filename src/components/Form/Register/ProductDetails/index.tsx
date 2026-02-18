@@ -4,8 +4,8 @@ import { InputComponent } from '@/components/Input'
 import { InputImage } from '@/components/Input/InputImage'
 import { SectionHeader } from '@/components/SectionHeader'
 import { TextBase } from '@/components/TextBase'
-import { useFormContext } from 'react-hook-form'
-import { cn } from '@/lib/utils'
+import { useFormContext, useFormState } from 'react-hook-form'
+import { ProductFormData } from '@/@schema/Form/product-form.schema'
 
 interface ProductDetailsProps {
   dataArrayStore: StoreType[]
@@ -27,10 +27,8 @@ export function ProductDetails({
   dataArrayStore,
   dataArrayCategory,
 }: ProductDetailsProps) {
-  const {
-    setValue,
-    formState: { errors },
-  } = useFormContext()
+  const { control, setValue } = useFormContext<ProductFormData>()
+  const { errors } = useFormState({ control })
 
   return (
     <div className="flex flex-col gap-5">
@@ -53,16 +51,14 @@ export function ProductDetails({
           <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
             <InputComponent.root>
               <InputComponent.label label="Nome do Produto" htmlFor="product" />
-              <InputComponent.wrapper
-                iconName="pencil"
-                classNameWrapper={cn(errors.product && 'border-red-500')}
-              >
+              <InputComponent.wrapper iconName="pencil">
                 <InputComponent.inputBase
                   placeHolder="Camiseta Oversized"
                   id="product"
                   name="product"
                 />
               </InputComponent.wrapper>
+
               {errors.product && (
                 <TextBase as="span" className="text-red-500 text-sm mt-1">
                   {errors.product.message as string}
@@ -76,10 +72,7 @@ export function ProductDetails({
               <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
                 <InputComponent.root>
                   <InputComponent.label label="Loja" htmlFor="store" />
-                  <InputComponent.wrapper
-                    iconName="store"
-                    classNameWrapper={cn(errors.store && 'border-red-500')}
-                  >
+                  <InputComponent.wrapper iconName="store">
                     <InputComponent.inputSelectedBasic
                       id="store"
                       name="store"
@@ -106,10 +99,7 @@ export function ProductDetails({
               <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
                 <InputComponent.root>
                   <InputComponent.label label="Categoria" htmlFor="category" />
-                  <InputComponent.wrapper
-                    iconName="category"
-                    classNameWrapper={cn(errors.category && 'border-red-500')}
-                  >
+                  <InputComponent.wrapper iconName="category">
                     <InputComponent.inputSelectedGroup
                       id="category"
                       name="category"
@@ -140,10 +130,7 @@ export function ProductDetails({
               <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
                 <InputComponent.root>
                   <InputComponent.label label="Situação" htmlFor="status" />
-                  <InputComponent.wrapper
-                    iconName="shieldCheck"
-                    classNameWrapper={cn(errors.status && 'border-red-500')}
-                  >
+                  <InputComponent.wrapper iconName="shieldCheck">
                     <InputComponent.inputSelectedBasic
                       placeHolder="-"
                       id="status"
