@@ -6,7 +6,6 @@ import { Box, Star } from 'lucide-react'
 import Image from 'next/image'
 
 export default function SignIn() {
-  console.log('teste')
   return (
     <main className="bg-main w-screen min-h-dvh h-full flex flex-col items-center p-4 relative overflow-hidden">
       <div

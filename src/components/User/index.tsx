@@ -4,8 +4,20 @@ import * as Tooltip from '@radix-ui/react-tooltip'
 import { DoorOpen } from 'lucide-react'
 import Image from 'next/image'
 import { TextBase } from '../TextBase'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 export function User() {
+  const router = useRouter()
+
+  async function handleLogout() {
+    await fetch('/api/auth/logout', { method: 'POST' })
+    toast.info('Até logo! 👋', {
+      onClose: () => router.push('/'),
+      autoClose: 1000,
+    })
+  }
+
   return (
     <div className="flex gap-2 group/user items-center lg:h-11 lg:pl-1.25 lg:pr-3 bg-background-hover border border-border-default p-3 rounded-lg justify-between overflow-hidden transition-all duration-300 hover:bg-background-modal hover:border-border-hover">
       <div className="flex gap-2">
@@ -33,7 +45,11 @@ export function User() {
         <Tooltip.Provider delayDuration={500}>
           <Tooltip.Root>
             <Tooltip.Trigger asChild>
-              <button type="button" className="IconButton group/logout">
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="IconButton group/logout"
+              >
                 <DoorOpen className="w-5 h-5 text-icon-not-activate transition-all duration-300 cursor-pointer hover:text-red-400 hover:scale-110 active:text-red-400 active:scale-95 active:duration-100" />
               </button>
             </Tooltip.Trigger>

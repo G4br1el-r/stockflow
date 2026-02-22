@@ -8,6 +8,7 @@ import {
   LoginRegisterSchema,
 } from '@/@schema/Login/login-form.schema'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 export function LoginForm() {
   const methodsLogin = useForm<LoginFormData>({
@@ -21,11 +22,27 @@ export function LoginForm() {
     },
   })
 
-  function handleFormSubmit(data: LoginFormData) {
-    console.log(data)
+  const router = useRouter()
+
+  async function handleFormSubmit(data: LoginFormData) {
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: data.email, password: data.password }),
+    })
+
+    if (!response.ok) {
+      const error = await response.json()
+      return toast.error(error.error)
+    }
+
+    const { name } = await response.json()
+
     methodsLogin.reset()
-    toast.success('Login realizado com sucesso!')
-    console.log('aqui')
+    toast.success(`Bem-vindo(a) ${name}`, {
+      onClose: () => router.push('/cadastro'),
+      autoClose: 1000,
+    })
   }
 
   function handleFormError(data: FieldErrors<LoginFormData>) {
