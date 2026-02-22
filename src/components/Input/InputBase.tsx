@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { useFormContext, Controller } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 
 interface InputBaseWrapper {
   id: string

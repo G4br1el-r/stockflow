@@ -79,7 +79,7 @@ export function InputImage() {
       {!preview ? (
         <div
           {...getRootProps()}
-          className={`flex flex-col extramd:w-70.5 md:w-90 items-center justify-center w-full h-full extramd:h-full border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
+          className={`flex flex-col extramd:w-70.5 md:w-90 items-center justify-center w-full h-73 xl:h-full extramd:h-full border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
             isDragActive
               ? 'border-blue-neon'
               : 'text-gray-300/40 hover:border-blue-neon'

@@ -22,7 +22,7 @@ export function InputLabel({
           'font-bold transition-colors duration-300',
           readOnly
             ? 'text-gray-500'
-            : 'group-focus-within:text-blue-neon text-label-input',
+            : 'group-focus-within:text-blue-neon dark:text-gray-300 text-gray-700',
           classNameLabel,
         )}
       >

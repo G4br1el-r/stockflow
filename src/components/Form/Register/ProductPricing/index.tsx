@@ -36,10 +36,7 @@ export function ProductPricing() {
           classNameIcon="text-green-neon"
           iconName="banknote"
         />
-        <TextBase
-          as="span"
-          className="font-bold text-[1.2rem] text-title-section"
-        >
+        <TextBase as="span" className="font-bold text-[1.2rem]">
           Financeiro e Preficiação
         </TextBase>
       </div>

@@ -103,20 +103,20 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
           return (
             <div
               key={field.id}
-              className="w-full h-fit extramd:h-full bg-modal-background border-2 rounded-2xl flex flex-col 2xl:max-w-full relative overflow-hidden group/card transition-all duration-500 hover:-translate-y-1 focus-within:-translate-y-1"
+              className="w-full h-fit extramd:h-full bg-modal-background border-2 rounded-2xl flex flex-col 2xl:max-w-full relative overflow-hidden group/card transition-all duration-500 "
               style={{
-                borderColor: selectedColor ? `${selectedColor}33` : '#80808033',
+                borderColor: selectedColor ? `${selectedColor}55` : '#80808033',
               }}
             >
               <div
                 className="w-full h-20 p-3 flex items-center justify-between rounded-t-2xl border-b-2 gap-5 relative z-10 transition-colors duration-500"
                 style={{
-                  backgroundColor: `${selectedColor || '#808080'}0D`,
-                  borderBottomColor: `${selectedColor || '#808080'}33`,
+                  backgroundColor: `${selectedColor || ''}0D`,
+                  borderBottomColor: `${selectedColor || ''}33`,
                 }}
               >
                 <div
-                  className="w-9 h-9 bg-red-950 rounded-full shrink-0 transition-all duration-500 group-hover/card:scale-110 group-focus-within/card:scale-110"
+                  className="w-9 h-9 bg-red-950 rounded-full shrink-0 transition-all duration-500 "
                   style={{
                     backgroundColor: selectedColor || '#808080',
                   }}
@@ -129,6 +129,7 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
                     dataArray={getAvailableColors(index)}
                     placeHolder="Selecione uma cor"
                     classNameWrapper={cn(
+                      'bg-sidebar',
                       errors.variants?.[index]?.hexName && 'text-red-500!',
                     )}
                     onValueChange={(hexValue) => {
@@ -223,7 +224,7 @@ export function ProductCard({ dataArraySize }: ProductCardProps) {
         type="button"
         tabIndex={0}
         onClick={AddNewCard}
-        className="w-full active:scale-95 h-15 shrink-0 cursor-pointer rounded-lg bg-input-background border-2 border-dashed border-input-border flex-center gap-3 transition-all duration-500 hover:border-blue-neon/50 focus:border-dashed focus:border-blue-neon hover:bg-input-background/50 hover:-translate-y-0.5 focus:outline-none focus:ring-blue-neon/50 focus:bg-input-background/50 focus:-translate-y-0.5 group/new relative overflow-hidden"
+        className="w-full active:scale-95 h-15 shrink-0 cursor-pointer rounded-lg bg-sidebar border-2 border-dashed border-input-border flex-center gap-3 transition-all duration-500 hover:border-blue-neon/50 focus:border-dashed focus:border-blue-neon hover:bg-input-background/50 hover:-translate-y-0.5 focus:outline-none focus:ring-blue-neon/50 focus:bg-input-background/50 focus:-translate-y-0.5 group/new relative overflow-hidden"
       >
         <Palette className="w-5 h-5 text-gray-600 transition-all duration-500 group-hover/new:text-blue-neon group-hover/new:scale-110 group-hover/new:rotate-12 group-focus/new:text-blue-neon group-focus/new:scale-110 group-focus/new:rotate-12 relative z-10" />
         <TextBase

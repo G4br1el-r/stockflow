@@ -4,7 +4,7 @@ import '@/app/globals.css'
 import { SidebarDesktop } from '@/components/Sidebar'
 import { ProvidersSwitchDarkAndLight } from '@/providers/ProviderSwitchDarkAndLight'
 import { Header } from '@/components/Header'
-import { Toaster } from 'react-hot-toast'
+import { ToastProvider } from '@/components/ToastProvider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -31,8 +31,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-dvh h-dvh antialiased bg-main xl:overflow-hidden`}
       >
-        <Toaster />
         <ProvidersSwitchDarkAndLight>
+          <ToastProvider />
           <section className="grid w-full grid-cols-[auto_1fr] grid-rows-[auto_1fr] min-h-screen">
             <section className="col-start-1 col-end-2 row-start-1 row-end-3 hidden xl:block">
               <SidebarDesktop />

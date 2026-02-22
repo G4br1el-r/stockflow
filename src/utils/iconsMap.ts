@@ -19,9 +19,13 @@ import {
   PiggyBank,
   Shirt,
   ShieldCheck,
+  Mail,
+  LockKeyhole,
 } from 'lucide-react'
 
 export const iconMap = {
+  lockKeyhole: LockKeyhole,
+  mail: Mail,
   scanText: ScanText,
   pencil: Pencil,
   store: Store,

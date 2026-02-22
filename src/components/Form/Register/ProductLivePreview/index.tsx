@@ -96,10 +96,7 @@ export function ProductLivePreview() {
           classNameIcon="text-blue-neon"
           iconName="eye"
         />
-        <TextBase
-          as="span"
-          className="font-bold text-[1.2rem] text-title-section"
-        >
+        <TextBase as="span" className="font-bold text-[1.2rem]">
           Pré-visualização
         </TextBase>
       </div>

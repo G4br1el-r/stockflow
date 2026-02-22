@@ -43,7 +43,7 @@ function SidebarContent({
   const isDarkTheme = theme === 'dark'
 
   return (
-    <div className="flex flex-col h-full overflow-hidden backdrop-blur-md bg-sidebar-lateral-background/90">
+    <div className="flex flex-col h-full overflow-hidden backdrop-blur-lg bg-sidebar">
       <div className="flex items-center h-17 justify-between px-3 py-4 gap-2">
         <div className="relative flex items-center h-9 group/logo">
           <div className="relative w-11 h-full shrink-0 z-10 transition-all duration-300 group-hover/logo:scale-110">
@@ -134,7 +134,7 @@ export function SidebarDesktop() {
   return (
     <aside
       className={cn(
-        'hidden lg:flex lg:sticky flex-col xl:border-r-2 xl:border-sidebar-lateral-border bg-sidebar-lateral-background left-0 top-0 h-screen transition-all duration-500',
+        'hidden lg:flex lg:sticky flex-col xl:border-r-2 xl:border-sidebar-lateral-border bg-sidebar left-0 top-0 h-screen transition-all duration-500',
         hovered ? 'w-64' : 'w-17',
       )}
       onMouseEnter={() => setHovered(true)}
@@ -166,7 +166,7 @@ export function SidebarMobile({
       {mobileOpen && (
         <button
           type="button"
-          className="fixed inset-0 bg-sidebar-lateral-background backdrop-blur-lg z-40"
+          className="fixed inset-0 bg-sidebar backdrop-blur-lg z-40"
           onClick={() => setMobileOpen(false)}
           aria-label="Fechar menu"
         />
@@ -174,7 +174,7 @@ export function SidebarMobile({
 
       <aside
         className={cn(
-          'fixed left-0 top-0 h-dvh w-64 z-50 shadow-xl transition-transform duration-300 ease-in-out border-r border-border-subtle',
+          'fixed left-0 top-0 h-dvh w-64 z-50 shadow-xl transition-transform duration-300 ease-in-out border-r border-sidebar-lateral-border',
           mobileOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >

@@ -38,15 +38,12 @@ export function ProductDetails({
           classNameIcon="text-blue-neon"
           iconName="filePlus"
         />
-        <TextBase
-          as="span"
-          className="font-bold text-[1.2rem] text-title-section"
-        >
+        <TextBase as="span" className="font-bold text-[1.2rem]">
           Informações Gerais
         </TextBase>
       </div>
 
-      <section className="flex flex-col gap-5">
+      <section className="flex flex-col gap-5 ">
         <div className="flex flex-col gap-5 extralg:order-2">
           <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
             <InputComponent.root>

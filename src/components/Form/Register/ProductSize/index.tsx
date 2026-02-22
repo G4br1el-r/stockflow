@@ -57,7 +57,6 @@ export function ProductSize({
     <div className="w-full h-full flex-center">
       <div className="w-full h-full grid grid-cols-3 gap-3">
         {sizesFields.map((sizeField, sizeIndex) => {
-          // ✅ índices corretos: variants[variantIndex] e sizes[sizeIndex]
           const sizeError =
             errors.variants?.[variantIndex]?.sizes?.[sizeIndex]?.size
           const quantityError =
@@ -66,7 +65,7 @@ export function ProductSize({
           return (
             <div
               key={sizeField.id}
-              className="w-full h-35 bg-input-background rounded-lg flex flex-col justify-between items-center px-3 pb-3 pt-5.5 gap-1.5 group/size transition-all duration-300 focus-within:-translate-y-0.5 hover:-translate-y-0.5 relative overflow-hidden"
+              className="w-full h-35 bg-sidebar rounded-lg flex flex-col justify-between items-center px-3 pb-3 pt-5.5 gap-1.5 group/size transition-all duration-300 focus-within:-translate-y-0.5 hover:-translate-y-0.5 relative overflow-hidden"
               style={{
                 border: `1px solid ${selectedColor || '#808080'}33`,
               }}
@@ -93,7 +92,10 @@ export function ProductSize({
                     dataArray={getAvailableSizes(sizeIndex)}
                     placeHolder="-"
                     classNameArrow="h-3 w-3"
-                    classNameWrapper={cn(sizeError && 'text-red-500!')}
+                    classNameWrapper={cn(
+                      'bg-sidebar',
+                      sizeError && 'text-red-500!',
+                    )}
                   />
                 </InputComponent.wrapper>
               </InputComponent.root>
@@ -138,7 +140,7 @@ export function ProductSize({
           <button
             type="button"
             onClick={() => addSize({ size: '', quantity: undefined as any })}
-            className="w-full h-35 bg-input-background cursor-pointer rounded-lg flex flex-col justify-center items-center p-3 gap-1.5 border-dashed border-2 transition-all duration-300 hover:bg-input-background/50 hover:-translate-y-1 group/add relative overflow-hidden"
+            className="w-full h-35 bg-sidebar cursor-pointer rounded-lg flex flex-col justify-center items-center p-3 gap-1.5 border-dashed border-2 transition-all duration-300 hover:bg-sidebar/50 hover:-translate-y-1 group/add relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-white/0 group-hover/add:bg-white/2 rounded-lg transition-all duration-500" />
 

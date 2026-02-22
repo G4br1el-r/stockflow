@@ -16,11 +16,11 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 import { ProductSidebarPreview } from './ProductSidebarPreview'
 import { FieldErrors, FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import toast from 'react-hot-toast'
 import {
   ProductFormData,
   productRegisterSchema,
 } from '@/@schema/Form/product-form.schema'
+import { toast } from 'react-toastify'
 
 interface RegisterProductsFormProps {
   dataArrayCategory: CategoryTypes[]
@@ -66,13 +66,13 @@ export default function RegisterProductsForm({
   function handleFormSubmit(data: ProductFormData) {
     console.log(data)
     methodsProduct.reset()
-    setIsDialogOpen(false)
     toast.success(`${data.product} cadastrado com sucesso!`)
+    setIsDialogOpen(false)
   }
 
-  async function handleFormError(data: FieldErrors<ProductFormData>) {
+  function handleFormError(data: FieldErrors<ProductFormData>) {
     console.log(data)
-    toast.error('Ops! Alguns campos precisam de atenção antes de salvar.')
+    toast.error('Ops! Parece que alguns campos precisam de atenção.')
     setIsDialogOpen(false)
   }
 
@@ -102,11 +102,11 @@ export default function RegisterProductsForm({
               handleFormError,
             )}
             ref={formRef}
-            className="custom-scrollbar flex pb-5 flex-col gap-10 w-full xl:h-[calc(100vh-109.6px)] xl:overflow-y-auto xl:py-15 xl:px-20"
+            className="custom-scrollbar flex pb-5 flex-col gap-10 w-full xl:h-[calc(100vh-109.6px)] xl:overflow-y-auto xl:py-15 xl:px-40"
           >
             <TextBase
               as="span"
-              className="text-[1.2rem] font-semibold hidden xl:block w-3/4 text-gray-600"
+              className="text-[1.2rem] font-semibold hidden xl:block w-3/4 text-gray-neon"
             >
               Cadastre seus produtos de forma prática e rápida. Preencha as
               informações essenciais e organize seu catálogo em minutos

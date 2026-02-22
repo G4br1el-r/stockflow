@@ -45,12 +45,12 @@ export function Header() {
         data-visible="true"
         className="fixed z-20 w-full data-[visible=true]:translate-y-0 data-[visible=false]:-translate-y-20 xl:hidden transition-all duration-500 ease-in-out"
       >
-        <div className="px-4 backdrop-blur-lg bg-sidebar-lateral-background flex items-center justify-center h-17">
+        <div className="px-4 backdrop-blur-md bg-sidebar flex items-center justify-center h-17">
           <div className="flex items-center w-full h-full justify-between">
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
-              className="p-1 bg-sidebar-lateral-background backdrop-blur-sm rounded-sm"
+              className="p-1 bg-sidebar backdrop-blur-sm rounded-sm"
             >
               <Menu className="h-7 w-7 " />
             </button>
