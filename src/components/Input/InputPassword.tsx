@@ -8,6 +8,7 @@ interface InputPasswordWrapper {
   name: string
   className?: string
   placeHolder?: string
+  disable?: boolean
 }
 
 export function InputPassword({
@@ -15,6 +16,7 @@ export function InputPassword({
   name,
   className,
   placeHolder,
+  disable,
 }: InputPasswordWrapper) {
   const { control } = useFormContext()
   const [show, setShow] = useState(false)
@@ -30,8 +32,9 @@ export function InputPassword({
             id={id}
             type={show ? 'text' : 'password'}
             placeholder={placeHolder}
+            disabled={disable}
             className={cn(
-              'w-full h-full placeholder:text-input-placeholder focus:outline-none flex',
+              'w-full h-full placeholder:text-input-placeholder disabled:cursor-auto focus:outline-none flex',
               className,
             )}
           />
@@ -39,7 +42,8 @@ export function InputPassword({
       />
       <button
         type="button"
-        className="focus:outline-none"
+        disabled={disable}
+        className="focus:outline-none cursor-pointer disabled:cursor-auto"
         onClick={() => setShow((prev) => !prev)}
       >
         {show ? (

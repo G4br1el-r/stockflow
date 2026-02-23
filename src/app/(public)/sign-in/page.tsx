@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 export default function SignIn() {
   return (
-    <main className="bg-main w-screen min-h-dvh h-full flex flex-col items-center p-4 relative overflow-hidden">
+    <main className="bg-main w-screen min-h-dvh h-full flex flex-col items-center p-4 relative overflow-x-hidden overflow-y-auto">
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 -left-40 w-150 h-150 rounded-full bg-blue-neon/5 blur-[120px]"
@@ -17,8 +17,8 @@ export default function SignIn() {
         className="pointer-events-none absolute bottom-0 right-0 w-125 h-125 rounded-full bg-blue-neon/4 blur-[100px]"
       />
 
-      <section className="relative z-10 justify-between items-center flex flex-col xl:grid! xl:grid-cols-2! w-full h-full">
-        <div className="w-55 h-15 min-h-15 mx-auto relative xl:col-span-2 xl:self-start">
+      <section className="relative z-10 justify-between items-center flex flex-col xl:grid! xl:grid-cols-2! w-full flex-1 gap-6 xl:gap-0">
+        <div className="w-55 h-15 min-h-15 mx-auto relative xl:col-span-2 xl:self-start shrink-0">
           <PrismLogoClient />
         </div>
 
@@ -61,7 +61,7 @@ export default function SignIn() {
           </TextBase>
         </div>
 
-        <section className="w-full 3xl:h-full! transition-all duration-300 flex flex-col gap-6 max-w-100 xl:justify-self-center xl:justify-around xl:py-20 xl:h-140 xl:rounded-3xl xl:max-w-170 3xl:max-w-200 xl:px-10 xl:gap-15 xl:bg-linear-to-b xl:from-modal-background/3 xl:to-transparent xl:backdrop-blur-xl relative overflow-hidden">
+        <section className="w-full 3xl:h-full! p-2 transition-all duration-300 flex flex-col gap-6 max-w-120 xl:justify-self-center xl:justify-around xl:py-20 xl:h-140 xl:rounded-3xl xl:max-w-170 3xl:max-w-200 xl:px-10 xl:gap-15 xl:bg-linear-to-b xl:from-modal-background/3 xl:to-transparent xl:backdrop-blur-xl relative overflow-hidden shrink-0">
           <div
             aria-hidden
             className="hidden xl:block absolute top-0 left-8 right-8 h-px bg-linear-to-r from-transparent via-white/20 to-transparent"
@@ -86,7 +86,7 @@ export default function SignIn() {
           <LoginForm />
         </section>
 
-        <div className="w-full xl:pl-20 flex flex-col items-center max-w-100 3xl:max-w-130 gap-3 xl:self-start xl:max-w-120">
+        <div className="w-full xl:pl-20 flex flex-col items-center max-w-120 3xl:max-w-130 p-2 gap-3 xl:self-start xl:max-w-120 shrink-0 xl:mt-0">
           <div className="flex w-full justify-between items-center">
             <TextBase
               as="span"

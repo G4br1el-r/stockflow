@@ -1,16 +1,26 @@
 import { LoginFormData } from '@/@schema/Login/login-form.schema'
 import { InputComponent } from '@/components/Input'
 import { TextBase } from '@/components/TextBase'
-import { ArrowRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { ArrowRight, Loader } from 'lucide-react'
 import { useFormContext, useFormState } from 'react-hook-form'
 
-export function LoginInputs() {
+interface LoginInputsProsp {
+  isPending: boolean
+}
+
+export function LoginInputs({ isPending }: LoginInputsProsp) {
   const { control } = useFormContext<LoginFormData>()
   const { errors } = useFormState({ control })
 
   return (
     <>
-      <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
+      <div
+        className={cn(
+          'group/input transition-all duration-300',
+          !isPending && 'hover:-translate-y-0.5 focus-within:-translate-y-0.5',
+        )}
+      >
         <InputComponent.root>
           <InputComponent.label
             label="E-mail corporativo"
@@ -22,6 +32,7 @@ export function LoginInputs() {
               placeHolder="nome@empresa.com"
               id="email"
               name="email"
+              disable={isPending}
             />
           </InputComponent.wrapper>
 
@@ -35,7 +46,12 @@ export function LoginInputs() {
         </InputComponent.root>
       </div>
 
-      <div className="group/input transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
+      <div
+        className={cn(
+          'group/input transition-all duration-300',
+          !isPending && 'hover:-translate-y-0.5 focus-within:-translate-y-0.5',
+        )}
+      >
         <InputComponent.root>
           <div className="flex items-center justify-between">
             <InputComponent.label
@@ -55,6 +71,7 @@ export function LoginInputs() {
               placeHolder="*********"
               id="password"
               name="password"
+              disable={isPending}
             />
           </InputComponent.wrapper>
 
@@ -70,12 +87,17 @@ export function LoginInputs() {
 
       <button
         type="submit"
-        className="w-full h-12 cursor-pointer bg-blue-neon flex-center rounded-lg gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-neon/70 focus:ring-offset-2 focus:ring-offset-background"
+        disabled={isPending}
+        className="w-full h-12 cursor-pointer bg-blue-neon flex-center rounded-lg gap-2 transition-all duration-300 disabled:cursor-auto hover:scale-[1.02] disabled:hover:scale-100 disabled:bg-blue-neon/50 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-neon/70 focus:ring-offset-2 focus:ring-offset-background"
       >
         <TextBase as="span" className="font-semibold text-white">
-          Entrar na plataforma
+          {isPending ? (
+            <Loader className="animate-spin" />
+          ) : (
+            'Entrar na plataforma'
+          )}
         </TextBase>
-        <ArrowRight className="w-4 h-4 text-white" />
+        {!isPending && <ArrowRight className="w-4 h-4 text-white" />}
       </button>
 
       <div className="flex items-center justify-center gap-1">
